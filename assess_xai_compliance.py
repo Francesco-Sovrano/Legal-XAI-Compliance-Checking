@@ -183,16 +183,14 @@ regulations = {
 # 2.  Algorithm‑level metadata
 #     For brevity we include all algorithms in Tables 2 & 3.
 # -------------------------------------------------------------------
-# ---------------------------------------------------------------------
-# MODEL-AGNOSTIC METHODS
-# ---------------------------------------------------------------------
+# Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
 algorithms_model_agnostic = {
 	'Decision Trees': {
 		'subprops': {
 			'no_false_positives': 2,       # DTs can include spurious splits → more false positives than RuleFit (3) and far more than SHAP (5).
 			'no_false_negatives': 2,       # DTs may ignore subtle interactions → more false negatives; lower than RuleFit (3) and SHAP (5).
-			'completeness': 5,             # A full tree covers all learned logic → higher than surrogate methods (e.g. RuleFit’s 4) and local methods (typically ≤3).
-			'stability': 1,                # Small data changes can yield very different trees → lowest of all methods.
+			'completeness': 3,        # neutral global coverage; SHAP/TreeSHAP (4) more complete
+            'stability': 1,                # Small data changes can yield very different trees → lowest of all methods.
 			'adversarial_robustness': 2,   # Vulnerable to adversarial splits → lower than global‐smooth methods like PDP (3).
 			'consistency': 2,              # Different runs often differ → lower than surrogate linear methods (RuleFit 3).
 			'hyperparameters_perturbation_robustness': 2,  # Tree depth/pruning changes shape drastically → lower than PDP/ICE (4).
@@ -210,8 +208,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # More faithful than DT but still surrogate → moderate, lower than SHAP (5).
 			'no_false_negatives': 3,       # Better at capturing real influences vs. DT (2) but less than SHAP (5).
-			'completeness': 4,             # Captures many interactions via rules+linear terms → slightly below DT’s full coverage.
-			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'completeness': 4,          # blends linear terms and rules to better cover model behavior
+            'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
@@ -229,8 +227,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation, lower than SHAP (5).
 			'no_false_negatives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation but less than SHAP (5).
-			'completeness': 4,             # Captures many interactions via rules+linear terms → slightly below DT’s full coverage.
-			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'completeness': 4,          # blends linear terms and rules to better cover model behavior
+            'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
@@ -248,8 +246,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
 			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
-			'completeness': 2,             # Focused “high‐precision” rules miss coverage → worse than SHAP (2 vs. 2) but below global.
-			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
+			'completeness': 3,          # local only, doesn’t cover full decision region
+            'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
 			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) is stronger.
 			'consistency': 2,              # Varies per seed → better than LIME (1).
 			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
@@ -267,8 +265,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 2,       # Tends to highlight irrelevant features → lower than Anchors (3).
 			'no_false_negatives': 2,       # Omits some real effects → same.
-			'completeness': 2,             # Only linear approximation locally → low.
-			'stability': 1,                # Extremely sensitive to samples → worst.
+			'completeness': 2,          # local linear fit only partial view
+            'stability': 1,                # Extremely sensitive to samples → worst.
 			'adversarial_robustness': 1,   # Easily manipulated → worst.
 			'consistency': 1,              # Varies run to run → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Kernel width / sample count drastically shift outcome → worst.
@@ -286,8 +284,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 5,       # Theoretically only truly contributive features → highest.
 			'no_false_negatives': 5,       # Captures all positive/negative contributions → highest.
-			'completeness': 2,             # Only additive attributions, misses interactions → low vs. global methods.
-			'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
+			'completeness': 3,        # positive & negative faithful but not full rationale; moderate
+            'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
 			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated → moderate.
 			'consistency': 3,              # Satisfies consistency axiom → above LIME/Anchors.
 			'hyperparameters_perturbation_robustness': 3,  # Kernel width matters → similar.
@@ -305,8 +303,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Counterfactuals only include needed changes → neutral.
 			'no_false_negatives': 3,       # Might miss some feasible paths → neutral.
-			'completeness': 2,             # Single CF omits full model logic → low.
-			'stability': 1,                # Different runs yield different examples → lowest.
+			'completeness': 3,          # focuses only on one or few counterfactuals
+            'stability': 1,                # Different runs yield different examples → lowest.
 			'adversarial_robustness': 1,   # Can be circumvented by adversarial tweaks → lowest.
 			'consistency': 1,              # High variance across seeds → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
@@ -324,8 +322,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Averages out irrelevant effects → neutral.
 			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
-			'completeness': 2,             # Ignores interactions → low.
-			'stability': 4,                # Smooth curves → high stability.
+			'completeness': 3,          # shows average effect, misses heterogeneity
+            'stability': 4,                # Smooth curves → high stability.
 			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate.
 			'consistency': 4,              # Consistent across runs → high.
 			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
@@ -343,8 +341,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Same rationale as PDP but per instance → neutral.
 			'no_false_negatives': 3,       # Same as PDP → neutral.
-			'completeness': 3,             # Captures individual curves → better than PDP (2).
-			'stability': 3,                # Some noise from sampling → average.
+			'completeness': 3,          # single‐instance view only
+            'stability': 3,                # Some noise from sampling → average.
 			'adversarial_robustness': 3,   # As PDP → average.
 			'consistency': 3,              # Runs vary slightly → average.
 			'hyperparameters_perturbation_robustness': 3,  # Similar to PDP.
@@ -362,8 +360,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Counterfactual features truly required → neutral.
 			'no_false_negatives': 3,       # May miss alternative causal features → neutral.
-			'completeness': 2,             # Single‐point CF → low.
-			'stability': 1,                # Highly stochastic solver → worst.
+			'completeness': 2,          # focuses on minimal perturbation, not full rationale
+            'stability': 1,                # Highly stochastic solver → worst.
 			'adversarial_robustness': 1,   # Can be gamed → worst.
 			'consistency': 1,              # Varies per seed → worst.
 			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → worst.
@@ -381,8 +379,8 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Prototypes representative but not guaranteed → neutral.
 			'no_false_negatives': 3,       # May omit some modes → neutral.
-			'completeness': 3,             # A few prototypes approximate distribution → average.
-			'stability': 3,                # Algorithmic convergence ensures moderate stability.
+			'completeness': 2,          # selects subset only
+            'stability': 3,                # Algorithmic convergence ensures moderate stability.
 			'adversarial_robustness': 3,   # Prototype set can be attacked → average.
 			'consistency': 3,              # Same seeds yield same prototypes → moderate.
 			'hyperparameters_perturbation_robustness': 3,  # Kernel parameters matter → average.
@@ -404,8 +402,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral.
 			'no_false_negatives': 3,       # May miss latent factors → neutral.
-			'completeness': 2,             # Only pre-defined concepts → low.
-			'stability': 2,                # Depends on network activations → below average.
+			'completeness': 2,          # only concept axes, not full model
+            'stability': 2,                # Depends on network activations → below average.
 			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → low.
 			'consistency': 2,              # Concept drift across runs → low.
 			'hyperparameters_perturbation_robustness': 2,  # Layer choice matters → low.
@@ -423,8 +421,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 5,       # Exact Shapley for trees → highest.
 			'no_false_negatives': 5,       # Exact coverage → highest.
-			'completeness': 3,             # Global additive summary → better than kernel SHAP (2).
-			'stability': 3,                # Deterministic algorithm → average.
+			'completeness': 4,        # global sum of contributions; near-best
+            'stability': 3,                # Deterministic algorithm → average.
 			'adversarial_robustness': 3,   # Similar to SHAP → average.
 			'consistency': 3,              # Fulfills axioms → average.
 			'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
@@ -442,8 +440,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Gradient‐based attribution → neutral.
 			'no_false_negatives': 3,       # Similar to IG → neutral.
-			'completeness': 3,             # Sums to output difference → average.
-			'stability': 2,                # Sensitive to target layer choice → below average.
+			'completeness': 3,        # covers paths but not full rationale
+            'stability': 2,                # Sensitive to target layer choice → below average.
 			'adversarial_robustness': 2,   # Gradients can be fooled → low.
 			'consistency': 2,              # Varies by reference input → low.
 			'hyperparameters_perturbation_robustness': 2,  # Reference choice matters → low.
@@ -461,8 +459,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift → better than DeepLift.
 			'no_false_negatives': 4,       # Similar improvement → above neutral.
-			'completeness': 3,             # Inherits completeness of DeepLift → average.
-			'stability': 3,                # More stable than pure gradients → average.
+			'completeness': 3,        # moderated by sampling; neutral
+            'stability': 3,                # More stable than pure gradients → average.
 			'adversarial_robustness': 3,   # Slight improvement over DeepLift → average.
 			'consistency': 3,              # Inherits SHAP axioms → average.
 			'hyperparameters_perturbation_robustness': 3,  # Average.
@@ -476,31 +474,12 @@ algorithms_model_specific = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-	'Boolean Rules': {
-		'subprops': {
-			'no_false_positives': 2,       # Rule induction can overfit → more false positives.
-			'no_false_negatives': 2,       # May omit minor interactions → more false negatives.
-			'completeness': 5,             # Global rule set covers all logic → highest.
-			'stability': 2,                # Rule mining is unstable → low.
-			'adversarial_robustness': 2,   # Rules can be gamed → low.
-			'consistency': 2,              # Varies with mining parameters → low.
-			'hyperparameters_perturbation_robustness': 2,  # Support/confidence thresholds shift rules → low.
-			'sparsity_and_size': 3,        # Depends on rule count → neutral.
-			'level_of_detail': 4,          # Rule‐level granularity → high.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 2,          # Exposes full rule set → low.
-			'traceability': 4,             # Rules explicitly listed → high.
-			'runtime_performance_and_implementation_constraints': 3,  # Mining can be costly but once done is fast.
-		},
-		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
-	},
 	'Shapley Flow': {
 		'subprops': {
 			'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
 			'no_false_negatives': 5,       # Captures all contributive paths → highest.
-			'completeness': 2,             # Only flows along edges, misses global interactions → low.
-			'stability': 3,                # Deterministic propagation → average.
+			'completeness': 4,        # near TreeSHAP coverage
+            'stability': 3,                # Deterministic propagation → average.
 			'adversarial_robustness': 3,   # Similar to SHAP → average.
 			'consistency': 3,              # Axiomatic → average.
 			'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
@@ -518,8 +497,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Similar to gradient methods → neutral.
 			'no_false_negatives': 3,       # Neutral.
-			'completeness': 3,             # Layer‐wise summation → average.
-			'stability': 2,                # Sensitive to layer selection → low.
+			'completeness': 3,        # covers relevance but not full model
+            'stability': 2,                # Sensitive to layer selection → low.
 			'adversarial_robustness': 1,   # Extremely vulnerable→ lowest.
 			'consistency': 2,              # Varies by relevance rule → low.
 			'hyperparameters_perturbation_robustness': 2,  # Rule variants shift results → low.
@@ -537,8 +516,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Maximizes particular neurons → neutral.
 			'no_false_negatives': 3,       # Neutral.
-			'completeness': 1,             # Only shows extreme activation → lowest coverage.
-			'stability': 1,                # Highly sensitive to init and optimizer → lowest.
+			'completeness': 1,        # only maximized neuron; minimal
+            'stability': 1,                # Highly sensitive to init and optimizer → lowest.
 			'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
 			'consistency': 2,              # Varies with random seed → low.
 			'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
@@ -556,8 +535,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Highlights regions moderately → neutral.
 			'no_false_negatives': 3,       # Neutral.
-			'completeness': 1,             # Only coarse spatial maps → very low.
-			'stability': 2,                # Sensitive to layer choice → low.
+			'completeness': 3,        # only top activations; low
+            'stability': 2,                # Sensitive to layer choice → low.
 			'adversarial_robustness': 2,   # Heatmaps can be misled → low.
 			'consistency': 2,              # Varies per layer and run → low.
 			'hyperparameters_perturbation_robustness': 2,  # Depends on smoothing → low.
@@ -575,8 +554,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Axiomatic but baseline‐dependent → neutral.
 			'no_false_negatives': 3,       # Neutral.
-			'completeness': 3,             # Sums to output difference → average.
-			'stability': 2,                # Sensitive to path/baseline → low.
+			'completeness': 3,        # satisfies completeness axiom but partial rationale
+            'stability': 2,                # Sensitive to path/baseline → low.
 			'adversarial_robustness': 2,   # Can be manipulated → low.
 			'consistency': 2,              # Baseline choice yields variance → low.
 			'hyperparameters_perturbation_robustness': 2,  # Step count matters → low.
@@ -594,8 +573,8 @@ algorithms_model_specific = {
 		'subprops': {
 			'no_false_positives': 3,       # Debate exists, so neutral.
 			'no_false_negatives': 3,       # Neutral.
-			'completeness': 1,             # Attention often fails completeness tests → lowest.
-			'stability': 2,                # Sensitive to training variations → low.
+			'completeness': 2,        # only attended parts; minimal
+            'stability': 2,                # Sensitive to training variations → low.
 			'adversarial_robustness': 1,   # Easily manipulated → lowest.
 			'consistency': 2,              # Layer/head differences → low.
 			'hyperparameters_perturbation_robustness': 2,  # Head count matters → low.
@@ -628,11 +607,6 @@ algorithms_model_specific['DeepLift'            ]['models'] = [
 
 algorithms_model_specific['DeepSHAP'            ]['models'] = [
 	'deep-neural-networks (feed-forward, CNNs, RNN/LSTM, Transformers)'
-]  
-
-algorithms_model_specific['Boolean Rules'       ]['models'] = [
-	'rule-based classifiers / Boolean rule learners',
-	'interpretable tree or list models'
 ]  
 
 algorithms_model_specific['Shapley Flow'        ]['models'] = [
