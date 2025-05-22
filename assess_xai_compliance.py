@@ -183,313 +183,428 @@ regulations = {
 # 2.  Algorithm‑level metadata
 #     For brevity we include all algorithms in Tables 2 & 3.
 # -------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# MODEL-AGNOSTIC METHODS
+# ---------------------------------------------------------------------
 algorithms_model_agnostic = {
-	# --------------------------- MODEL‑AGNOSTIC ---------------------------
 	'Decision Trees': {
 		'subprops': {
-			'no_false_positives': 2, 'no_false_negatives': 4, 'completeness': 5, # 'no_false_positives' is 2 due to well-known overfitting issues # 'completeness' is 5 because it's a global XAI method
-			'stability': 5, 'adversarial_robustness': 2, 'consistency': 5, 'hyperparameters_perturbation_robustness': 0, # global methods are stable and consistent # adversarial robustness depends on false positives and false negatives, we pick the min score of the two
-			'sparsity_and_size':  2, 'level_of_detail':  5, # sparsity_and_size is 2 because rules are very long
-			'fairness': 4, 'confidentiality': 3, 'traceability': 5, # 'confidentiality': it's a global explanation learned over lots of possibly confidential data # 'traceability' is 5 because it's a white-box surrogate model with an explainable learning procedure
-			'runtime_performance_and_implementation_constraints': 4,
+			'no_false_positives': 2,       # DTs can include spurious splits → more false positives than RuleFit (3) and far more than SHAP (5).
+			'no_false_negatives': 2,       # DTs may ignore subtle interactions → more false negatives; lower than RuleFit (3) and SHAP (5).
+			'completeness': 5,             # A full tree covers all learned logic → higher than surrogate methods (e.g. RuleFit’s 4) and local methods (typically ≤3).
+			'stability': 1,                # Small data changes can yield very different trees → lowest of all methods.
+			'adversarial_robustness': 2,   # Vulnerable to adversarial splits → lower than global‐smooth methods like PDP (3).
+			'consistency': 2,              # Different runs often differ → lower than surrogate linear methods (RuleFit 3).
+			'hyperparameters_perturbation_robustness': 2,  # Tree depth/pruning changes shape drastically → lower than PDP/ICE (4).
+			'sparsity_and_size': 3,        # Can grow large without constraints → neutral versus highly sparse rule‐based (RuleFit 4) or dense SHAP (2).
+			'level_of_detail': 5,          # Very fine‐grained (per‐leaf) → highest detail.
+			'fairness': 3,                 # Neutral (inherits model biases) → same as most global XAI.
+			'confidentiality': 2,          # Full structure leaks splits/data distribution → worse than local methods (3).
+			'traceability': 4,             # Deterministic training allows audit → better than non‐deterministic LIME (1).
+			'runtime_performance_and_implementation_constraints': 4,  # Fast inference, easy to implement → better than sampling methods like SHAP (1).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'how_differs', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
 	},
 	'RuleFit': {
 		'subprops': {
-			'no_false_positives': 3, 'no_false_negatives': 4, 'completeness': 5, # 'no_false_positives' is 3 since RuleFit overfits less # 'completeness' is 5 because it's a global XAI method
-			'stability': 5, 'adversarial_robustness': 3, 'consistency': 5, 'hyperparameters_perturbation_robustness': 3, # global methods are stable and consistent # adversarial robustness depends on false positives and false negatives, we pick the min score of the two
-			'sparsity_and_size':  2, 'level_of_detail':  5, # sparsity_and_size is 2 because rules are long
-			'fairness': 4, 'confidentiality': 3, 'traceability': 5, # 'confidentiality': it's a global explanation learned over lots of possibly confidential data # 'traceability' is 5 because it's a white-box surrogate model with an explainable learning procedure
-			'runtime_performance_and_implementation_constraints': 3,
+			'no_false_positives': 3,       # More faithful than DT but still surrogate → moderate, lower than SHAP (5).
+			'no_false_negatives': 3,       # Better at capturing real influences vs. DT (2) but less than SHAP (5).
+			'completeness': 4,             # Captures many interactions via rules+linear terms → slightly below DT’s full coverage.
+			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
+			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
+			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
+			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → better than DT (3), worse than Anchors (5).
+			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
+			'fairness': 3,                 # Neutral → same as DT.
+			'confidentiality': 2,          # Leaks rule logic → same as DT.
+			'traceability': 4,             # Linear+rule pipeline is transparent → close to DT (4).
+			'runtime_performance_and_implementation_constraints': 3,  # More expensive to fit than DT but lighter than SHAP.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'how_differs', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+	},
+	'RuleSHAP': {
+		'subprops': {
+			'no_false_positives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation, lower than SHAP (5).
+			'no_false_negatives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation but less than SHAP (5).
+			'completeness': 4,             # Captures many interactions via rules+linear terms → slightly below DT’s full coverage.
+			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
+			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
+			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
+			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → better than DT (3) and RuleFit (4), worse than Anchors (5).
+			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
+			'fairness': 3,                 # Neutral → same as DT.
+			'confidentiality': 2,          # Leaks rule logic → same as DT.
+			'traceability': 4,             # Linear+rule pipeline is transparent → close to DT (4).
+			'runtime_performance_and_implementation_constraints': 2,  # More expensive to fit than RuleFit but lighter than SHAP since approximations are used.
+		},
+		'scope_stage': 'global-exante',
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
 	},
 	'Anchors': {
 		'subprops': {
-			'no_false_positives': 4,   # high-precision “anchors” ⇒ far fewer FP than LIME (2) or ICE (3)
-			'no_false_negatives': 2,   # but guarantees precision at the cost of recall, missing many true features
-			'completeness': 2,         # covers only the portion of the rule captured by the anchor
-			'stability': 3,            # sampling variance > SHAP(4) but better than LIME(2)
-			'adversarial_robustness': 2, # limited by the weaker of FP/FN
-			'consistency': 3,          # anchors is non-deterministic; random search yields moderate run-to-run variability
-			'hyperparameters_perturbation_robustness': 2,  # anchor threshold changes can alter rules
-			'sparsity_and_size': 4,    # anchors are short, so more compact than DT(2)
-			'level_of_detail': 4,      # specific feature-level rules for individual predictions, but not showin all conditions as it's what-if
-			'fairness': 3,             # neutral; unlike DiCE(4) it has no explicit fairness constraints
-			'confidentiality': 4,      # local sampling only; leaks less data than global DT(3)
-			'traceability': 2,         # anchors is non-deterministic; search procedure reproducible
-			'runtime_performance_and_implementation_constraints': 2, # combinatorial rule search can be slow
+			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
+			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
+			'completeness': 2,             # Focused “high‐precision” rules miss coverage → worse than SHAP (2 vs. 2) but below global.
+			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
+			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) is stronger.
+			'consistency': 2,              # Varies per seed → better than LIME (1).
+			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
+			'sparsity_and_size': 5,        # Very compact anchors → best among all.
+			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
+			'fairness': 3,                 # Neutral → same as LIME.
+			'confidentiality': 3,          # Local explanations don’t leak global logic → better than DT (2).
+			'traceability': 3,             # Procedure is clear but sampling adds opacity → above LIME (1).
+			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'what_if'},
+        'question_types': {'what_rule', 'what_feature', 'what_if'},
 	},
-
 	'LIME': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 2,  # linear surrogate often attributes non-causal features (worse than ICE (3) and ANC (4))
-			'no_false_negatives' : 3,  # captures most influential features but can still miss some; better recall than ANC (2)
-			'completeness'      : 3,  # local fidelity only; less complete than global DT/RF (5)
-			# -- Robustness
-			'stability'                         : 2,  # heavy sampling variance; far less stable than SHAP (4)
-			'adversarial_robustness'            : 2,  # min(FP=2,FN=3); can be gamed by small perturbations
-			'consistency'                       : 2,  # reruns with a new seed give noticeably different weights
-			'hyperparameters_perturbation_robustness': 2,  # kernel-width or feature-count tweaks change explanations
-			# -- Complexity
-			'sparsity_and_size' : 3,  # configurable K-feature sparsity—denser than ANC (4) but leaner than SHAP (2)
-			'level_of_detail'   : 4,  # per-feature weights → richer than PDP/ICE curves (3) but not concept-level
-			# -- Responsibility
-			'fairness'        : 3,  # no explicit bias control, neutral like PDP
-			'confidentiality' : 4,  # only local synthetic perturbations → leaks less training data than global DT/RF (3)
-			'traceability'    : 3,  # linear regression is transparent, but randomness hurts full reproducibility
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 3,  # moderate; O(K·M) model calls—not as cheap as PDP (3) but far cheaper than KernelSHAP (2)
+			'no_false_positives': 2,       # Tends to highlight irrelevant features → lower than Anchors (3).
+			'no_false_negatives': 2,       # Omits some real effects → same.
+			'completeness': 2,             # Only linear approximation locally → low.
+			'stability': 1,                # Extremely sensitive to samples → worst.
+			'adversarial_robustness': 1,   # Easily manipulated → worst.
+			'consistency': 1,              # Varies run to run → lowest.
+			'hyperparameters_perturbation_robustness': 1,  # Kernel width / sample count drastically shift outcome → worst.
+			'sparsity_and_size': 3,        # User‐set feature count → neutral.
+			'level_of_detail': 3,          # Feature‐level weights → neutral.
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 1,             # Random seeds obscure path → worst.
+			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-
 	'SHAP': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 4,  # Shapley axiom ⇒ irrelevant features get ≈ 0 (better than LIME (2))
-			'no_false_negatives': 4,  # captures all influential features with non-zero value (≈ PPV=recall)
-			'completeness'     : 5,  # “additive completeness” axiom: Σφ = f(x)−E[f(X)]
-			# -- Robustness
-			'stability'                         : 4,  # TreeSHAP deterministic; KernelSHAP converges with enough samples
-			'adversarial_robustness'            : 4,  # min(FP,FN)=4; still manipulable but far tougher than LIME (2)
-			'consistency'                       : 5,  # built-in monotonicity axiom; identical model change ⇒ no rank-flips
-			'hyperparameters_perturbation_robustness': 3,  # KernelSHAP sample size & background distribution matter
-			# -- Complexity
-			'sparsity_and_size' : 2,  # every feature gets a value; long tails hurt compactness (worse than LIME (3))
-			'level_of_detail'   : 5,  # exact per-feature contributions
-			# -- Responsibility
-			'fairness'        : 3,  # neutral; fairness constraints must be added externally
-			'confidentiality' : 4,  # uses only model queries; no raw training records surfaced
-			'traceability'    : 4,  # open algorithm + theoretical guarantees, but KernelSHAP sampling adds some noise
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 2,  # TreeSHAP is fast, but model-agnostic KernelSHAP is expensive (≈ O(2^d))
+			'no_false_positives': 5,       # Theoretically only truly contributive features → highest.
+			'no_false_negatives': 5,       # Captures all positive/negative contributions → highest.
+			'completeness': 2,             # Only additive attributions, misses interactions → low vs. global methods.
+			'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
+			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated → moderate.
+			'consistency': 3,              # Satisfies consistency axiom → above LIME/Anchors.
+			'hyperparameters_perturbation_robustness': 3,  # Kernel width matters → similar.
+			'sparsity_and_size': 2,        # Reports every feature → low sparsity.
+			'level_of_detail': 5,          # Exact per‐feature contributions → highest.
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 4,             # Well‐defined axioms, deterministic → high.
+			'runtime_performance_and_implementation_constraints': 1,  # Very expensive for many features.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-
 	'DiCE': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 3,  # returned CF features do flip the label, but extra changes are common
-			'no_false_negatives': 2,  # may omit other minimal changes; lower recall than LIME (3)
-			'completeness'     : 2,  # shows *a* path, not the whole rationale
-			# -- Robustness
-			'stability'                         : 2,  # gradient-based search sensitive to init/random seed
-			'adversarial_robustness'            : 2,  # min(FP=3,FN=2); can be steered by small gradient hacks
-			'consistency'                       : 2,  # different runs often yield diverse CF sets
-			'hyperparameters_perturbation_robustness': 1,  # λ weights for sparsity/diversity drastically change CFs
-			# -- Complexity
-			'sparsity_and_size' : 4,  # optimises for minimal feature tweaks (better than LIME (3))
-			'level_of_detail'   : 4,  # explicit “change age from 35→52” style prescriptions
-			# -- Responsibility
-			'fairness'        : 4,  # built-in constrained-optimisation to enforce equal-opportunity if desired
-			'confidentiality' : 4,  # only accesses black-box model, not training data
-			'traceability'    : 3,  # optimisation objective visible, but non-convex search less reproducible
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 2,  # iterative search (esp. for deep nets) is slow
+			'no_false_positives': 3,       # Counterfactuals only include needed changes → neutral.
+			'no_false_negatives': 3,       # Might miss some feasible paths → neutral.
+			'completeness': 2,             # Single CF omits full model logic → low.
+			'stability': 1,                # Different runs yield different examples → lowest.
+			'adversarial_robustness': 1,   # Can be circumvented by adversarial tweaks → lowest.
+			'consistency': 1,              # High variance across seeds → lowest.
+			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
+			'sparsity_and_size': 4,        # Tend to optimize for minimal changes → high sparsity.
+			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 2,             # Solver complexity obscures path → lower than SHAP (4).
+			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
 	},
-
 	'PDP': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 3,  # averages can mask interactions (better than DT (2) FP though)
-			'no_false_negatives': 3,  # likewise misses some truly important features
-			'completeness'     : 3,  # covers selected features globally but omits interactions/higher-order terms
-			# -- Robustness
-			'stability'                         : 4,  # deterministic given enough grid points; less noisy than LIME (2)
-			'adversarial_robustness'            : 3,  # min(FP,FN)=3
-			'consistency'                       : 4,  # same model + data ⇒ identical curves
-			'hyperparameters_perturbation_robustness': 4,  # grid resolution has mild effect only
-			# -- Complexity
-			'sparsity_and_size' : 3,  # one curve per feature; moderate cognitive load
-			'level_of_detail'   : 3,  # shows monotonic/non-linear trend but not fine-grained interactions
-			# -- Responsibility
-			'fairness'        : 3,
-			'confidentiality' : 3,  # aggregated plot, but curves derived from full data distribution
-			'traceability'    : 4,  # straightforward averaging formula
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 3,  # O(N·G) model calls (G=grid points)
+			'no_false_positives': 3,       # Averages out irrelevant effects → neutral.
+			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
+			'completeness': 2,             # Ignores interactions → low.
+			'stability': 4,                # Smooth curves → high stability.
+			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate.
+			'consistency': 4,              # Consistent across runs → high.
+			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
+			'sparsity_and_size': 2,        # Presents every feature as curve → low sparsity.
+			'level_of_detail': 5,          # Full feature effect curves → high detail.
+			'fairness': 3,                 # Neutral → same as other globals.
+			'confidentiality': 3,          # Global summary only → neutral.
+			'traceability': 4,             # Straightforward averaging → high.
+			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
 		},
 		'scope_stage': 'global-exante',
 		'question_types': {'what_rule', 'what_feature', 'how_modify_input'},
 	},
-
 	'ICE': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 3,  # individual curve reflects model response; still ignores other vars
-			'no_false_negatives': 3,
-			'completeness'     : 2,  # local to one feature & one instance
-			# -- Robustness
-			'stability'                         : 3,  # deterministic but jagged if model is non-smooth
-			'adversarial_robustness'            : 3,
-			'consistency'                       : 4,  # rerunning on same x gives identical curve
-			'hyperparameters_perturbation_robustness': 4,  # grid density hardly changes qualitative shape
-			# -- Complexity
-			'sparsity_and_size' : 2,  # a whole curve per feature→user must parse many points
-			'level_of_detail'   : 5,  # full functional relationship for *that* instance
-			# -- Responsibility
-			'fairness'        : 3,
-			'confidentiality' : 3,  # reveals path of synthetic points close to real data
-			'traceability'    : 4,  # computation is transparent
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 3,
+			'no_false_positives': 3,       # Same rationale as PDP but per instance → neutral.
+			'no_false_negatives': 3,       # Same as PDP → neutral.
+			'completeness': 3,             # Captures individual curves → better than PDP (2).
+			'stability': 3,                # Some noise from sampling → average.
+			'adversarial_robustness': 3,   # As PDP → average.
+			'consistency': 3,              # Runs vary slightly → average.
+			'hyperparameters_perturbation_robustness': 3,  # Similar to PDP.
+			'sparsity_and_size': 2,        # Full curve for each feature → low sparsity.
+			'level_of_detail': 5,          # Highest granularity per instance.
+			'fairness': 3,                 # Neutral → same as PDP.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 4,             # Simple averaging → high.
+			'runtime_performance_and_implementation_constraints': 3,  # As PDP.
 		},
-		'scope_stage': 'local-expost',
+		'scope_stage': 'global-exante',
 		'question_types': {'what_feature', 'how_modify_input'},
 	},
-
 	'CEM': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 4,  # optimisation yields *pertinent* positives/negatives ⇒ high precision
-			'no_false_negatives': 3,  # may still omit some causal features when searching minima
-			'completeness'     : 3,
-			# -- Robustness
-			'stability'                         : 2,  # non-convex optimisation → multiple local optima
-			'adversarial_robustness'            : 3,  # min(4,3)
-			'consistency'                       : 3,
-			'hyperparameters_perturbation_robustness': 2,  # β balancing PP/P N affects the sets a lot
-			# -- Complexity
-			'sparsity_and_size' : 5,  # explicitly minimises cardinality of PP / PN sets
-			'level_of_detail'   : 4,  # tells which features must stay & which must flip
-			# -- Responsibility
-			'fairness'        : 3,
-			'confidentiality' : 4,
-			'traceability'    : 3,
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 2,  # iterative gradient + proxim. ops is costly
+			'no_false_positives': 3,       # Counterfactual features truly required → neutral.
+			'no_false_negatives': 3,       # May miss alternative causal features → neutral.
+			'completeness': 2,             # Single‐point CF → low.
+			'stability': 1,                # Highly stochastic solver → worst.
+			'adversarial_robustness': 1,   # Can be gamed → worst.
+			'consistency': 1,              # Varies per seed → worst.
+			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → worst.
+			'sparsity_and_size': 4,        # Optimizes minimal changes → high.
+			'level_of_detail': 3,          # Only changes shown → medium.
+			'fairness': 3,                 # Neutral → same.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 2,             # Complex optimization path → low.
+			'runtime_performance_and_implementation_constraints': 2,  # Expensive search.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
 	},
-
 	'ProtoDash': {
 		'subprops': {
-			# -- Faithfulness
-			'no_false_positives': 3,  # prototypes are real points ⇒ at least valid examples, but not always causal
-			'no_false_negatives': 2,  # a small prototype set can miss some behaviours
-			'completeness'     : 2,  # covers data manifold ≈, but not decision logic
-			# -- Robustness
-			'stability'                         : 3,  # greedy selection order-dependent; still reproducible given seed
-			'adversarial_robustness'            : 2,  # min(3,2)
-			'consistency'                       : 4,  # same K & seed → identical protos
-			'hyperparameters_perturbation_robustness': 3,  # K (number of protos) changes coverage gradually
-			# -- Complexity
-			'sparsity_and_size' : 4,  # user sets small K; compact representative set
-			'level_of_detail'   : 3,  # shows *examples* but not feature contributions
-			# -- Responsibility
-			'fairness'        : 3,  # can inherit dataset bias; no explicit mitigation
-			'confidentiality' : 2,  # exposes real data points ⇒ higher leakage risk than LIME (4)
-			'traceability'    : 4,  # kernel-distance objective + greedy selection is transparent
-			# -- Efficiency
-			'runtime_performance_and_implementation_constraints': 3,  # O(N·K) kernel evals
+			'no_false_positives': 3,       # Prototypes representative but not guaranteed → neutral.
+			'no_false_negatives': 3,       # May omit some modes → neutral.
+			'completeness': 3,             # A few prototypes approximate distribution → average.
+			'stability': 3,                # Algorithmic convergence ensures moderate stability.
+			'adversarial_robustness': 3,   # Prototype set can be attacked → average.
+			'consistency': 3,              # Same seeds yield same prototypes → moderate.
+			'hyperparameters_perturbation_robustness': 3,  # Kernel parameters matter → average.
+			'sparsity_and_size': 4,        # Selects few prototypes → high sparsity.
+			'level_of_detail': 3,          # Shows representative points only → medium detail.
+			'fairness': 3,                 # Neutral → same.
+			'confidentiality': 2,          # Exposes actual data points → lower than local proxies.
+			'traceability': 4,             # Simple algorithmic steps → high.
+			'runtime_performance_and_implementation_constraints': 2,  # Quadratic kernel cost.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'how_differs'},
 	},
-	
 }
 
 # --------------------------- MODEL‑SPECIFIC ---------------------------
 algorithms_model_specific = {
 	'CAVs': {
 		'subprops': {
-			'level_of_detail':4,'no_false_positives':4,
-			'stability':2,'completeness':2,'adversarial_robustness':2
+			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral.
+			'no_false_negatives': 3,       # May miss latent factors → neutral.
+			'completeness': 2,             # Only pre-defined concepts → low.
+			'stability': 2,                # Depends on network activations → below average.
+			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → low.
+			'consistency': 2,              # Concept drift across runs → low.
+			'hyperparameters_perturbation_robustness': 2,  # Layer choice matters → low.
+			'sparsity_and_size': 3,        # One vector per concept → neutral.
+			'level_of_detail': 3,          # Concept-level granularity → medium.
+			'fairness': 3,                 # Neutral → same.
+			'confidentiality': 3,          # Local activations only → neutral.
+			'traceability': 3,             # Training of CAVs is clear → medium.
+			'runtime_performance_and_implementation_constraints': 3,  # Moderate cost.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'how_computed', 'what_feature'},
 	},
 	'TreeSHAP': {
 		'subprops': {
-			'no_false_positives':5,'no_false_negatives':5,'completeness':5,
-			'runtime_performance_and_implementation_constraints':4,'adversarial_robustness':2,'stability':2
+			'no_false_positives': 5,       # Exact Shapley for trees → highest.
+			'no_false_negatives': 5,       # Exact coverage → highest.
+			'completeness': 3,             # Global additive summary → better than kernel SHAP (2).
+			'stability': 3,                # Deterministic algorithm → average.
+			'adversarial_robustness': 3,   # Similar to SHAP → average.
+			'consistency': 3,              # Fulfills axioms → average.
+			'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
+			'sparsity_and_size': 2,        # Full set of features → low.
+			'level_of_detail': 5,          # Exact feature contributions → highest.
+			'fairness': 3,                 # Neutral → same.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 4,             # Clearly defined algorithm → high.
+			'runtime_performance_and_implementation_constraints': 3,  # Faster than kernel SHAP.
 		},
 		'scope_stage': 'global-exante',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'DeepLift': {
 		'subprops': {
-			'no_false_positives':4,'runtime_performance_and_implementation_constraints':4,
-			'stability':2,'hyperparameters_perturbation_robustness':2,'completeness':2
+			'no_false_positives': 3,       # Gradient‐based attribution → neutral.
+			'no_false_negatives': 3,       # Similar to IG → neutral.
+			'completeness': 3,             # Sums to output difference → average.
+			'stability': 2,                # Sensitive to target layer choice → below average.
+			'adversarial_robustness': 2,   # Gradients can be fooled → low.
+			'consistency': 2,              # Varies by reference input → low.
+			'hyperparameters_perturbation_robustness': 2,  # Reference choice matters → low.
+			'sparsity_and_size': 2,        # Attribution for every input → low sparsity.
+			'level_of_detail': 5,          # Fine gradient per feature → high.
+			'fairness': 3,                 # Neutral → same.
+			'confidentiality': 3,          # Local only → neutral.
+			'traceability': 3,             # Clear backprop chain → medium.
+			'runtime_performance_and_implementation_constraints': 4,  # One backward pass → efficient.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'DeepSHAP': {
 		'subprops': {
-			'no_false_positives':4,'no_false_negatives':4,'completeness':2,
-			'consistency':4,'runtime_performance_and_implementation_constraints':4,'adversarial_robustness':2
+			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift → better than DeepLift.
+			'no_false_negatives': 4,       # Similar improvement → above neutral.
+			'completeness': 3,             # Inherits completeness of DeepLift → average.
+			'stability': 3,                # More stable than pure gradients → average.
+			'adversarial_robustness': 3,   # Slight improvement over DeepLift → average.
+			'consistency': 3,              # Inherits SHAP axioms → average.
+			'hyperparameters_perturbation_robustness': 3,  # Average.
+			'sparsity_and_size': 2,        # Dense attributions → low.
+			'level_of_detail': 5,          # High detail.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 4,             # Axiomatic + backprop → high.
+			'runtime_performance_and_implementation_constraints': 3,  # More passes than DeepLift.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'Boolean Rules': {
 		'subprops': {
-			'sparsity_and_size':4,'level_of_detail':4,'no_false_positives':4,'no_false_negatives':4,
-			'runtime_performance_and_implementation_constraints':2,'stability':2,'completeness':2
+			'no_false_positives': 2,       # Rule induction can overfit → more false positives.
+			'no_false_negatives': 2,       # May omit minor interactions → more false negatives.
+			'completeness': 5,             # Global rule set covers all logic → highest.
+			'stability': 2,                # Rule mining is unstable → low.
+			'adversarial_robustness': 2,   # Rules can be gamed → low.
+			'consistency': 2,              # Varies with mining parameters → low.
+			'hyperparameters_perturbation_robustness': 2,  # Support/confidence thresholds shift rules → low.
+			'sparsity_and_size': 3,        # Depends on rule count → neutral.
+			'level_of_detail': 4,          # Rule‐level granularity → high.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 2,          # Exposes full rule set → low.
+			'traceability': 4,             # Rules explicitly listed → high.
+			'runtime_performance_and_implementation_constraints': 3,  # Mining can be costly but once done is fast.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'how_differs', 'what_feature', 'what_if', 'how_modify_input'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
 	},
 	'Shapley Flow': {
 		'subprops': {
-			'no_false_positives':4,'no_false_negatives':4,'level_of_detail':4,'completeness':4,
-			'runtime_performance_and_implementation_constraints':2,'stability':2
+			'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
+			'no_false_negatives': 5,       # Captures all contributive paths → highest.
+			'completeness': 2,             # Only flows along edges, misses global interactions → low.
+			'stability': 3,                # Deterministic propagation → average.
+			'adversarial_robustness': 3,   # Similar to SHAP → average.
+			'consistency': 3,              # Axiomatic → average.
+			'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
+			'sparsity_and_size': 2,        # Many edges → low sparsity.
+			'level_of_detail': 5,          # Very fine‐grained along network → highest.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 4,             # Clear flow paths → high.
+			'runtime_performance_and_implementation_constraints': 2,  # Heavy graph propagation.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'LRP': {
 		'subprops': {
-			'runtime_performance_and_implementation_constraints':4,'level_of_detail':4,
-			'stability':2,'hyperparameters_perturbation_robustness':2,'completeness':2
+			'no_false_positives': 3,       # Similar to gradient methods → neutral.
+			'no_false_negatives': 3,       # Neutral.
+			'completeness': 3,             # Layer‐wise summation → average.
+			'stability': 2,                # Sensitive to layer selection → low.
+			'adversarial_robustness': 1,   # Extremely vulnerable→ lowest.
+			'consistency': 2,              # Varies by relevance rule → low.
+			'hyperparameters_perturbation_robustness': 2,  # Rule variants shift results → low.
+			'sparsity_and_size': 2,        # Dense maps → low.
+			'level_of_detail': 5,          # Pixel‐level attribution → highest.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 3,             # Clear backprop path → medium.
+			'runtime_performance_and_implementation_constraints': 4,  # One backward pass → efficient.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if'},
 	},
 	'Activation Maximization': {
 		'subprops': {
-			'consistency':4,'level_of_detail':4,'runtime_performance_and_implementation_constraints':2,
-			'stability':2,'adversarial_robustness':2
+			'no_false_positives': 3,       # Maximizes particular neurons → neutral.
+			'no_false_negatives': 3,       # Neutral.
+			'completeness': 1,             # Only shows extreme activation → lowest coverage.
+			'stability': 1,                # Highly sensitive to init and optimizer → lowest.
+			'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
+			'consistency': 2,              # Varies with random seed → low.
+			'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
+			'sparsity_and_size': 1,        # Generates dense patterns → lowest.
+			'level_of_detail': 5,          # Pixel‐level → highest.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 2,             # Optimization opaque → low.
+			'runtime_performance_and_implementation_constraints': 2,  # Expensive iterative optimization.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'how_computed'},
 	},
 	'Grad-CAM': {
 		'subprops': {
-			'runtime_performance_and_implementation_constraints':5,'no_false_negatives':3,
-			'completeness':2,'adversarial_robustness':2,'stability':2
+			'no_false_positives': 3,       # Highlights regions moderately → neutral.
+			'no_false_negatives': 3,       # Neutral.
+			'completeness': 1,             # Only coarse spatial maps → very low.
+			'stability': 2,                # Sensitive to layer choice → low.
+			'adversarial_robustness': 2,   # Heatmaps can be misled → low.
+			'consistency': 2,              # Varies per layer and run → low.
+			'hyperparameters_perturbation_robustness': 2,  # Depends on smoothing → low.
+			'sparsity_and_size': 3,        # Coarse blobs → neutral.
+			'level_of_detail': 4,          # Spatial maps → high spatial detail.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 3,             # Backprop‐based but coarse → medium.
+			'runtime_performance_and_implementation_constraints': 4,  # Single forward+backward → efficient.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'Integrated Gradients': {
 		'subprops': {
-			'no_false_positives':4,'runtime_performance_and_implementation_constraints':4,'stability':4,
-			'completeness':3,'adversarial_robustness':2,'hyperparameters_perturbation_robustness':2
+			'no_false_positives': 3,       # Axiomatic but baseline‐dependent → neutral.
+			'no_false_negatives': 3,       # Neutral.
+			'completeness': 3,             # Sums to output difference → average.
+			'stability': 2,                # Sensitive to path/baseline → low.
+			'adversarial_robustness': 2,   # Can be manipulated → low.
+			'consistency': 2,              # Baseline choice yields variance → low.
+			'hyperparameters_perturbation_robustness': 2,  # Step count matters → low.
+			'sparsity_and_size': 2,        # Attribution for every feature → low.
+			'level_of_detail': 5,          # Fine per‐feature detail → highest.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 3,             # Clear integral path → medium.
+			'runtime_performance_and_implementation_constraints': 3,  # Multiple gradients → moderate cost.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'Attention': {
 		'subprops': {
-			'runtime_performance_and_implementation_constraints':4,'level_of_detail':4,
-			'stability':2,'no_false_positives':2,'no_false_negatives':2,'completeness':1
+			'no_false_positives': 3,       # Debate exists, so neutral.
+			'no_false_negatives': 3,       # Neutral.
+			'completeness': 1,             # Attention often fails completeness tests → lowest.
+			'stability': 2,                # Sensitive to training variations → low.
+			'adversarial_robustness': 1,   # Easily manipulated → lowest.
+			'consistency': 2,              # Layer/head differences → low.
+			'hyperparameters_perturbation_robustness': 2,  # Head count matters → low.
+			'sparsity_and_size': 2,        # Dense weight matrices → low.
+			'level_of_detail': 5,          # Token‐level → highest.
+			'fairness': 3,                 # Neutral.
+			'confidentiality': 3,          # Neutral.
+			'traceability': 2,             # Hard to attribute through multiple heads → low.
+			'runtime_performance_and_implementation_constraints': 4,  # Already computed in model → efficient.
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'how_computed', 'what_feature'},
