@@ -196,7 +196,7 @@ algorithms_model_agnostic = {
 			'adversarial_robustness': 2,   # Vulnerable to adversarial splits → lower than global‐smooth methods like PDP (3).
 			'consistency': 2,              # Different runs often differ → lower than surrogate linear methods (RuleFit 3).
 			'hyperparameters_perturbation_robustness': 2,  # Tree depth/pruning changes shape drastically → lower than PDP/ICE (4).
-			'sparsity_and_size': 3,        # Can grow large without constraints → neutral versus highly sparse rule‐based (RuleFit 4) or dense SHAP (2).
+			'sparsity_and_size': 4,        # Can grow large without constraints.
 			'level_of_detail': 5,          # Very fine‐grained (per‐leaf) → highest detail.
 			'fairness': 3,                 # Neutral (inherits model biases) → same as most global XAI.
 			'confidentiality': 2,          # Full structure leaks splits/data distribution → worse than local methods (3).
@@ -215,7 +215,7 @@ algorithms_model_agnostic = {
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → better than DT (3), worse than Anchors (5).
+			'sparsity_and_size': 3,        # L1 penalty enforces sparsity but still worse than DT (4) due to gradient boosting generating hundreds of decision trees.
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
 			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
@@ -234,7 +234,7 @@ algorithms_model_agnostic = {
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → better than DT (3) and RuleFit (4), worse than Anchors (5).
+			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
 			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
