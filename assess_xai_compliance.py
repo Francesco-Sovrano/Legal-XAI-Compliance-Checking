@@ -183,11 +183,12 @@ regulations = {
 # 2.  Algorithm‑level metadata
 #     For brevity we include all algorithms in Tables 2 & 3.
 # -------------------------------------------------------------------
+# We assign scores "by comparison", i.e., by looking at whether an algorithm is better or worse than the others so that, when compared, scores are consistent with common knowledge about these algorithms. For instance, we know that SHAP has one of the strongest theoretical guarantees for faithfulness, whereas LIME lags behind. So, LIME's faithfulness scores must be lower than SHAP's, and so on. For instance, decision trees are well-known for overfitting and therefore are not as good as a gradient-boosting-based method such as RuleFit, which has higher faithfulness. Moreover, decision trees cannot capture well linear dependencies, whereas RuleFit is designed to do that as well thus being more complete. Notably, we consider 3 as a neutral score. Other things we considered are that: global methods may leak confidential data; non-determinism reduces traceability
 # Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
 algorithms_model_agnostic = {
 	'Decision Trees': {
 		'subprops': {
-			'no_false_positives': 2,       # DTs can include spurious splits → more false positives than RuleFit (3) and far more than SHAP (5).
+			'no_false_positives': 3,       # DTs can include spurious splits but usually can identify the right predicates → more false positives than SHAP (5).
 			'no_false_negatives': 2,       # DTs may ignore subtle interactions → more false negatives; lower than RuleFit (3) and SHAP (5).
 			'completeness': 3,        # neutral global coverage; SHAP/TreeSHAP (4) more complete
             'stability': 1,                # Small data changes can yield very different trees → lowest of all methods.
