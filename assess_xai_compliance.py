@@ -415,7 +415,7 @@ algorithms_model_specific = {
 			'consistency': 3,              # Concept drift across runs → more than DiCE (1) since training is anchored to a training set; similar to ICE (3); less than PDP (4) because it does averaging but it's non-deterministic.
 			'hyperparameters_perturbation_robustness': 1,  # Layer choice matters + training hyper-parameters → similar to LIME (1).
 			'sparsity': 4,        # One vector per concept → more sparse than SHAP (4) but it depends on the kind and amount of concepts.
-			'level_of_detail': 5,          # Concept-level granularity → possibly the highest since it can work with very abstract concepts.
+			'level_of_detail': 1,          # Concept-level granularity → possibly the lowest level of detail since it can work with very abstract concepts.
 			'fairness': 2,                 # It depends on the choice of concepts → in the worst-case scenario can be hampered by concept choices, so it's low.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 1,             # Training neural nets is barely traceable → worse than LIME (2).
@@ -445,38 +445,38 @@ algorithms_model_specific = {
 	# },
 	'DeepLift': {
 		'subprops': {
-			'no_false_positives': 3,       # Gradient‐based attribution → neutral.
-			'no_false_negatives': 3,       # Similar to IG → neutral.
-			'completeness': 3,        # covers paths but not full rationale
-			'stability': 2,                # Sensitive to target layer choice → below average.
-			'adversarial_robustness': 2,   # Gradients can be fooled → low.
-			'consistency': 2,              # Varies by reference input → low.
-			'hyperparameters_perturbation_robustness': 2,  # Reference choice matters → low.
-			'sparsity': 2,        # Attribution for every input → low sparsity.
-			'level_of_detail': 5,          # Fine gradient per feature → high.
-			'fairness': 3,                 # Neutral → same.
-			'confidentiality': 3,          # Local only → neutral.
-			'traceability': 3,             # Clear backprop chain → medium.
-			'runtime_performance_and_implementation_constraints': 4,  # One backward pass → efficient.
+			'no_false_positives': 3,       # Gradient‐based attribution → lower than DeepSHAP (4).
+			'no_false_negatives': 3,       # See no_false_positives.
+			'completeness': 3,        # positive & negative faithful but not full rationale; moderate just like SHAP (3)
+			'stability': 1,                # Sensitive to target layer choice → less than DeepSHAP (2), similar to CAVs (1)
+			'adversarial_robustness': 2,   # Gradients can be fooled → less than DeepSHAP (3)
+			'consistency': 3,              # Varies by reference input → less than DeepSHAP (4); similar to CAVs (3).
+			'hyperparameters_perturbation_robustness': 1,  # Less than DeepSHAP (2)
+			'sparsity': 3,        # Same as DeepSHAP (3).
+			'level_of_detail': 3,          # Same as DeepSHAP (3)
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 3,             # backprop, non-deterministic → less than DeepSHAP (4) but more than Anchors (2), LIME (2)
+			'runtime_performance_and_implementation_constraints': 4,  # Faster than DeepSHAP (3)
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
 	'DeepSHAP': {
 		'subprops': {
-			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift → better than DeepLift.
-			'no_false_negatives': 4,       # Similar improvement → above neutral.
-			'completeness': 3,        # moderated by sampling; neutral
-			'stability': 3,                # More stable than pure gradients → average.
-			'adversarial_robustness': 3,   # Slight improvement over DeepLift → average.
-			'consistency': 3,              # Inherits SHAP axioms → average.
-			'hyperparameters_perturbation_robustness': 3,  # Average.
-			'sparsity': 2,        # Dense attributions → low.
-			'level_of_detail': 5,          # High detail.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 4,             # Axiomatic + backprop → high.
-			'runtime_performance_and_implementation_constraints': 3,  # More passes than DeepLift.
+			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift. Theoretically only truly contributive features but it only approximates SHAP → lower than SHAP (5); better than DeepLift.
+			'no_false_negatives': 4,       # See no_false_positives.
+			'completeness': 3,        # positive & negative faithful but not full rationale; moderate just like SHAP (3)
+			'stability': 2,                # Approximate SHAP values are non-deterministic, so there may be sampling noise → less than SHAP (4) but more stable than pure gradients (1) because of SHAP estimates involved
+			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated in practice due to sampling → less than SHAP (4)
+			'consistency': 4,              # Satisfies consistency axiom but approximations are non-deterministic → less than SHAP (5).
+			'hyperparameters_perturbation_robustness': 2,  # Background choices matter → better than LIME (1) but worse than SHAP (3), so similar to Anchors (2).
+			'sparsity': 3,        # Same as SHAP (3).
+			'level_of_detail': 3,          # Same as SHAP (3)
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 4,             # Well‐defined axioms + backprop, non-deterministic → less than SHAP (5) but more than Anchors (2), LIME (2), and DeepLift (3)
+			'runtime_performance_and_implementation_constraints': 3,  # More passes than DeepLift. Expensive for many features but approximations make it faster than SHAP (1). Similar to LIME (3).
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
@@ -602,11 +602,11 @@ algorithms_model_specific['CAVs'                ]['models'] = [
 	'deep-neural-networks (CNNs, RNNs, Transformers)'
 ]  
 
-algorithms_model_specific['TreeSHAP'            ]['models'] = [
-	'decision-trees',
-	'random-forests',
-	'gradient-boosted trees (XGBoost, LightGBM, CatBoost)'
-]  
+# algorithms_model_specific['TreeSHAP'            ]['models'] = [
+# 	'decision-trees',
+# 	'random-forests',
+# 	'gradient-boosted trees (XGBoost, LightGBM, CatBoost)'
+# ]  
 
 algorithms_model_specific['DeepLift'            ]['models'] = [
 	'deep-neural-networks (feed-forward, CNNs, RNN/LSTM, Transformers)'
@@ -616,9 +616,9 @@ algorithms_model_specific['DeepSHAP'            ]['models'] = [
 	'deep-neural-networks (feed-forward, CNNs, RNN/LSTM, Transformers)'
 ]  
 
-algorithms_model_specific['Shapley Flow'        ]['models'] = [
-	'model-agnostic (any ML pipeline given a causal DAG)'
-]  
+# algorithms_model_specific['Shapley Flow'        ]['models'] = [
+# 	'model-agnostic (any ML pipeline given a causal DAG)'
+# ]  
 
 algorithms_model_specific['LRP'                 ]['models'] = [
 	'deep-neural-networks (especially CNNs, RNNs, Transformers)'
