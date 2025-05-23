@@ -277,7 +277,7 @@ algorithms_model_agnostic = {
 			'consistency': 1,              # Varies run to run → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Kernel width / sample count drastically shift outcome → worst.
 			'sparsity': 3,        # User‐set feature count → neutral.
-			'level_of_detail': 3,          # Feature‐level weights → neutral.
+			'level_of_detail': 2,          # Feature‐level weights → worse than SHAP (3).
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 1,             # Random seeds obscure path → worst.
@@ -296,7 +296,7 @@ algorithms_model_agnostic = {
 			'consistency': 5,              # Satisfies consistency axiom; approximations are non-deterministic → above LIME/Anchors.
 			'hyperparameters_perturbation_robustness': 3,  # Background choices matter → better than LIME (1) and Anchors (2).
 			'sparsity': 3,        # Same as LIME (3).
-			'level_of_detail': 4,          # It can provide interaction effects when exact SHAP values are computed, but not when approximations are used → slightly better than LIME (3)
+			'level_of_detail': 3,          # It can provide interaction effects when exact SHAP values are computed, but not when approximations are used → slightly better than LIME (3)
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Well‐defined axioms, deterministic → very high.
@@ -324,43 +324,43 @@ algorithms_model_agnostic = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
 	},
-	'PDP': {
+	'PDP': { # One-way PDPs tell us about the interaction between the target response and an input feature of interest (e.g. linear, non-linear). Link: https://scikit-learn.org/stable/modules/partial_dependence.html
 		'subprops': {
-			'no_false_positives': 3,       # Averages out irrelevant effects → neutral.
+			'no_false_positives': 4,       # Averages out irrelevant effects → less than DiCE (5) or SHAP (5) but better than Anchors (2) due to averaging.
 			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
 			'completeness': 3,          # shows average effect, misses heterogeneity
 			'stability': 4,                # Smooth curves → high stability.
-			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate.
-			'consistency': 4,              # Consistent across runs → high.
+			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate but less than DiCE (4) since the explanations are not provably correct.
+			'consistency': 4,              # Consistent across runs → high due to averaging.
 			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
-			'sparsity': 2,        # Presents every feature as curve → low sparsity.
-			'level_of_detail': 5,          # Full feature effect curves → high detail.
+			'sparsity': 2,        # Only shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
+			'level_of_detail': 4,          # Full feature effect curves + interaction effects → higher than SHAP (4).
 			'fairness': 3,                 # Neutral → same as other globals.
-			'confidentiality': 3,          # Global summary only → neutral.
+			'confidentiality': 3,          # Global summary only → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 4,             # Straightforward averaging → high.
-			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
+			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost but better than DiCE (3).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'how_modify_input'},
+		'question_types': {'what_rule', 'what_if'},
 	},
 	'ICE': {
 		'subprops': {
-			'no_false_positives': 3,       # Same rationale as PDP but per instance → neutral.
-			'no_false_negatives': 3,       # Same as PDP → neutral.
-			'completeness': 3,          # single‐instance view only
-			'stability': 3,                # Some noise from sampling → average.
+			'no_false_positives': 3,       # Same rationale as PDP (4) but per instance → neutral.
+			'no_false_negatives': 4,       # Hides less partial effects than PDP (3)
+			'completeness': 2,          # Due to the limits of human perception, only one input feature of interest is supported for ICE plots. Link: https://scikit-learn.org/stable/modules/partial_dependence.html
+			'stability': 3,                # Some noise from sampling → average; less than PDP (4).
 			'adversarial_robustness': 3,   # As PDP → average.
-			'consistency': 3,              # Runs vary slightly → average.
-			'hyperparameters_perturbation_robustness': 3,  # Similar to PDP.
-			'sparsity': 2,        # Full curve for each feature → low sparsity.
-			'level_of_detail': 5,          # Highest granularity per instance.
+			'consistency': 3,              # Runs vary slightly → average; less than PDP (4).
+			'hyperparameters_perturbation_robustness': 4,  # Similar to PDP.
+			'sparsity': 2,        # Only shows one feature at a time, presenting every datapoints as a curve → similar sparsity to PDP (2).
+			'level_of_detail': 3,          # Full feature effect curves but no interaction effects → lower than PDP (4).
 			'fairness': 3,                 # Neutral → same as PDP.
-			'confidentiality': 3,          # Local only → neutral.
-			'traceability': 4,             # Simple averaging → high.
-			'runtime_performance_and_implementation_constraints': 3,  # As PDP.
+			'confidentiality': 2,          # Like DT (2) and worse than PDP (3) since it doesn't show only aggregated information.
+			'traceability': 3,             # Random sampling makes it less traceable than PDP (4).
+			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost similar to PDP (4).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_feature', 'how_modify_input'},
+		'question_types': {'what_rule', 'what_if'},
 	},
 	'CEM': {
 		'subprops': {
