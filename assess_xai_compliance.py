@@ -540,19 +540,19 @@ algorithms_model_specific = {
 	# },
 	'Grad-CAM': {
 		'subprops': {
-			'no_false_positives': 3,       # Highlights regions moderately → neutral.
-			'no_false_negatives': 3,       # Neutral.
-			'completeness': 3,        # only top activations; low
-			'stability': 2,                # Sensitive to layer choice → low.
-			'adversarial_robustness': 2,   # Heatmaps can be misled → low.
-			'consistency': 2,              # Varies per layer and run → low.
-			'hyperparameters_perturbation_robustness': 2,  # Depends on smoothing → low.
-			'sparsity': 3,        # Coarse blobs → neutral.
-			'level_of_detail': 4,          # Spatial maps → high spatial detail.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 3,             # Backprop‐based but coarse → medium.
-			'runtime_performance_and_implementation_constraints': 4,  # Single forward+backward → efficient.
+			'no_false_positives': 3,       # Highlights regions moderately. Grad-CAM’s coarse heatmaps often highlight large regions, including irrelevant background pixels, leading to more spurious attributions → neutral; less than LRP (4).
+			'no_false_negatives': 3,       # Small but important features outside the receptive field of the last conv layer may be missed, causing genuine contributors to go un-highlighted → Neutral; less than LRP (4).
+			'completeness': 2,        # Does not enforce conservation of the model’s output score; only approximates which areas most influence the prediction, so total attribution can be incomplete → less than LRP (3).
+			'stability': 2,                # Slight changes in input or model (e.g., different layer choice) can yield noticeably different heatmaps, indicating moderate instability → slighlty more than LRP (1) because of less error propagation. Grad-CAM generates coarse localization maps by pooling gradients at the last convolutional layer, rather than propagating relevance scores layer by layer (as LRP does).
+			'adversarial_robustness': 4,   # Selvaraju et al. (https://arxiv.org/abs/1610.02391?utm_source=chatgpt.com) showed Grad-CAM is relatively robust to adversarial noise compared to raw gradients, since it pools over feature maps → more than LRP (1) and more than DeepSHAP (3). Overall, Grad-CAM exhibits higher adversarial robustness than DeepSHAP. Grad-CAM’s pooling of high-level feature gradients makes its heatmaps relatively stable under adversarial noise, whereas DeepSHAP’s perturbation-based Shapley value estimates can be easily manipulated, with adversaries fooling SHAP in the vast majority of cases. 
+			'consistency': 3,              # Outputs vary with architecture and layer selection (e.g., VGG vs. ResNet, conv4 vs. conv5), so consistency is modest → similar to LRP (3).
+			'hyperparameters_perturbation_robustness': 2,  # Few hyperparameters than LRP (choice of layer, aggregation method), but changing them alters maps noticeably → slightly more than LRP (1).
+			'sparsity': 3,        # dense heatmaps → similar to LRP (2).
+			'level_of_detail': 3,          # Same as LRP (3)
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 5,             # Same as LRP (5)
+			'runtime_performance_and_implementation_constraints': 5,  # Requires only one backward pass through the last conv layer plus a weighted sum—ultra-efficient and simple to implement → more than LRP (4)
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
