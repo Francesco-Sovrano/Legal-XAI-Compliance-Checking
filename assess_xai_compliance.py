@@ -353,14 +353,14 @@ algorithms_model_agnostic = {
 			'consistency': 3,              # Runs vary slightly → average; less than PDP (4).
 			'hyperparameters_perturbation_robustness': 4,  # Similar to PDP.
 			'sparsity': 2,        # Only shows one feature at a time, presenting every datapoints as a curve → similar sparsity to PDP (2).
-			'level_of_detail': 3,          # Full feature effect curves but no interaction effects → lower than PDP (4).
+			'level_of_detail': 4,          # Full feature effect curves with limited interaction effects → similar to PDP (4).
 			'fairness': 3,                 # Neutral → same as PDP.
 			'confidentiality': 2,          # Like DT (2) and worse than PDP (3) since it doesn't show only aggregated information.
 			'traceability': 3,             # Random sampling makes it less traceable than PDP (4).
 			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost similar to PDP (4).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_if'},
+		'question_types': {'what_rule', 'how_differs'},
 	},
 	'CEM': {
 		'subprops': {
