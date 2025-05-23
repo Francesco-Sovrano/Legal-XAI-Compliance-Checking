@@ -185,12 +185,12 @@ regulations = {
 # -------------------------------------------------------------------
 # We assign scores \emph{by comparison}, i.e., by evaluating whether an algorithm performs better or worse than others, such that the resulting scores align with common knowledge about these algorithms. For instance, it is well-established that SHAP provides strong theoretical guarantees for faithfulness, whereas LIME tends to lag behind. Consequently, LIME's faithfulness scores should be lower than those of SHAP, and so forth. 
 # As another example, decision trees are known to overfit and are therefore generally less reliable than gradient-boosting-based methods such as RuleFit, which exhibit higher faithfulness. Furthermore, decision trees struggle to capture linear dependencies, whereas RuleFit is specifically designed to handle such patterns, making it producing more complete explanations.
-# We consider a score of 3 to be neutral. Other considerations include the potential for global methods to leak confidential data, and the reduction in traceability caused by non-deterministic behavior.
+# We consider a score of 3 to be neutral. Other considerations include the potential for global methods to leak confidential data, and the reduction in traceability and consistency caused by non-deterministic behavior.
 # Our scoring methodology begins with the use of ChatGPT o4-mini (OpenAI’s most advanced reasoning model), which is provided with the guidelines mentioned above to generate initial scores for all XAI methods together. Subsequently, the authors of the paper manually revised these scores based on their expertise and the relevant literature, correcting inaccuracies and enhancing the overall quality of the scoring. The fundamental principle is that scores are assigned \emph{by comparison}, making them meaningful only within the context of the full set of algorithms. Introducing new XAI methods may necessitate rescaling, potentially including the use of decimal scores (which we avoided).
 # It is crucial to note that, due to the methodology used and the inherently qualitative nature of the scoring, the resulting compliance scores should be interpreted with caution. They are not to be regarded as definitive certificates of compliance but rather as helpful indicators for selecting appropriate XAI methods to ensure legally compliant explanations.
 
 
-# Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
+# Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability and consistency; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
 algorithms_model_agnostic = {
 	'Decision Trees': {
 		'subprops': {
@@ -216,9 +216,9 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # More faithful than DT (2) but still surrogate → moderate, lower than SHAP (5).
 			'no_false_negatives': 3,       # Worse at capturing real influences than SHAP (5). Same as DT (3).
 			'completeness': 4,          # blends linear terms and rules to better cover model behavior → better than DT (3).
-			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
-			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
-			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
+			'stability': 3,                # LASSO regularization dampens variance → more stable than DT (1); PDP (4) is better though.
+			'adversarial_robustness': 3,   # Moderate robustness → above DT (2) due to gradient boosting being less prone to overfitting.
+			'consistency': 3,              # LASSO regularization yields some consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
 			'sparsity': 3,        # L1 penalty enforces sparsity but still worse than DT (4) due to gradient boosting generating hundreds of decision trees.
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
