@@ -731,7 +731,7 @@ def assess_xai_algorithms(algorithms):
 print("1️⃣ Best model agnostic XAI algorithm per regulation-question:\n")
 print(assess_xai_algorithms(algorithms_model_agnostic).to_string(index=False))
 
-print("2️⃣ Best model specific XAI algorithm per regulation-question:\n")
+print("2️⃣ Best model specific (neural net) XAI algorithm per regulation-question:\n")
 algorithms_all = {}
 algorithms_all.update(algorithms_model_agnostic)
 algorithms_all.update(algorithms_model_specific)
