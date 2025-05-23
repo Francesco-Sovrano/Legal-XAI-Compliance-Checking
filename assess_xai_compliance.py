@@ -300,7 +300,7 @@ algorithms_model_agnostic = {
 			'level_of_detail': 2,          # Feature‐level weights → worse than SHAP (3).
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
-			'traceability': 1,             # Random seeds obscure path → worst.
+			'traceability': 2,             # Random seeds obscure path → worst.
 			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
 		},
 		'scope_stage': 'local-expost',
@@ -407,42 +407,42 @@ algorithms_model_agnostic = {
 algorithms_model_specific = {
 	'CAVs': {
 		'subprops': {
-			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral.
-			'no_false_negatives': 3,       # May miss latent factors → neutral.
-			'completeness': 2,          # only concept axes, not full model
-			'stability': 2,                # Depends on network activations → below average.
-			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → low.
-			'consistency': 2,              # Concept drift across runs → low.
-			'hyperparameters_perturbation_robustness': 2,  # Layer choice matters → low.
-			'sparsity': 3,        # One vector per concept → neutral.
-			'level_of_detail': 3,          # Concept-level granularity → medium.
-			'fairness': 3,                 # Neutral → same.
-			'confidentiality': 3,          # Local activations only → neutral.
-			'traceability': 3,             # Training of CAVs is clear → medium.
-			'runtime_performance_and_implementation_constraints': 3,  # Moderate cost.
+			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral; better than LIME (2), worse than SHAP (5).
+			'no_false_negatives': 2,       # May miss latent factors → worse than no_false_positives (3), similar to LIME (2).
+			'completeness': 2,          # only concept axes, not full model → less complete than SHAP (3)
+			'stability': 1,                # Depends on network activations; based on stochastic gradient descent → worse than SHAP (4), similar to LIME (1).
+			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → less than Anchors (3), more than LIME (1) because neural nets are more robust against noise than linear models.
+			'consistency': 3,              # Concept drift across runs → more than DiCE (1) since training is anchored to a training set; similar to ICE (3); less than PDP (4) because it does averaging but it's non-deterministic.
+			'hyperparameters_perturbation_robustness': 1,  # Layer choice matters + training hyper-parameters → similar to LIME (1).
+			'sparsity': 4,        # One vector per concept → more sparse than SHAP (4) but it depends on the kind and amount of concepts.
+			'level_of_detail': 5,          # Concept-level granularity → possibly the highest since it can work with very abstract concepts.
+			'fairness': 2,                 # It depends on the choice of concepts → in the worst-case scenario can be hampered by concept choices, so it's low.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 1,             # Training neural nets is barely traceable → worse than LIME (2).
+			'runtime_performance_and_implementation_constraints': 1,  # Training involved → worse than LIME (3) and it depends on the size of the neural network (which can be huge).
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
 	},
-	'TreeSHAP': {
-		'subprops': {
-			'no_false_positives': 5,       # Exact Shapley for trees → highest.
-			'no_false_negatives': 5,       # Exact coverage → highest.
-			'completeness': 4,        # global sum of contributions; near-best
-			'stability': 3,                # Deterministic algorithm → average.
-			'adversarial_robustness': 3,   # Similar to SHAP → average.
-			'consistency': 3,              # Fulfills axioms → average.
-			'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
-			'sparsity': 2,        # Full set of features → low.
-			'level_of_detail': 5,          # Exact feature contributions + interaction effects → highest.
-			'fairness': 3,                 # Neutral → same.
-			'confidentiality': 3,          # Local only → neutral.
-			'traceability': 4,             # Clearly defined algorithm → high.
-			'runtime_performance_and_implementation_constraints': 3,  # Faster than kernel SHAP.
-		},
-		'scope_stage': 'global-exante',
-		'question_types': {'what_feature', 'what_if', 'how_computed'},
-	},
+	# 'TreeSHAP': {
+	# 	'subprops': {
+	# 		'no_false_positives': 5,       # Exact Shapley for trees → highest.
+	# 		'no_false_negatives': 5,       # Exact coverage → highest.
+	# 		'completeness': 4,        # global sum of contributions; near-best
+	# 		'stability': 3,                # Deterministic algorithm → average.
+	# 		'adversarial_robustness': 3,   # Similar to SHAP → average.
+	# 		'consistency': 3,              # Fulfills axioms → average.
+	# 		'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
+	# 		'sparsity': 2,        # Full set of features → low.
+	# 		'level_of_detail': 5,          # Exact feature contributions + interaction effects → highest.
+	# 		'fairness': 3,                 # Neutral → same.
+	# 		'confidentiality': 3,          # Local only → neutral.
+	# 		'traceability': 4,             # Clearly defined algorithm → high.
+	# 		'runtime_performance_and_implementation_constraints': 3,  # Faster than kernel SHAP.
+	# 	},
+	# 	'scope_stage': 'global-exante',
+	# 	'question_types': {'what_feature', 'what_if', 'how_computed'},
+	# },
 	'DeepLift': {
 		'subprops': {
 			'no_false_positives': 3,       # Gradient‐based attribution → neutral.
@@ -481,25 +481,25 @@ algorithms_model_specific = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-	'Shapley Flow': {
-		'subprops': {
-			'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
-			'no_false_negatives': 5,       # Captures all contributive paths → highest.
-			'completeness': 4,        # near TreeSHAP coverage
-			'stability': 3,                # Deterministic propagation → average.
-			'adversarial_robustness': 3,   # Similar to SHAP → average.
-			'consistency': 3,              # Axiomatic → average.
-			'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
-			'sparsity': 2,        # Many edges → low sparsity.
-			'level_of_detail': 5,          # Very fine‐grained along network → highest.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 4,             # Clear flow paths → high.
-			'runtime_performance_and_implementation_constraints': 2,  # Heavy graph propagation.
-		},
-		'scope_stage': 'local-expost',
-		'question_types': {'what_feature', 'what_if', 'how_computed'},
-	},
+	# 'Shapley Flow': {
+	# 	'subprops': {
+	# 		'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
+	# 		'no_false_negatives': 5,       # Captures all contributive paths → highest.
+	# 		'completeness': 4,        # near TreeSHAP coverage
+	# 		'stability': 3,                # Deterministic propagation → average.
+	# 		'adversarial_robustness': 3,   # Similar to SHAP → average.
+	# 		'consistency': 3,              # Axiomatic → average.
+	# 		'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
+	# 		'sparsity': 2,        # Many edges → low sparsity.
+	# 		'level_of_detail': 5,          # Very fine‐grained along network → highest.
+	# 		'fairness': 3,                 # Neutral.
+	# 		'confidentiality': 3,          # Neutral.
+	# 		'traceability': 4,             # Clear flow paths → high.
+	# 		'runtime_performance_and_implementation_constraints': 2,  # Heavy graph propagation.
+	# 	},
+	# 	'scope_stage': 'local-expost',
+	# 	'question_types': {'what_feature', 'what_if', 'how_computed'},
+	# },
 	'LRP': {
 		'subprops': {
 			'no_false_positives': 3,       # Similar to gradient methods → neutral.
