@@ -502,42 +502,42 @@ algorithms_model_specific = {
 	# },
 	'LRP': {
 		'subprops': {
-			'no_false_positives': 3,       # Similar to gradient methods → neutral.
-			'no_false_negatives': 3,       # Neutral.
-			'completeness': 3,        # covers relevance but not full model
-			'stability': 2,                # Sensitive to layer selection → low.
-			'adversarial_robustness': 1,   # Extremely vulnerable→ lowest.
-			'consistency': 2,              # Varies by relevance rule → low.
-			'hyperparameters_perturbation_robustness': 2,  # Rule variants shift results → low.
-			'sparsity': 2,        # Dense maps → low.
-			'level_of_detail': 5,          # Pixel‐level attribution → highest.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 3,             # Clear backprop path → medium.
-			'runtime_performance_and_implementation_constraints': 4,  # One backward pass → efficient.
+			'no_false_positives': 4,       # LRP’s deep Taylor decomposition produces more focused, less noisy relevance maps compared to simple sensitivity‐based methods, reducing spurious attributions (false positives) and capturing most contributing features (false negatives) better → better than DeepLift (4).
+			'no_false_negatives': 4,       # LRP’s deep Taylor decomposition produces more focused, less noisy relevance maps compared to simple sensitivity‐based methods, reducing spurious attributions (false positives) and capturing most contributing features (false negatives) better → better than DeepLift (4).
+			'completeness': 4,        # LRP’s layer‐wise conservation principle guarantees that the sum of relevance at the input equals the model’s output score (full attribution of the decision) whereas DeepLIFT only accounts for change from a reference. → slightly better than DeepLift (3).
+			'stability': 1,                # LRP explanations vary dramatically with small input or rule‐parameter changes → similar to DeepLift (1)
+			'adversarial_robustness': 1,   # LRP maps can be fooled by adversarially‐modified models without changing accuracy, showing almost no robustness to targeted perturbations → less than DeepLift (2)
+			'consistency': 3,              # Like DeepLIFT (3), LRP’s outputs depend on rule choices and network architecture. Different propagation schemes can yield different heatmaps for the same decision .
+			'hyperparameters_perturbation_robustness': 1,  # LRP requires tuning ε, α/β, or γ per‐layer; small changes in these hyperparameters can significantly alter explanations  → similar to DeepLift (1)
+			'sparsity': 2,        # Standard LRP assigns relevance to nearly every input feature, producing dense maps. Dedicated variants are needed to induce sparsity → Slightly less than DeepLift (3).
+			'level_of_detail': 3,          # Same as DeepLift (3)
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 5,             # Follows specific rules for propagation and it's deterministic → more than DeepSHAP (4)
+			'runtime_performance_and_implementation_constraints': 4,  # LRP runs in a single backward pass (comparable to gradient‐based methods), making it highly efficient to implement → similar to DeepLift (4)
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
 	},
-	'Activation Maximization': {
-		'subprops': {
-			'no_false_positives': 3,       # Maximizes particular neurons → neutral.
-			'no_false_negatives': 3,       # Neutral.
-			'completeness': 1,        # only maximized neuron; minimal
-			'stability': 1,                # Highly sensitive to init and optimizer → lowest.
-			'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
-			'consistency': 2,              # Varies with random seed → low.
-			'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
-			'sparsity': 1,        # Generates dense patterns → lowest.
-			'level_of_detail': 5,          # Pixel‐level → highest.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 2,             # Optimization opaque → low.
-			'runtime_performance_and_implementation_constraints': 2,  # Expensive iterative optimization.
-		},
-		'scope_stage': 'local-expost',
-		'question_types': {'how_computed'},
-	},
+	# 'Activation Maximization': {
+	# 	'subprops': {
+	# 		'no_false_positives': 3,       # Maximizes particular neurons → neutral.
+	# 		'no_false_negatives': 3,       # Neutral.
+	# 		'completeness': 1,        # only maximized neuron; minimal
+	# 		'stability': 1,                # Highly sensitive to init and optimizer → lowest.
+	# 		'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
+	# 		'consistency': 2,              # Varies with random seed → low.
+	# 		'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
+	# 		'sparsity': 1,        # Generates dense patterns → lowest.
+	# 		'level_of_detail': 5,          # Pixel‐level → highest.
+	# 		'fairness': 3,                 # Neutral.
+	# 		'confidentiality': 3,          # Neutral.
+	# 		'traceability': 2,             # Optimization opaque → low.
+	# 		'runtime_performance_and_implementation_constraints': 2,  # Expensive iterative optimization.
+	# 	},
+	# 	'scope_stage': 'local-expost',
+	# 	'question_types': {'how_computed'},
+	# },
 	'Grad-CAM': {
 		'subprops': {
 			'no_false_positives': 3,       # Highlights regions moderately → neutral.
@@ -624,10 +624,10 @@ algorithms_model_specific['LRP'                 ]['models'] = [
 	'deep-neural-networks (especially CNNs, RNNs, Transformers)'
 ]  
 
-algorithms_model_specific['Activation Maximization']['models'] = [
-	'convolutional neural networks (vision)',
-	'other deep-neural-networks amenable to gradient ascent'
-]  
+# algorithms_model_specific['Activation Maximization']['models'] = [
+# 	'convolutional neural networks (vision)',
+# 	'other deep-neural-networks amenable to gradient ascent'
+# ]  
 
 algorithms_model_specific['Grad-CAM'            ]['models'] = [
 	'convolutional neural networks (2-D/3-D, vision, video)'
