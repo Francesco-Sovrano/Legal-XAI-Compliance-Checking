@@ -209,7 +209,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 4,  # Fast inference, easy to implement → better than sampling methods like SHAP (1).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'}, # Surrogate models like RuleFit aim to approximate complex "black-box" models with more interpretable ones. While they enhance interpretability, they don't inherently provide contrastive or counterfactual explanations.
 	},
 	'RuleFit': {
 		'subprops': {
@@ -228,7 +228,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 3,  # More expensive to fit than DT but lighter than SHAP.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'}, # Surrogate models like RuleFit aim to approximate complex "black-box" models with more interpretable ones. While they enhance interpretability, they don't inherently provide contrastive or counterfactual explanations.
 	},
 	'RuleSHAP': {
 		'subprops': {
@@ -247,7 +247,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 2,  # More expensive to fit than RuleFit but lighter than SHAP since approximations are used.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'}, # Surrogate models like RuleFit aim to approximate complex "black-box" models with more interpretable ones. While they enhance interpretability, they don't inherently provide contrastive or counterfactual explanations.
 	},
 	'PDP': { # One-way PDPs tell us about the interaction between the target response and an input feature of interest (e.g. linear, non-linear). Link: https://scikit-learn.org/stable/modules/partial_dependence.html
 		'subprops': {
