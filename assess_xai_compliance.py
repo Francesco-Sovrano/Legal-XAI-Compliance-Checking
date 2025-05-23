@@ -15,6 +15,7 @@ QUESTION_KINDS = {
 	'how_differs',   # "How does this decision differ from…"
 	'what_if',       # "What if parameter X changed…"
 	'how_modify_input',  # "What input values should I adjust…"
+	'why_instead_of',  # "Why did I get outcome A instead of B?"
 }
 
 # map from the exact phrase (or a close synonym) to our canonical question key
@@ -27,7 +28,7 @@ TEXT_TO_QUESTION_KIND = {
 	# feature-related
 	'what features':         'what_feature',
 	'what are top features': 'what_feature',
-	'what reasons':          'what_feature',
+	'what reasons':          'why_instead_of',
 	'what feature importance': 'what_feature',
 
 	'why those top features': 'how_computed', # think about it
@@ -47,8 +48,8 @@ TEXT_TO_QUESTION_KIND = {
 	# computation transparency
 	'how output is computed':      'how_computed',
 	'is input problematic':        'what_rule',
-	'what input quality':          'how_modify_input',
-	'how reliable is output':      'how_differs', # think about it, maybe not about XAI but rather confidence scoring
+	'what input quality':          'how_modify_input', # similar to 'what best input format and ranges'
+	'how reliable is output':      'why_instead_of', # think about it, maybe not about XAI but rather confidence scoring
 	'how robust':      'how_differs', # think about it, maybe not about XAI but rather confidence scoring
 }
 
@@ -208,7 +209,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 4,  # Fast inference, easy to implement → better than sampling methods like SHAP (1).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
 	},
 	'RuleFit': {
 		'subprops': {
@@ -227,7 +228,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 3,  # More expensive to fit than DT but lighter than SHAP.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
 	},
 	'RuleSHAP': {
 		'subprops': {
@@ -246,26 +247,45 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 2,  # More expensive to fit than RuleFit but lighter than SHAP since approximations are used.
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input', 'how_computed'},
+		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_computed'},
 	},
-	'Anchors': {
+	'PDP': { # One-way PDPs tell us about the interaction between the target response and an input feature of interest (e.g. linear, non-linear). Link: https://scikit-learn.org/stable/modules/partial_dependence.html
 		'subprops': {
-			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
-			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
-			'completeness': 3,          # what-if explanation that doesn't cover full (local) decision region
-			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
-			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) which is stronger.
-			'consistency': 2,              # Varies per seed → better than LIME (1).
-			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
-			'sparsity': 5,        # Very compact anchors → best among all.
-			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
-			'fairness': 3,                 # Neutral → same as LIME.
-			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
-			'traceability': 3,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
-			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
+			'no_false_positives': 4,       # Averages out irrelevant effects → less than DiCE (5) or SHAP (5) but better than Anchors (2) due to averaging.
+			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
+			'completeness': 3,          # shows average effect, misses heterogeneity
+			'stability': 4,                # Smooth curves → high stability.
+			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate but less than DiCE (4) since the explanations are not provably correct.
+			'consistency': 4,              # Consistent across runs → high due to averaging.
+			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
+			'sparsity': 2,        # Only shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
+			'level_of_detail': 4,          # Full feature effect curves + interaction effects → higher than SHAP (4).
+			'fairness': 3,                 # Neutral → same as other globals.
+			'confidentiality': 3,          # Global summary only → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 4,             # Straightforward averaging → high.
+			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost but better than DiCE (3).
 		},
-		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'what_if'},
+		'scope_stage': 'global-exante',
+		'question_types': {'what_rule', 'what_if'}, # no 'how_computed' because it doesn't show all features' contributions
+	},
+	'ICE': {
+		'subprops': {
+			'no_false_positives': 3,       # Same rationale as PDP (4) but per instance → neutral.
+			'no_false_negatives': 4,       # Hides less partial effects than PDP (3)
+			'completeness': 2,          # Due to the limits of human perception, only one input feature of interest is supported for ICE plots. Link: https://scikit-learn.org/stable/modules/partial_dependence.html
+			'stability': 3,                # Some noise from sampling → average; less than PDP (4).
+			'adversarial_robustness': 3,   # As PDP → average.
+			'consistency': 3,              # Runs vary slightly → average; less than PDP (4).
+			'hyperparameters_perturbation_robustness': 4,  # Similar to PDP.
+			'sparsity': 2,        # Only shows one feature at a time, presenting every datapoints as a curve → similar sparsity to PDP (2).
+			'level_of_detail': 4,          # Full feature effect curves with limited interaction effects → similar to PDP (4).
+			'fairness': 3,                 # Neutral → same as PDP.
+			'confidentiality': 2,          # Like DT (2) and worse than PDP (3) since it doesn't show only aggregated information.
+			'traceability': 3,             # Random sampling makes it less traceable than PDP (4).
+			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost similar to PDP (4).
+		},
+		'scope_stage': 'global-exante',
+		'question_types': {'what_rule', 'how_differs'}, # no 'how_computed' because it doesn't show all features' contributions
 	},
 	'LIME': {
 		'subprops': {
@@ -322,64 +342,45 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
-	},
-	'PDP': { # One-way PDPs tell us about the interaction between the target response and an input feature of interest (e.g. linear, non-linear). Link: https://scikit-learn.org/stable/modules/partial_dependence.html
-		'subprops': {
-			'no_false_positives': 4,       # Averages out irrelevant effects → less than DiCE (5) or SHAP (5) but better than Anchors (2) due to averaging.
-			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
-			'completeness': 3,          # shows average effect, misses heterogeneity
-			'stability': 4,                # Smooth curves → high stability.
-			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate but less than DiCE (4) since the explanations are not provably correct.
-			'consistency': 4,              # Consistent across runs → high due to averaging.
-			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
-			'sparsity': 2,        # Only shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
-			'level_of_detail': 4,          # Full feature effect curves + interaction effects → higher than SHAP (4).
-			'fairness': 3,                 # Neutral → same as other globals.
-			'confidentiality': 3,          # Global summary only → better than DT (2), but neutral since it can still disclose how the AI model works.
-			'traceability': 4,             # Straightforward averaging → high.
-			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost but better than DiCE (3).
-		},
-		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_if'},
-	},
-	'ICE': {
-		'subprops': {
-			'no_false_positives': 3,       # Same rationale as PDP (4) but per instance → neutral.
-			'no_false_negatives': 4,       # Hides less partial effects than PDP (3)
-			'completeness': 2,          # Due to the limits of human perception, only one input feature of interest is supported for ICE plots. Link: https://scikit-learn.org/stable/modules/partial_dependence.html
-			'stability': 3,                # Some noise from sampling → average; less than PDP (4).
-			'adversarial_robustness': 3,   # As PDP → average.
-			'consistency': 3,              # Runs vary slightly → average; less than PDP (4).
-			'hyperparameters_perturbation_robustness': 4,  # Similar to PDP.
-			'sparsity': 2,        # Only shows one feature at a time, presenting every datapoints as a curve → similar sparsity to PDP (2).
-			'level_of_detail': 4,          # Full feature effect curves with limited interaction effects → similar to PDP (4).
-			'fairness': 3,                 # Neutral → same as PDP.
-			'confidentiality': 2,          # Like DT (2) and worse than PDP (3) since it doesn't show only aggregated information.
-			'traceability': 3,             # Random sampling makes it less traceable than PDP (4).
-			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost similar to PDP (4).
-		},
-		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'how_differs'},
+		'question_types': {'what_feature', 'what_if', 'how_modify_input'},
 	},
 	'CEM': {
 		'subprops': {
-			'no_false_positives': 3,       # Counterfactual features truly required → neutral.
+			'no_false_positives': 5,       # Contrastive explanations show how to modify the input they're provably correct → whenever they provide an explanation, that is a correct.
 			'no_false_negatives': 3,       # May miss alternative causal features → neutral.
-			'completeness': 2,          # focuses on minimal perturbation, not full rationale
+			'completeness': 4,          # focuses on minimal perturbation, not full rationale, but provides more insights than DiCE (3)
 			'stability': 1,                # Highly stochastic solver → worst.
-			'adversarial_robustness': 1,   # Can be gamed → worst.
+			'adversarial_robustness': 4,   # The explanations produced are correct, but CEM could be manipulated to provide sub-optimal explanations → similar to DiCE (4).
 			'consistency': 1,              # Varies per seed → worst.
-			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → worst.
-			'sparsity': 4,        # Optimizes minimal changes → high.
+			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → similar to DiCE (1).
+			'sparsity': 4,        # Optimizes minimal changes → high; similar to DiCE (4).
 			'level_of_detail': 3,          # Only changes shown → medium.
 			'fairness': 3,                 # Neutral → same.
-			'confidentiality': 3,          # Local only → neutral.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Complex optimization path → low.
-			'runtime_performance_and_implementation_constraints': 2,  # Expensive search.
+			'runtime_performance_and_implementation_constraints': 2,  # Expensive search, more than DiCE (3).
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'what_if', 'how_modify_input'},
+		'question_types': {'what_feature', 'why_instead_of'},
+	},
+	'Anchors': {
+		'subprops': {
+			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
+			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
+			'completeness': 3,          # what-if explanation that doesn't cover full (local) decision region
+			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
+			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) which is stronger.
+			'consistency': 2,              # Varies per seed → better than LIME (1).
+			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
+			'sparsity': 5,        # Very compact anchors → best among all.
+			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
+			'fairness': 3,                 # Neutral → same as LIME.
+			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 3,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
+			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
+		},
+		'scope_stage': 'local-expost',
+		'question_types': {'what_feature', 'why_instead_of'},
 	},
 	'ProtoDash': {
 		'subprops': {
