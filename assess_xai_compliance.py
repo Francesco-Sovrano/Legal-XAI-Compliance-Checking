@@ -380,7 +380,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 3,  # Sampling is costly but not as CEM (2) → slightly worse than LIME (3).
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'why_instead_of'},
+		'question_types': {'what_rule', 'what_feature', 'how_computed'}, # not a contrastive explainer; it does not tell you which features prevent other outcomes, only what suffices for the current one
 	},
 	'ProtoDash': {
 		'subprops': {
