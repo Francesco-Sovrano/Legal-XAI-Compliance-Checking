@@ -260,7 +260,7 @@ algorithms_model_agnostic = {
 			'sparsity': 5,        # Very compact anchors → best among all.
 			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
 			'fairness': 3,                 # Neutral → same as LIME.
-			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2).
+			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 3,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
 			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
 		},
@@ -279,7 +279,7 @@ algorithms_model_agnostic = {
 			'sparsity': 3,        # User‐set feature count → neutral.
 			'level_of_detail': 3,          # Feature‐level weights → neutral.
 			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2).
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 1,             # Random seeds obscure path → worst.
 			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
 		},
@@ -292,13 +292,13 @@ algorithms_model_agnostic = {
 			'no_false_negatives': 5,       # Captures all positive/negative contributions → highest.
 			'completeness': 3,        # positive & negative faithful but not full rationale; moderate
 			'stability': 4,                # Exact SHAP values are very stable and deterministic, but approximations are non-deterministic; still sampling noise.
-			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated in practice → moderate.
+			'adversarial_robustness': 4,   # Some robustness via axioms but can be manipulated in practice due to sampling.
 			'consistency': 5,              # Satisfies consistency axiom; approximations are non-deterministic → above LIME/Anchors.
 			'hyperparameters_perturbation_robustness': 3,  # Background choices matter → better than LIME (1) and Anchors (2).
 			'sparsity': 3,        # Same as LIME (3).
 			'level_of_detail': 4,          # It can provide interaction effects when exact SHAP values are computed, but not when approximations are used → slightly better than LIME (3)
 			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2).
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Well‐defined axioms, deterministic → very high.
 			'runtime_performance_and_implementation_constraints': 1,  # Very expensive for many features.
 		},
@@ -307,17 +307,17 @@ algorithms_model_agnostic = {
 	},
 	'DiCE': {
 		'subprops': {
-			'no_false_positives': 3,       # Counterfactuals only include needed changes → neutral.
-			'no_false_negatives': 3,       # Might miss some feasible paths → neutral.
+			'no_false_positives': 5,       # Counterfactuals show how changing the input impacts the output and they're provably correct → whenever they provide an explanation, that is a correct what-if explanation (maybe not optimal, but correct).
+			'no_false_negatives': 3,       # DiCE might miss some feasible paths → neutral.
 			'completeness': 3,          # focuses only on one or few counterfactuals
 			'stability': 1,                # Different runs yield different examples → lowest.
-			'adversarial_robustness': 1,   # Can be circumvented by adversarial tweaks → lowest.
+			'adversarial_robustness': 4,   # The explanations produced are correct, but DiCE could be manipulated to provide sub-optimal explanations → similar to SHAP (4).
 			'consistency': 1,              # High variance across seeds → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
 			'sparsity': 4,        # Tend to optimize for minimal changes → high sparsity.
 			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
 			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local only → neutral.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Solver complexity obscures path → lower than SHAP (4).
 			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
 		},
