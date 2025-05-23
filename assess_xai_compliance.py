@@ -63,7 +63,7 @@ SUBPROP_TO_CAT = {
 	'consistency': 'Robustness',
 	'hyperparameters_perturbation_robustness': 'Robustness',
 	# Complexity
-	'sparsity_and_size': 'Complexity',
+	'sparsity': 'Complexity',
 	'level_of_detail': 'Complexity',
 	# Responsibility
 	'fairness': 'Responsibility',
@@ -90,7 +90,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':0,
 			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 0, 
-			'sparsity_and_size': 0, 'level_of_detail': 0,
+			'sparsity': 0, 'level_of_detail': 0,
 			'fairness':1, 'confidentiality':0.5, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':0,
 		},
@@ -104,7 +104,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 0, 
-			'sparsity_and_size': 0, 'level_of_detail': 0,
+			'sparsity': 0, 'level_of_detail': 0,
 			'fairness':1, 'confidentiality':0.5, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':0,
 		},
@@ -116,7 +116,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':0, 'completeness':0,
 			'stability':0, 'adversarial_robustness':0.5, 'consistency':0, 'hyperparameters_perturbation_robustness': 1, 
-			'sparsity_and_size': 0, 'level_of_detail': 1,
+			'sparsity': 0, 'level_of_detail': 1,
 			'fairness':1, 'confidentiality':1, 'traceability':0,
 			'runtime_performance_and_implementation_constraints':0,
 		},
@@ -128,7 +128,7 @@ regulations = {
 		'required': {
 			'no_false_positives':0.75, 'no_false_negatives':1, 'completeness':0.75,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
-			'sparsity_and_size': 0, 'level_of_detail': 0,
+			'sparsity': 0, 'level_of_detail': 0,
 			'fairness':1, 'confidentiality':0, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
@@ -140,7 +140,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
-			'sparsity_and_size': 0.5, 'level_of_detail': 0,
+			'sparsity': 0.5, 'level_of_detail': 0,
 			'fairness':1, 'confidentiality':1, 'traceability':1, # we assume the worst-case scenario for confidentiality
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
@@ -152,7 +152,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
-			'sparsity_and_size': 0, 'level_of_detail': 0,
+			'sparsity': 0, 'level_of_detail': 0,
 			'fairness':1, 'confidentiality':0, 'traceability':1, 
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
@@ -167,7 +167,7 @@ regulations = {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':0, 'adversarial_robustness':1, 'consistency':0, 'hyperparameters_perturbation_robustness': 1, 
-			'sparsity_and_size': 1, 'level_of_detail': 1,
+			'sparsity': 1, 'level_of_detail': 1,
 			'fairness':1, 'confidentiality':0, 'traceability':1, 
 			'runtime_performance_and_implementation_constraints':0,
 		},
@@ -183,19 +183,25 @@ regulations = {
 # 2.  Algorithm‑level metadata
 #     For brevity we include all algorithms in Tables 2 & 3.
 # -------------------------------------------------------------------
-# We assign scores "by comparison", i.e., by looking at whether an algorithm is better or worse than the others so that, when compared, scores are consistent with common knowledge about these algorithms. For instance, we know that SHAP has one of the strongest theoretical guarantees for faithfulness, whereas LIME lags behind. So, LIME's faithfulness scores must be lower than SHAP's, and so on. For instance, decision trees are well-known for overfitting and therefore are not as good as a gradient-boosting-based method such as RuleFit, which has higher faithfulness. Moreover, decision trees cannot capture well linear dependencies, whereas RuleFit is designed to do that as well thus being more complete. Notably, we consider 3 as a neutral score. Other things we considered are that: global methods may leak confidential data; non-determinism reduces traceability
+# We assign scores \emph{by comparison}, i.e., by evaluating whether an algorithm performs better or worse than others, such that the resulting scores align with common knowledge about these algorithms. For instance, it is well-established that SHAP provides strong theoretical guarantees for faithfulness, whereas LIME tends to lag behind. Consequently, LIME's faithfulness scores should be lower than those of SHAP, and so forth. 
+# As another example, decision trees are known to overfit and are therefore generally less reliable than gradient-boosting-based methods such as RuleFit, which exhibit higher faithfulness. Furthermore, decision trees struggle to capture linear dependencies, whereas RuleFit is specifically designed to handle such patterns, making it producing more complete explanations.
+# We consider a score of 3 to be neutral. Other considerations include the potential for global methods to leak confidential data, and the reduction in traceability caused by non-deterministic behavior.
+# Our scoring methodology begins with the use of ChatGPT o4-mini (OpenAI’s most advanced reasoning model), which is provided with the guidelines mentioned above to generate initial scores for all XAI methods together. Subsequently, the authors of the paper manually revised these scores based on their expertise and the relevant literature, correcting inaccuracies and enhancing the overall quality of the scoring. The fundamental principle is that scores are assigned \emph{by comparison}, making them meaningful only within the context of the full set of algorithms. Introducing new XAI methods may necessitate rescaling, potentially including the use of decimal scores (which we avoided).
+# It is crucial to note that, due to the methodology used and the inherently qualitative nature of the scoring, the resulting compliance scores should be interpreted with caution. They are not to be regarded as definitive certificates of compliance but rather as helpful indicators for selecting appropriate XAI methods to ensure legally compliant explanations.
+
+
 # Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
 algorithms_model_agnostic = {
 	'Decision Trees': {
 		'subprops': {
-			'no_false_positives': 3,       # DTs can include spurious splits but usually can identify the right predicates → more false positives than SHAP (5).
-			'no_false_negatives': 2,       # DTs may ignore subtle interactions → more false negatives; lower than RuleFit (3) and SHAP (5).
+			'no_false_positives': 2,       # DTs can include spurious predicates due to overfitting → more false positives than SHAP (5).
+			'no_false_negatives': 3,       # DTs may ignore subtle interactions → more false negatives; same as RuleFit (3) and SHAP (5).
 			'completeness': 3,        # neutral global coverage; SHAP/TreeSHAP (4) more complete
-            'stability': 1,                # Small data changes can yield very different trees → lowest of all methods.
-			'adversarial_robustness': 2,   # Vulnerable to adversarial splits → lower than global‐smooth methods like PDP (3).
+			'stability': 1,                # Small data changes can yield very different trees due to overfitting → lowest of all methods.
+			'adversarial_robustness': 2,   # Vulnerable to adversarial examples (https://arxiv.org/pdf/1902.10660v2) → lower than global‐smooth methods like PDP (3).
 			'consistency': 2,              # Different runs often differ → lower than surrogate linear methods (RuleFit 3).
 			'hyperparameters_perturbation_robustness': 2,  # Tree depth/pruning changes shape drastically → lower than PDP/ICE (4).
-			'sparsity_and_size': 4,        # Can grow large without constraints.
+			'sparsity': 3,        # Typical pruned trees are readable but can still be large.
 			'level_of_detail': 5,          # Very fine‐grained (per‐leaf) → highest detail.
 			'fairness': 3,                 # Neutral (inherits model biases) → same as most global XAI.
 			'confidentiality': 2,          # Full structure leaks splits/data distribution → worse than local methods (3).
@@ -207,14 +213,14 @@ algorithms_model_agnostic = {
 	},
 	'RuleFit': {
 		'subprops': {
-			'no_false_positives': 3,       # More faithful than DT but still surrogate → moderate, lower than SHAP (5).
-			'no_false_negatives': 3,       # Better at capturing real influences vs. DT (2) but less than SHAP (5).
-			'completeness': 4,          # blends linear terms and rules to better cover model behavior
-            'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'no_false_positives': 3,       # More faithful than DT (2) but still surrogate → moderate, lower than SHAP (5).
+			'no_false_negatives': 3,       # Worse at capturing real influences than SHAP (5). Same as DT (3).
+			'completeness': 4,          # blends linear terms and rules to better cover model behavior → better than DT (3).
+			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity_and_size': 3,        # L1 penalty enforces sparsity but still worse than DT (4) due to gradient boosting generating hundreds of decision trees.
+			'sparsity': 3,        # L1 penalty enforces sparsity but still worse than DT (4) due to gradient boosting generating hundreds of decision trees.
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
 			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
@@ -229,11 +235,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation, lower than SHAP (5).
 			'no_false_negatives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation but less than SHAP (5).
 			'completeness': 4,          # blends linear terms and rules to better cover model behavior
-            'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
+			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity_and_size': 4,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
+			'sparsity': 4,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
 			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
@@ -248,11 +254,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
 			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
 			'completeness': 3,          # local only, doesn’t cover full decision region
-            'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
+			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
 			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) is stronger.
 			'consistency': 2,              # Varies per seed → better than LIME (1).
 			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
-			'sparsity_and_size': 5,        # Very compact anchors → best among all.
+			'sparsity': 5,        # Very compact anchors → best among all.
 			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
 			'fairness': 3,                 # Neutral → same as LIME.
 			'confidentiality': 3,          # Local explanations don’t leak global logic → better than DT (2).
@@ -260,18 +266,18 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
 		},
 		'scope_stage': 'local-expost',
-        'question_types': {'what_rule', 'what_feature', 'what_if'},
+		'question_types': {'what_rule', 'what_feature', 'what_if'},
 	},
 	'LIME': {
 		'subprops': {
 			'no_false_positives': 2,       # Tends to highlight irrelevant features → lower than Anchors (3).
 			'no_false_negatives': 2,       # Omits some real effects → same.
 			'completeness': 2,          # local linear fit only partial view
-            'stability': 1,                # Extremely sensitive to samples → worst.
+			'stability': 1,                # Extremely sensitive to samples → worst.
 			'adversarial_robustness': 1,   # Easily manipulated → worst.
 			'consistency': 1,              # Varies run to run → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Kernel width / sample count drastically shift outcome → worst.
-			'sparsity_and_size': 3,        # User‐set feature count → neutral.
+			'sparsity': 3,        # User‐set feature count → neutral.
 			'level_of_detail': 3,          # Feature‐level weights → neutral.
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local only → neutral.
@@ -286,11 +292,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 5,       # Theoretically only truly contributive features → highest.
 			'no_false_negatives': 5,       # Captures all positive/negative contributions → highest.
 			'completeness': 3,        # positive & negative faithful but not full rationale; moderate
-            'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
+			'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
 			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated → moderate.
 			'consistency': 3,              # Satisfies consistency axiom → above LIME/Anchors.
 			'hyperparameters_perturbation_robustness': 3,  # Kernel width matters → similar.
-			'sparsity_and_size': 2,        # Reports every feature → low sparsity.
+			'sparsity': 2,        # Reports every feature → low sparsity.
 			'level_of_detail': 5,          # Exact per‐feature contributions → highest.
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local only → neutral.
@@ -305,11 +311,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Counterfactuals only include needed changes → neutral.
 			'no_false_negatives': 3,       # Might miss some feasible paths → neutral.
 			'completeness': 3,          # focuses only on one or few counterfactuals
-            'stability': 1,                # Different runs yield different examples → lowest.
+			'stability': 1,                # Different runs yield different examples → lowest.
 			'adversarial_robustness': 1,   # Can be circumvented by adversarial tweaks → lowest.
 			'consistency': 1,              # High variance across seeds → lowest.
 			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
-			'sparsity_and_size': 4,        # Tend to optimize for minimal changes → high sparsity.
+			'sparsity': 4,        # Tend to optimize for minimal changes → high sparsity.
 			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local only → neutral.
@@ -324,11 +330,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Averages out irrelevant effects → neutral.
 			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
 			'completeness': 3,          # shows average effect, misses heterogeneity
-            'stability': 4,                # Smooth curves → high stability.
+			'stability': 4,                # Smooth curves → high stability.
 			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate.
 			'consistency': 4,              # Consistent across runs → high.
 			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
-			'sparsity_and_size': 2,        # Presents every feature as curve → low sparsity.
+			'sparsity': 2,        # Presents every feature as curve → low sparsity.
 			'level_of_detail': 5,          # Full feature effect curves → high detail.
 			'fairness': 3,                 # Neutral → same as other globals.
 			'confidentiality': 3,          # Global summary only → neutral.
@@ -343,11 +349,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Same rationale as PDP but per instance → neutral.
 			'no_false_negatives': 3,       # Same as PDP → neutral.
 			'completeness': 3,          # single‐instance view only
-            'stability': 3,                # Some noise from sampling → average.
+			'stability': 3,                # Some noise from sampling → average.
 			'adversarial_robustness': 3,   # As PDP → average.
 			'consistency': 3,              # Runs vary slightly → average.
 			'hyperparameters_perturbation_robustness': 3,  # Similar to PDP.
-			'sparsity_and_size': 2,        # Full curve for each feature → low sparsity.
+			'sparsity': 2,        # Full curve for each feature → low sparsity.
 			'level_of_detail': 5,          # Highest granularity per instance.
 			'fairness': 3,                 # Neutral → same as PDP.
 			'confidentiality': 3,          # Local only → neutral.
@@ -362,11 +368,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Counterfactual features truly required → neutral.
 			'no_false_negatives': 3,       # May miss alternative causal features → neutral.
 			'completeness': 2,          # focuses on minimal perturbation, not full rationale
-            'stability': 1,                # Highly stochastic solver → worst.
+			'stability': 1,                # Highly stochastic solver → worst.
 			'adversarial_robustness': 1,   # Can be gamed → worst.
 			'consistency': 1,              # Varies per seed → worst.
 			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → worst.
-			'sparsity_and_size': 4,        # Optimizes minimal changes → high.
+			'sparsity': 4,        # Optimizes minimal changes → high.
 			'level_of_detail': 3,          # Only changes shown → medium.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local only → neutral.
@@ -381,11 +387,11 @@ algorithms_model_agnostic = {
 			'no_false_positives': 3,       # Prototypes representative but not guaranteed → neutral.
 			'no_false_negatives': 3,       # May omit some modes → neutral.
 			'completeness': 2,          # selects subset only
-            'stability': 3,                # Algorithmic convergence ensures moderate stability.
+			'stability': 3,                # Algorithmic convergence ensures moderate stability.
 			'adversarial_robustness': 3,   # Prototype set can be attacked → average.
 			'consistency': 3,              # Same seeds yield same prototypes → moderate.
 			'hyperparameters_perturbation_robustness': 3,  # Kernel parameters matter → average.
-			'sparsity_and_size': 4,        # Selects few prototypes → high sparsity.
+			'sparsity': 4,        # Selects few prototypes → high sparsity.
 			'level_of_detail': 3,          # Shows representative points only → medium detail.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 2,          # Exposes actual data points → lower than local proxies.
@@ -404,11 +410,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral.
 			'no_false_negatives': 3,       # May miss latent factors → neutral.
 			'completeness': 2,          # only concept axes, not full model
-            'stability': 2,                # Depends on network activations → below average.
+			'stability': 2,                # Depends on network activations → below average.
 			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → low.
 			'consistency': 2,              # Concept drift across runs → low.
 			'hyperparameters_perturbation_robustness': 2,  # Layer choice matters → low.
-			'sparsity_and_size': 3,        # One vector per concept → neutral.
+			'sparsity': 3,        # One vector per concept → neutral.
 			'level_of_detail': 3,          # Concept-level granularity → medium.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local activations only → neutral.
@@ -423,11 +429,11 @@ algorithms_model_specific = {
 			'no_false_positives': 5,       # Exact Shapley for trees → highest.
 			'no_false_negatives': 5,       # Exact coverage → highest.
 			'completeness': 4,        # global sum of contributions; near-best
-            'stability': 3,                # Deterministic algorithm → average.
+			'stability': 3,                # Deterministic algorithm → average.
 			'adversarial_robustness': 3,   # Similar to SHAP → average.
 			'consistency': 3,              # Fulfills axioms → average.
 			'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
-			'sparsity_and_size': 2,        # Full set of features → low.
+			'sparsity': 2,        # Full set of features → low.
 			'level_of_detail': 5,          # Exact feature contributions → highest.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local only → neutral.
@@ -442,11 +448,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Gradient‐based attribution → neutral.
 			'no_false_negatives': 3,       # Similar to IG → neutral.
 			'completeness': 3,        # covers paths but not full rationale
-            'stability': 2,                # Sensitive to target layer choice → below average.
+			'stability': 2,                # Sensitive to target layer choice → below average.
 			'adversarial_robustness': 2,   # Gradients can be fooled → low.
 			'consistency': 2,              # Varies by reference input → low.
 			'hyperparameters_perturbation_robustness': 2,  # Reference choice matters → low.
-			'sparsity_and_size': 2,        # Attribution for every input → low sparsity.
+			'sparsity': 2,        # Attribution for every input → low sparsity.
 			'level_of_detail': 5,          # Fine gradient per feature → high.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local only → neutral.
@@ -461,11 +467,11 @@ algorithms_model_specific = {
 			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift → better than DeepLift.
 			'no_false_negatives': 4,       # Similar improvement → above neutral.
 			'completeness': 3,        # moderated by sampling; neutral
-            'stability': 3,                # More stable than pure gradients → average.
+			'stability': 3,                # More stable than pure gradients → average.
 			'adversarial_robustness': 3,   # Slight improvement over DeepLift → average.
 			'consistency': 3,              # Inherits SHAP axioms → average.
 			'hyperparameters_perturbation_robustness': 3,  # Average.
-			'sparsity_and_size': 2,        # Dense attributions → low.
+			'sparsity': 2,        # Dense attributions → low.
 			'level_of_detail': 5,          # High detail.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -480,11 +486,11 @@ algorithms_model_specific = {
 			'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
 			'no_false_negatives': 5,       # Captures all contributive paths → highest.
 			'completeness': 4,        # near TreeSHAP coverage
-            'stability': 3,                # Deterministic propagation → average.
+			'stability': 3,                # Deterministic propagation → average.
 			'adversarial_robustness': 3,   # Similar to SHAP → average.
 			'consistency': 3,              # Axiomatic → average.
 			'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
-			'sparsity_and_size': 2,        # Many edges → low sparsity.
+			'sparsity': 2,        # Many edges → low sparsity.
 			'level_of_detail': 5,          # Very fine‐grained along network → highest.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -499,11 +505,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Similar to gradient methods → neutral.
 			'no_false_negatives': 3,       # Neutral.
 			'completeness': 3,        # covers relevance but not full model
-            'stability': 2,                # Sensitive to layer selection → low.
+			'stability': 2,                # Sensitive to layer selection → low.
 			'adversarial_robustness': 1,   # Extremely vulnerable→ lowest.
 			'consistency': 2,              # Varies by relevance rule → low.
 			'hyperparameters_perturbation_robustness': 2,  # Rule variants shift results → low.
-			'sparsity_and_size': 2,        # Dense maps → low.
+			'sparsity': 2,        # Dense maps → low.
 			'level_of_detail': 5,          # Pixel‐level attribution → highest.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -518,11 +524,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Maximizes particular neurons → neutral.
 			'no_false_negatives': 3,       # Neutral.
 			'completeness': 1,        # only maximized neuron; minimal
-            'stability': 1,                # Highly sensitive to init and optimizer → lowest.
+			'stability': 1,                # Highly sensitive to init and optimizer → lowest.
 			'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
 			'consistency': 2,              # Varies with random seed → low.
 			'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
-			'sparsity_and_size': 1,        # Generates dense patterns → lowest.
+			'sparsity': 1,        # Generates dense patterns → lowest.
 			'level_of_detail': 5,          # Pixel‐level → highest.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -537,11 +543,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Highlights regions moderately → neutral.
 			'no_false_negatives': 3,       # Neutral.
 			'completeness': 3,        # only top activations; low
-            'stability': 2,                # Sensitive to layer choice → low.
+			'stability': 2,                # Sensitive to layer choice → low.
 			'adversarial_robustness': 2,   # Heatmaps can be misled → low.
 			'consistency': 2,              # Varies per layer and run → low.
 			'hyperparameters_perturbation_robustness': 2,  # Depends on smoothing → low.
-			'sparsity_and_size': 3,        # Coarse blobs → neutral.
+			'sparsity': 3,        # Coarse blobs → neutral.
 			'level_of_detail': 4,          # Spatial maps → high spatial detail.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -556,11 +562,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Axiomatic but baseline‐dependent → neutral.
 			'no_false_negatives': 3,       # Neutral.
 			'completeness': 3,        # satisfies completeness axiom but partial rationale
-            'stability': 2,                # Sensitive to path/baseline → low.
+			'stability': 2,                # Sensitive to path/baseline → low.
 			'adversarial_robustness': 2,   # Can be manipulated → low.
 			'consistency': 2,              # Baseline choice yields variance → low.
 			'hyperparameters_perturbation_robustness': 2,  # Step count matters → low.
-			'sparsity_and_size': 2,        # Attribution for every feature → low.
+			'sparsity': 2,        # Attribution for every feature → low.
 			'level_of_detail': 5,          # Fine per‐feature detail → highest.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
@@ -575,11 +581,11 @@ algorithms_model_specific = {
 			'no_false_positives': 3,       # Debate exists, so neutral.
 			'no_false_negatives': 3,       # Neutral.
 			'completeness': 2,        # only attended parts; minimal
-            'stability': 2,                # Sensitive to training variations → low.
+			'stability': 2,                # Sensitive to training variations → low.
 			'adversarial_robustness': 1,   # Easily manipulated → lowest.
 			'consistency': 2,              # Layer/head differences → low.
 			'hyperparameters_perturbation_robustness': 2,  # Head count matters → low.
-			'sparsity_and_size': 2,        # Dense weight matrices → low.
+			'sparsity': 2,        # Dense weight matrices → low.
 			'level_of_detail': 5,          # Token‐level → highest.
 			'fairness': 3,                 # Neutral.
 			'confidentiality': 3,          # Neutral.
