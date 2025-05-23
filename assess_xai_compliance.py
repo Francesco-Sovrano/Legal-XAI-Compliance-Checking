@@ -189,7 +189,6 @@ regulations = {
 # Our scoring methodology begins with the use of ChatGPT o4-mini (OpenAI’s most advanced reasoning model), which is provided with the guidelines mentioned above to generate initial scores for all XAI methods together. Subsequently, the authors of the paper manually revised these scores based on their expertise and the relevant literature, correcting inaccuracies and enhancing the overall quality of the scoring. The fundamental principle is that scores are assigned \emph{by comparison}, making them meaningful only within the context of the full set of algorithms. Introducing new XAI methods may necessitate rescaling, potentially including the use of decimal scores (which we avoided).
 # It is crucial to note that, due to the methodology used and the inherently qualitative nature of the scoring, the resulting compliance scores should be interpreted with caution. They are not to be regarded as definitive certificates of compliance but rather as helpful indicators for selecting appropriate XAI methods to ensure legally compliant explanations.
 
-
 # Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability and consistency; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
 algorithms_model_agnostic = {
 	'Decision Trees': {
@@ -220,7 +219,7 @@ algorithms_model_agnostic = {
 			'adversarial_robustness': 3,   # Moderate robustness → above DT (2) due to gradient boosting being less prone to overfitting.
 			'consistency': 3,              # LASSO regularization yields some consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity': 3,        # L1 penalty enforces sparsity but still worse than DT (4) due to gradient boosting generating hundreds of decision trees.
+			'sparsity': 2,        # LASSO regularization enforces sparsity but still worse than DT (3) due to gradient boosting generating hundreds of decision trees.
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
 			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
@@ -234,16 +233,16 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation, lower than SHAP (5).
 			'no_false_negatives': 4,       # More faithful than RuleFit due to SHAP-driven rule generation but less than SHAP (5).
-			'completeness': 4,          # blends linear terms and rules to better cover model behavior
-			'stability': 3,                # Regularization dampens variance → more stable than DT (1), equal to PDP (4) is better though.
-			'adversarial_robustness': 3,   # Moderate robustness → above DT (2), below PDP/ICE (3).
+			'completeness': 4,          # Same as RuleFit (4)
+			'stability': 3,                # Regularization dampens variance → more stable than DT (1), same as RuleFit (3).
+			'adversarial_robustness': 3,   # Same as RuleFit (3) although SHAP-driven rule extraction and SHAP-driven LASSO regression might help increasing robustness.
 			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
-			'sparsity': 4,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
-			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
-			'fairness': 3,                 # Neutral → same as DT.
-			'confidentiality': 2,          # Leaks rule logic → same as DT.
-			'traceability': 4,             # Linear+rule pipeline is transparent → close to DT (4).
+			'sparsity': 3,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
+			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5), same as RuleFit (4).
+			'fairness': 3,                 # Neutral → same as RuleFit.
+			'confidentiality': 2,          # Leaks rule logic → same as RuleFit.
+			'traceability': 3,             # Linear+rule pipeline is transparent. However SHAP approximations add some extra non-determinism → less than RuleFit (4).
 			'runtime_performance_and_implementation_constraints': 2,  # More expensive to fit than RuleFit but lighter than SHAP since approximations are used.
 		},
 		'scope_stage': 'global-exante',
