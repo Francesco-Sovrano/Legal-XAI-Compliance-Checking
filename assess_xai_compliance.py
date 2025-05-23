@@ -186,7 +186,7 @@ regulations = {
 # We assign scores \emph{by comparison}, i.e., by evaluating whether an algorithm performs better or worse than others, such that the resulting scores align with common knowledge about these algorithms. For instance, it is well-established that SHAP provides strong theoretical guarantees for faithfulness, whereas LIME tends to lag behind. Consequently, LIME's faithfulness scores should be lower than those of SHAP, and so forth. 
 # As another example, decision trees are known to overfit and are therefore generally less reliable than gradient-boosting-based methods such as RuleFit, which exhibit higher faithfulness. Furthermore, decision trees struggle to capture linear dependencies, whereas RuleFit is specifically designed to handle such patterns, making it producing more complete explanations.
 # We consider a score of 3 to be neutral. Other considerations include the potential for global methods to leak confidential data, and the reduction in traceability and consistency caused by non-deterministic behavior.
-# Our scoring methodology begins with the use of ChatGPT o4-mini (OpenAI’s most advanced reasoning model), which is provided with the guidelines mentioned above to generate initial scores for all XAI methods together. Subsequently, the authors of the paper manually revised these scores based on their expertise and the relevant literature, correcting inaccuracies and enhancing the overall quality of the scoring. The fundamental principle is that scores are assigned \emph{by comparison}, making them meaningful only within the context of the full set of algorithms. Introducing new XAI methods may necessitate rescaling, potentially including the use of decimal scores (which we avoided).
+# Our scoring methodology begins with the use of ChatGPT o4-mini (OpenAI's most advanced reasoning model), which is provided with the guidelines mentioned above to generate initial scores for all XAI methods together. Subsequently, the authors of the paper manually revised these scores based on their expertise and the relevant literature, correcting inaccuracies and enhancing the overall quality of the scoring. The fundamental principle is that scores are assigned \emph{by comparison}, making them meaningful only within the context of the full set of algorithms. Introducing new XAI methods may necessitate rescaling, potentially including the use of decimal scores (which we avoided).
 # It is crucial to note that, due to the methodology used and the inherently qualitative nature of the scoring, the resulting compliance scores should be interpreted with caution. They are not to be regarded as definitive certificates of compliance but rather as helpful indicators for selecting appropriate XAI methods to ensure legally compliant explanations.
 
 # Keep in mind that: 3 is somehow a neutral score; global methods may leak confidential data; non-determinism reduces traceability and consistency; RuleFit is more faithful than Decision Trees; SHAP is the most faithful model in terms of positives and negatives but not in terms of completeness; Anchors is more faithful than LIME; SHAP is better than LIME.
@@ -252,7 +252,7 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
 			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
-			'completeness': 3,          # what-if explanation that doesn’t cover full (local) decision region
+			'completeness': 3,          # what-if explanation that doesn't cover full (local) decision region
 			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
 			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) which is stronger.
 			'consistency': 2,              # Varies per seed → better than LIME (1).
@@ -260,7 +260,7 @@ algorithms_model_agnostic = {
 			'sparsity': 5,        # Very compact anchors → best among all.
 			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
 			'fairness': 3,                 # Neutral → same as LIME.
-			'confidentiality': 3,          # Local what-if explanations don’t leak global logic → better than DT (2).
+			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2).
 			'traceability': 3,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
 			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
 		},
@@ -279,7 +279,7 @@ algorithms_model_agnostic = {
 			'sparsity': 3,        # User‐set feature count → neutral.
 			'level_of_detail': 3,          # Feature‐level weights → neutral.
 			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local only → neutral.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2).
 			'traceability': 1,             # Random seeds obscure path → worst.
 			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
 		},
