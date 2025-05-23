@@ -291,15 +291,15 @@ algorithms_model_agnostic = {
 			'no_false_positives': 5,       # Theoretically only truly contributive features → highest.
 			'no_false_negatives': 5,       # Captures all positive/negative contributions → highest.
 			'completeness': 3,        # positive & negative faithful but not full rationale; moderate
-			'stability': 3,                # Kernel SHAP can vary, but TreeSHAP is deterministic → average.
-			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated → moderate.
-			'consistency': 3,              # Satisfies consistency axiom → above LIME/Anchors.
-			'hyperparameters_perturbation_robustness': 3,  # Kernel width matters → similar.
-			'sparsity': 2,        # Reports every feature → low sparsity.
-			'level_of_detail': 5,          # Exact per‐feature contributions → highest.
+			'stability': 4,                # Exact SHAP values are very stable and deterministic, but approximations are non-deterministic; still sampling noise.
+			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated in practice → moderate.
+			'consistency': 5,              # Satisfies consistency axiom; approximations are non-deterministic → above LIME/Anchors.
+			'hyperparameters_perturbation_robustness': 3,  # Background choices matter → better than LIME (1) and Anchors (2).
+			'sparsity': 3,        # Same as LIME (3).
+			'level_of_detail': 4,          # It can provide interaction effects when exact SHAP values are computed, but not when approximations are used → slightly better than LIME (3)
 			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local only → neutral.
-			'traceability': 4,             # Well‐defined axioms, deterministic → high.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2).
+			'traceability': 5,             # Well‐defined axioms, deterministic → very high.
 			'runtime_performance_and_implementation_constraints': 1,  # Very expensive for many features.
 		},
 		'scope_stage': 'local-expost',
