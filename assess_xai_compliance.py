@@ -252,16 +252,16 @@ algorithms_model_agnostic = {
 		'subprops': {
 			'no_false_positives': 3,       # Better precision than LIME (2) but not perfect like SHAP (5).
 			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
-			'completeness': 3,          # local only, doesn’t cover full decision region
+			'completeness': 3,          # what-if explanation that doesn’t cover full (local) decision region
 			'stability': 2,                # Sampling yields moderate stability → better than LIME (1), worse than PDP (4).
-			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) is stronger.
+			'adversarial_robustness': 2,   # Can still be fooled by adversarial points → same as SHAP (3) which is stronger.
 			'consistency': 2,              # Varies per seed → better than LIME (1).
 			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → slightly above LIME (1).
 			'sparsity': 5,        # Very compact anchors → best among all.
 			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
 			'fairness': 3,                 # Neutral → same as LIME.
-			'confidentiality': 3,          # Local explanations don’t leak global logic → better than DT (2).
-			'traceability': 3,             # Procedure is clear but sampling adds opacity → above LIME (1).
+			'confidentiality': 3,          # Local what-if explanations don’t leak global logic → better than DT (2).
+			'traceability': 3,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
 			'runtime_performance_and_implementation_constraints': 2,  # Sampling is costly → worse than LIME (3).
 		},
 		'scope_stage': 'local-expost',
