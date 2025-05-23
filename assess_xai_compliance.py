@@ -325,24 +325,24 @@ algorithms_model_agnostic = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-	'DiCE': {
+	'Anchors': {
 		'subprops': {
-			'no_false_positives': 5,       # Counterfactuals show how changing the input impacts the output and they're provably correct → whenever they provide an explanation, that is a correct what-if explanation (maybe not optimal, but correct).
-			'no_false_negatives': 3,       # DiCE might miss some feasible paths → neutral.
-			'completeness': 3,          # focuses only on one or few counterfactuals
-			'stability': 1,                # Different runs yield different examples → lowest.
-			'adversarial_robustness': 4,   # The explanations produced are correct, but DiCE could be manipulated to provide sub-optimal explanations → similar to SHAP (4).
-			'consistency': 1,              # High variance across seeds → lowest.
-			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
-			'sparsity': 4,        # Tend to optimize for minimal changes → high sparsity.
-			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
-			'fairness': 3,                 # Neutral → same as other locals.
-			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
-			'traceability': 2,             # Solver complexity obscures path → lower than SHAP (4).
-			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
+			'no_false_positives': 4,       # Better precision than LIME (2) but not perfect like SHAP (5) or CEM (5). The method relies on sampling and approximations to determine the precision of an anchor. As such, there's an inherent uncertainty, and the explanations are not guaranteed to be correct in all cases. By construction, anchors meet a user-specified precision threshold (e.g., 95%) with probabilistic confidence bounds
+			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
+			'completeness': 3,          # Similar to CEM but without pertinent negatives, so less than CEM (4).
+			'stability': 1,                # Highly stochastic solver → worst.
+			'adversarial_robustness': 3,   # Can still be fooled by adversarial points → less than CEM (4)
+			'consistency': 1,              # Varies per seed → same as CEM (1).
+			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → similar to CEM (1) but better since there's no stochastic optimization involved.
+			'sparsity': 5,        # Very compact anchors → best among all.
+			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
+			'fairness': 3,                 # Neutral → same as LIME.
+			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 2,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
+			'runtime_performance_and_implementation_constraints': 3,  # Sampling is costly but not as CEM (2) → slightly worse than LIME (3).
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_feature', 'what_if', 'how_modify_input'},
+		'question_types': {'what_rule', 'what_feature', 'how_computed'}, # not a contrastive explainer; it does not tell you which features prevent other outcomes, only what suffices for the current one
 	},
 	'CEM': {
 		'subprops': {
@@ -363,24 +363,24 @@ algorithms_model_agnostic = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'why_instead_of'},
 	},
-	'Anchors': {
+	'DiCE': {
 		'subprops': {
-			'no_false_positives': 4,       # Better precision than LIME (2) but not perfect like SHAP (5) or CEM (5). The method relies on sampling and approximations to determine the precision of an anchor. As such, there's an inherent uncertainty, and the explanations are not guaranteed to be correct in all cases. By construction, anchors meet a user-specified precision threshold (e.g., 95%) with probabilistic confidence bounds
-			'no_false_negatives': 3,       # Higher recall than LIME (2), lower than SHAP (5).
-			'completeness': 3,          # Similar to CEM but without pertinent negatives, so less than CEM (4).
-			'stability': 1,                # Highly stochastic solver → worst.
-			'adversarial_robustness': 3,   # Can still be fooled by adversarial points → less than CEM (4)
-			'consistency': 1,              # Varies per seed → same as CEM (1).
-			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → similar to CEM (1) but better since there's no stochastic optimization involved.
-			'sparsity': 5,        # Very compact anchors → best among all.
-			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
-			'fairness': 3,                 # Neutral → same as LIME.
-			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
-			'traceability': 2,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
-			'runtime_performance_and_implementation_constraints': 3,  # Sampling is costly but not as CEM (2) → slightly worse than LIME (3).
+			'no_false_positives': 5,       # Counterfactuals show how changing the input impacts the output and they're provably correct → whenever they provide an explanation, that is a correct what-if explanation (maybe not optimal, but correct).
+			'no_false_negatives': 3,       # DiCE might miss some feasible paths → neutral.
+			'completeness': 3,          # focuses only on one or few counterfactuals
+			'stability': 1,                # Different runs yield different examples → lowest.
+			'adversarial_robustness': 4,   # The explanations produced are correct, but DiCE could be manipulated to provide sub-optimal explanations → similar to SHAP (4).
+			'consistency': 1,              # High variance across seeds → lowest.
+			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
+			'sparsity': 4,        # Tend to optimize for minimal changes → high sparsity.
+			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
+			'fairness': 3,                 # Neutral → same as other locals.
+			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
+			'traceability': 2,             # Solver complexity obscures path → lower than SHAP (4).
+			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_rule', 'what_feature', 'how_computed'}, # not a contrastive explainer; it does not tell you which features prevent other outcomes, only what suffices for the current one
+		'question_types': {'what_feature', 'what_if', 'how_modify_input'},
 	},
 	'ProtoDash': {
 		'subprops': {
