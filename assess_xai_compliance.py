@@ -11,7 +11,7 @@ import math
 QUESTION_KINDS = {
 	'what_feature',  # "What specific features…"
 	'what_rule',     # "What rule / threshold…"
-	'how_computed',     # "What rule / threshold…"
+	'how_computed',     # "How is the output approximately computed?" # not necessarily how is it computed in every details is too complex: we have execution traces but they're useless, we need a high-level representation of the computation
 	'how_differs',   # "How does this decision differ from…"
 	'what_if',       # "What if parameter X changed…"
 	'how_modify_input',  # "What input values should I adjust…"
@@ -266,7 +266,7 @@ algorithms_model_agnostic = {
 			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost but better than DiCE (3).
 		},
 		'scope_stage': 'global-exante',
-		'question_types': {'what_rule', 'what_if'}, # no 'how_computed' because it doesn't show all features' contributions
+		'question_types': {'what_rule', 'what_if', 'how_computed'}, # no 'how_computed' because it doesn't show all features' contributions
 	},
 	'ICE': {
 		'subprops': {
@@ -316,7 +316,7 @@ algorithms_model_agnostic = {
 			'consistency': 5,              # Satisfies consistency axiom; approximations are non-deterministic → above LIME/Anchors.
 			'hyperparameters_perturbation_robustness': 3,  # Background choices matter → better than LIME (1) and Anchors (2).
 			'sparsity': 3,        # Same as LIME (3).
-			'level_of_detail': 3,          # It can provide interaction effects when exact SHAP values are computed, but not when approximations are used → slightly better than LIME (3)
+			'level_of_detail': 3,          # Same as LIME (3)
 			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Well‐defined axioms, deterministic → very high.
@@ -422,7 +422,7 @@ algorithms_model_specific = {
 			'runtime_performance_and_implementation_constraints': 3,  # Moderate cost.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'how_computed', 'what_feature'},
+		'question_types': {'what_feature', 'how_computed'},
 	},
 	'TreeSHAP': {
 		'subprops': {
@@ -434,7 +434,7 @@ algorithms_model_specific = {
 			'consistency': 3,              # Fulfills axioms → average.
 			'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
 			'sparsity': 2,        # Full set of features → low.
-			'level_of_detail': 5,          # Exact feature contributions → highest.
+			'level_of_detail': 5,          # Exact feature contributions + interaction effects → highest.
 			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local only → neutral.
 			'traceability': 4,             # Clearly defined algorithm → high.
@@ -517,7 +517,7 @@ algorithms_model_specific = {
 			'runtime_performance_and_implementation_constraints': 4,  # One backward pass → efficient.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_feature', 'what_if'},
+		'question_types': {'what_feature', 'how_computed'},
 	},
 	'Activation Maximization': {
 		'subprops': {
@@ -555,7 +555,7 @@ algorithms_model_specific = {
 			'runtime_performance_and_implementation_constraints': 4,  # Single forward+backward → efficient.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_feature', 'what_if', 'how_computed'},
+		'question_types': {'what_feature', 'how_computed'},
 	},
 	'Integrated Gradients': {
 		'subprops': {
@@ -574,7 +574,7 @@ algorithms_model_specific = {
 			'runtime_performance_and_implementation_constraints': 3,  # Multiple gradients → moderate cost.
 		},
 		'scope_stage': 'local-expost',
-		'question_types': {'what_feature', 'what_if', 'how_computed'},
+		'question_types': {'what_feature', 'how_computed'},
 	},
 	'Attention': {
 		'subprops': {
