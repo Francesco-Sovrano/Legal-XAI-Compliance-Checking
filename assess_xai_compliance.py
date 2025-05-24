@@ -145,7 +145,7 @@ regulations = {
 			'fairness':1, 'confidentiality':1, 'traceability':1, # we assume the worst-case scenario for confidentiality
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
-		'scope_stage': 'both',
+		'scope_stage': 'global-exante',
 		'question_types': ['what rule', 'what general logic', 'is input problematic', 'what inputs have wrong outcomes', 'what best input format and ranges', 'how reliable is output'],
 	},
 
