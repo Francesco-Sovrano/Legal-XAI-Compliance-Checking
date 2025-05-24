@@ -237,7 +237,7 @@ algorithms_model_agnostic = {
 			'completeness': 4,          # Same as RuleFit (4)
 			'stability': 3,                # Regularization dampens variance → more stable than DT (1), same as RuleFit (3).
 			'adversarial_robustness': 3,   # Same as RuleFit (3) although SHAP-driven rule extraction and SHAP-driven LASSO regression might help increasing robustness.
-			'consistency': 3,              # L1 smoothing yields consistency → above DT (2).
+			'consistency': 4,              # LASSO regression and SHAP estimates yield consistency → above RuleFit (3) but less than SHAP (5).
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
 			'sparsity': 3,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5), same as RuleFit (4).
@@ -258,7 +258,7 @@ algorithms_model_agnostic = {
 			'adversarial_robustness': 3,   # Aggregation resists single‐point attacks → moderate but less than DiCE (4) since the explanations are not provably correct.
 			'consistency': 4,              # Consistent across runs → high due to averaging.
 			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
-			'sparsity': 2,        # Only shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
+			'sparsity': 2,        # Shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
 			'level_of_detail': 4,          # Full feature effect curves + interaction effects → higher than SHAP (4).
 			'fairness': 3,                 # Neutral → same as other globals.
 			'confidentiality': 3,          # Global summary only → better than DT (2), but neutral since it can still disclose how the AI model works.
