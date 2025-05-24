@@ -116,7 +116,7 @@ regulations = {
 	'DSA27+P2B5': {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':0, 'completeness':0,
-			'stability':0, 'adversarial_robustness':0.5, 'consistency':0, 'hyperparameters_perturbation_robustness': 1, 
+			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 0, 'level_of_detail': 1,
 			'fairness':1, 'confidentiality':1, 'traceability':0,
 			'runtime_performance_and_implementation_constraints':0,
@@ -167,7 +167,7 @@ regulations = {
 	'AIA11': {
 		'required': {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
-			'stability':0, 'adversarial_robustness':1, 'consistency':0, 'hyperparameters_perturbation_robustness': 1, 
+			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 1, 'level_of_detail': 1,
 			'fairness':1, 'confidentiality':0, 'traceability':1, 
 			'runtime_performance_and_implementation_constraints':0,
