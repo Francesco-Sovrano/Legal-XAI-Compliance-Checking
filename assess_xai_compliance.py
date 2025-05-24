@@ -42,8 +42,8 @@ TEXT_TO_QUESTION_KIND = {
 
 	# input modification
 	'how to change':                'how_modify_input',
-	'what inputs have wrong outcomes': 'how_modify_input',
-	'what best input format and ranges': 'how_modify_input', # not sure about format
+	'what inputs have wrong outcomes': 'what_feature',
+	'what best input format and ranges': 'what_rule', # not sure about format
 
 	# computation transparency
 	'how output is computed':      'how_computed',
@@ -145,7 +145,7 @@ regulations = {
 			'fairness':1, 'confidentiality':1, 'traceability':1, # we assume the worst-case scenario for confidentiality
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
-		'scope_stage': 'global-exante',
+		'scope_stage': 'both',
 		'question_types': ['what rule', 'what general logic', 'is input problematic', 'what inputs have wrong outcomes', 'what best input format and ranges', 'how reliable is output'],
 	},
 
@@ -632,8 +632,6 @@ def assess_xai_algorithms(algorithms):
 				"Regulation": reg_name,
 				"Algorithm": algo_name,
 				"Score": S,
-				"Scope‑fit": fit_proc,
-				"Questions‑fit": fit_q
 			})
 
 	scores_df = pd.DataFrame(rows)
@@ -643,7 +641,7 @@ def assess_xai_algorithms(algorithms):
 	# -------------------------------------------------------------------
 	best_rows = []
 	for reg_name, reg in regulations.items():
-		for q in map(lambda x: TEXT_TO_QUESTION_KIND[x], reg['question_types']):
+		for q in set(map(lambda x: TEXT_TO_QUESTION_KIND[x], reg['question_types'])):
 			# print(q)
 			# for a in algorithms:
 			#   print(q in algorithms[a]['question_types'], a)
@@ -652,13 +650,19 @@ def assess_xai_algorithms(algorithms):
 				(scores_df['Regulation'] == reg_name) &
 				scores_df['Algorithm'].apply(lambda a: q in algorithms[a]['question_types'])
 			]
-			# print(cand)
-			best = cand.loc[cand['Score'].idxmax()]
+			# find the max score in this candidate set
+			max_score = cand['Score'].max()
+
+			# select all rows that have that score
+			best_candidates = cand[cand['Score'] == max_score]
+
+			# now append one entry per best row
+			best_algorithms = ', '.join(best['Algorithm'] for _, best in best_candidates.iterrows())
 			best_rows.append({
 				'Regulation'     : reg_name,
 				'Question'       : q,
-				'Best Algorithm' : best['Algorithm'] if not cand.empty else None,
-				'Fit-score'      : best['Score'] if not cand.empty else None,
+				'Best Algorithm' : best_algorithms if max_score > 0 else None,
+				'Fit-score'      : max_score     if max_score > 0 else None,
 			})
 
 	best_df = (
