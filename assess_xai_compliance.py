@@ -251,7 +251,7 @@ algorithms_model_agnostic = {
 	},
 	'PDP': { # One-way PDPs tell us about the interaction between the target response and an input feature of interest (e.g. linear, non-linear). Link: https://scikit-learn.org/stable/modules/partial_dependence.html
 		'subprops': {
-			'no_false_positives': 4,       # Averages out irrelevant effects → less than DiCE (5) or SHAP (5) but better than Anchors (2) due to averaging.
+			'no_false_positives': 3,       # Averages out irrelevant effects, but averaging might also cause the loss of uncommon effects → less than DiCE (5) or SHAP (5) but better than Anchors (2) due to averaging.
 			'no_false_negatives': 3,       # Some partial effects may be hidden → neutral.
 			'completeness': 3,          # shows average effect, misses heterogeneity
 			'stability': 4,                # Smooth curves → high stability.
@@ -270,7 +270,7 @@ algorithms_model_agnostic = {
 	},
 	'ICE': {
 		'subprops': {
-			'no_false_positives': 3,       # Same rationale as PDP (4) but per instance → neutral.
+			'no_false_positives': 3,       # Same rationale as PDP (3) but per instance → neutral.
 			'no_false_negatives': 4,       # Hides less partial effects than PDP (3)
 			'completeness': 2,          # Due to the limits of human perception, only one input feature of interest is supported for ICE plots. Link: https://scikit-learn.org/stable/modules/partial_dependence.html
 			'stability': 3,                # Some noise from sampling → average; less than PDP (4).
@@ -424,31 +424,12 @@ algorithms_model_specific = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
 	},
-	# 'TreeSHAP': {
-	# 	'subprops': {
-	# 		'no_false_positives': 5,       # Exact Shapley for trees → highest.
-	# 		'no_false_negatives': 5,       # Exact coverage → highest.
-	# 		'completeness': 4,        # global sum of contributions; near-best
-	# 		'stability': 3,                # Deterministic algorithm → average.
-	# 		'adversarial_robustness': 3,   # Similar to SHAP → average.
-	# 		'consistency': 3,              # Fulfills axioms → average.
-	# 		'hyperparameters_perturbation_robustness': 3,  # Few hyperparams → average.
-	# 		'sparsity': 2,        # Full set of features → low.
-	# 		'level_of_detail': 5,          # Exact feature contributions + interaction effects → highest.
-	# 		'fairness': 3,                 # Neutral → same.
-	# 		'confidentiality': 3,          # Local only → neutral.
-	# 		'traceability': 4,             # Clearly defined algorithm → high.
-	# 		'runtime_performance_and_implementation_constraints': 3,  # Faster than kernel SHAP.
-	# 	},
-	# 	'scope_stage': 'global-exante',
-	# 	'question_types': {'what_feature', 'what_if', 'how_computed'},
-	# },
 	'DeepLift': {
 		'subprops': {
 			'no_false_positives': 3,       # Gradient‐based attribution → lower than DeepSHAP (4).
 			'no_false_negatives': 3,       # See no_false_positives.
 			'completeness': 3,        # positive & negative faithful but not full rationale; moderate just like SHAP (3)
-			'stability': 1,                # Sensitive to target layer choice → less than DeepSHAP (2), similar to CAVs (1)
+			'stability': 3,                # Sensitive to target layer choice → slightly more than DeepSHAP (2) since it's deterministic
 			'adversarial_robustness': 2,   # Gradients can be fooled → less than DeepSHAP (3)
 			'consistency': 3,              # Varies by reference input → less than DeepSHAP (4); similar to CAVs (3).
 			'hyperparameters_perturbation_robustness': 1,  # Less than DeepSHAP (2)
@@ -467,7 +448,7 @@ algorithms_model_specific = {
 			'no_false_positives': 4,       # Combines SHAP axioms + DeepLift. Theoretically only truly contributive features but it only approximates SHAP → lower than SHAP (5); better than DeepLift.
 			'no_false_negatives': 4,       # See no_false_positives.
 			'completeness': 3,        # positive & negative faithful but not full rationale; moderate just like SHAP (3)
-			'stability': 2,                # Approximate SHAP values are non-deterministic, so there may be sampling noise → less than SHAP (4) but more stable than pure gradients (1) because of SHAP estimates involved
+			'stability': 2,                # Approximate SHAP values are non-deterministic, so there may be sampling noise → less than SHAP (4) and DeepLift (3) because of SHAP estimates involved
 			'adversarial_robustness': 3,   # Some robustness via axioms but can be manipulated in practice due to sampling → less than SHAP (4)
 			'consistency': 4,              # Satisfies consistency axiom but approximations are non-deterministic → less than SHAP (5).
 			'hyperparameters_perturbation_robustness': 2,  # Background choices matter → better than LIME (1) but worse than SHAP (3), so similar to Anchors (2).
@@ -481,25 +462,6 @@ algorithms_model_specific = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'what_if', 'how_computed'},
 	},
-	# 'Shapley Flow': {
-	# 	'subprops': {
-	# 		'no_false_positives': 5,       # Exact Shapley propagated through graph → highest.
-	# 		'no_false_negatives': 5,       # Captures all contributive paths → highest.
-	# 		'completeness': 4,        # near TreeSHAP coverage
-	# 		'stability': 3,                # Deterministic propagation → average.
-	# 		'adversarial_robustness': 3,   # Similar to SHAP → average.
-	# 		'consistency': 3,              # Axiomatic → average.
-	# 		'hyperparameters_perturbation_robustness': 3,  # Depends on edge weights only → average.
-	# 		'sparsity': 2,        # Many edges → low sparsity.
-	# 		'level_of_detail': 5,          # Very fine‐grained along network → highest.
-	# 		'fairness': 3,                 # Neutral.
-	# 		'confidentiality': 3,          # Neutral.
-	# 		'traceability': 4,             # Clear flow paths → high.
-	# 		'runtime_performance_and_implementation_constraints': 2,  # Heavy graph propagation.
-	# 	},
-	# 	'scope_stage': 'local-expost',
-	# 	'question_types': {'what_feature', 'what_if', 'how_computed'},
-	# },
 	'LRP': {
 		'subprops': {
 			'no_false_positives': 4,       # LRP’s deep Taylor decomposition produces more focused, less noisy relevance maps compared to simple sensitivity‐based methods, reducing spurious attributions (false positives) and capturing most contributing features (false negatives) better → better than DeepLift (4).
@@ -519,25 +481,6 @@ algorithms_model_specific = {
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
 	},
-	# 'Activation Maximization': {
-	# 	'subprops': {
-	# 		'no_false_positives': 3,       # Maximizes particular neurons → neutral.
-	# 		'no_false_negatives': 3,       # Neutral.
-	# 		'completeness': 1,        # only maximized neuron; minimal
-	# 		'stability': 1,                # Highly sensitive to init and optimizer → lowest.
-	# 		'adversarial_robustness': 1,   # Easily produces adversarial‐style patterns → lowest.
-	# 		'consistency': 2,              # Varies with random seed → low.
-	# 		'hyperparameters_perturbation_robustness': 2,  # Regularization critical → low.
-	# 		'sparsity': 1,        # Generates dense patterns → lowest.
-	# 		'level_of_detail': 5,          # Pixel‐level → highest.
-	# 		'fairness': 3,                 # Neutral.
-	# 		'confidentiality': 3,          # Neutral.
-	# 		'traceability': 2,             # Optimization opaque → low.
-	# 		'runtime_performance_and_implementation_constraints': 2,  # Expensive iterative optimization.
-	# 	},
-	# 	'scope_stage': 'local-expost',
-	# 	'question_types': {'how_computed'},
-	# },
 	'Grad-CAM': {
 		'subprops': {
 			'no_false_positives': 3,       # Highlights regions moderately. Grad-CAM’s coarse heatmaps often highlight large regions, including irrelevant background pixels, leading to more spurious attributions → neutral; less than LRP (4).
@@ -559,38 +502,38 @@ algorithms_model_specific = {
 	},
 	'Integrated Gradients': {
 		'subprops': {
-			'no_false_positives': 3,       # Axiomatic but baseline‐dependent → neutral.
-			'no_false_negatives': 3,       # Neutral.
-			'completeness': 3,        # satisfies completeness axiom but partial rationale
-			'stability': 2,                # Sensitive to path/baseline → low.
-			'adversarial_robustness': 2,   # Can be manipulated → low.
-			'consistency': 2,              # Baseline choice yields variance → low.
-			'hyperparameters_perturbation_robustness': 2,  # Step count matters → low.
-			'sparsity': 2,        # Attribution for every feature → low.
-			'level_of_detail': 5,          # Fine per‐feature detail → highest.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 3,             # Clear integral path → medium.
-			'runtime_performance_and_implementation_constraints': 3,  # Multiple gradients → moderate cost.
+			'no_false_positives': 4,  # Integrated Gradients satisfies the completeness axiom, meaning it attributes the full difference between the baseline and the input to its features, minimizing false positives. Similar to LRP (4), but less than SHAP (5) reliability. 
+			'no_false_negatives': 4, # IG satisfies the Completeness axiom (sum of attributions equals the output difference), matching LRP (4) and exceeding DeepLift/DeepSHAP (3), but lacks SHAP’s game-theoretic guarantees (5).
+			'completeness': 3,  # Theoretically complete, but in practice can be path-dependent. While it fully attributes the difference from a baseline, it doesn't explain the full model rationale. Similar to SHAP (3).
+			'stability': 3, # # Integrated Gradients is based on path integrals of gradients, which makes it more stable than methods relying on single gradient calculations (like simple saliency maps) or random perturbations, like LIME (1). Deterministic once a baseline and step count are fixed, so more stable than sampling-based DeepSHAP (2) but similar to DeepLift (3); Guided-IG further dampens noise.
+			'adversarial_robustness': 3, # IG can still be manipulated, yet IG-guided training has been used as a defence, giving it an edge on DeepLift (2) while trailing Grad-CAM (4). More robust than LIME (1) or DeepLIFT (2) due to its axiomatic foundation, but still susceptible to adversarial examples if the underlying model is. So less than SHAP (4).
+			'consistency': 4, # Because IG obeys Implementation Invariance, two functionally-identical nets yield identical attributions: better than DeepLift/Grad-CAM (3) and just below exact SHAP (5). Deterministic given fixed baseline; stable across runs, so more consistent than LRP (3) but not as consistent as SHAP (5).
+			'hyperparameters_perturbation_robustness': 3,  # The choice of baseline matters and can influence the explanation, but not overly sensitive. Better than LIME (1) and Anchors (2), similar to SHAP (3).
+			'sparsity': 3, # Generates attribution scores for all input features. Can be interpreted by thresholding but not inherently sparse. Similar to SHAP (3); all features evaluated.
+			'level_of_detail': 3, # Feature-level with gradient weighting. Similar to LRP (3) and Grad-CAM (3).
+			'fairness': 3, # Does not inherently address fairness, reflecting biases from the model. Neutral, similar to other local methods.
+			'confidentiality': 3, # As a local explanation, it does not leak global model logic. Same as DeepSHAP (3) and DeepLIFT (3). 
+			'traceability': 5, # The method is axiomatically defined and its calculation (integral of gradients) is precise and traceable. More transparent than LIME (2), similar to LRP (5) and SHAP (5).
+			'runtime_performance_and_implementation_constraints': 2, # Can be computationally expensive as it requires multiple forward passes to approximate the integral, especially for high-dimensional inputs. Slower than Grad-CAM (5) and LRP (4) but often faster than exact SHAP (1).
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'what_feature', 'how_computed'},
 	},
 	'Attention': {
 		'subprops': {
-			'no_false_positives': 3,       # Debate exists, so neutral.
-			'no_false_negatives': 3,       # Neutral.
-			'completeness': 2,        # only attended parts; minimal
-			'stability': 2,                # Sensitive to training variations → low.
-			'adversarial_robustness': 1,   # Easily manipulated → lowest.
-			'consistency': 2,              # Layer/head differences → low.
-			'hyperparameters_perturbation_robustness': 2,  # Head count matters → low.
-			'sparsity': 2,        # Dense weight matrices → low.
-			'level_of_detail': 5,          # Token‐level → highest.
-			'fairness': 3,                 # Neutral.
-			'confidentiality': 3,          # Neutral.
-			'traceability': 2,             # Hard to attribute through multiple heads → low.
-			'runtime_performance_and_implementation_constraints': 4,  # Already computed in model → efficient.
+			'no_false_positives': 2, # Activation maps or neuron activations show what features maximally activate certain neurons. These activations don't guarantee that the activated features are strictly causative of the final prediction, only that they are recognized by a specific neuron. Lower than LRP (4) or Integrated Gradients (5) which aim for direct attribution to the output.
+			'no_false_negatives': 2, # Focusing on activations of specific layers/neurons might miss other features that influence the prediction but don't strongly activate the chosen neuron. Similar to LIME (2). 
+			'completeness': 1, # You can permute weights without changing outputs (“attention is not explanation”), so worse than IG (4). Provides a very partial view, focusing on what specific parts of the model "see" rather than a holistic explanation of the decision. Least complete among local methods like CAVs (2).
+			'stability': 3, # Weights are deterministic but shift with random seeds and dropout, so mid-pack: better than Anchors (1), below PDP (4).
+			'adversarial_robustness': 3, # Moderate: adversaries can rewrite weights, but robustness similar to LIME/DeepSHAP. 
+			'consistency': 3, # Activations for similar inputs tend to be consistent, but the interpretation (what they represent) might vary. Similar to CAVs (3). 
+			'hyperparameters_perturbation_robustness': 2, # The choice of layer to visualize and the input range for activation maximization can influence the results. Similar to Grad-CAM (2)
+			'sparsity': 3, # Can highlight specific regions or features, but the underlying activation maps are dense. Similar to Grad-CAM (3). 
+			'level_of_detail': 4, # Provides visual insights into what parts of the input a specific neuron responds to, which is quite detailed at a conceptual level. Can be lower if simply showing raw activation values without interpretation. So, better than Integrated Gradients (3) and LRP (3), similar to PDP (4)
+			'fairness': 3, # Does not inherently address fairness; if the model is biased, neuron activations will reflect those biases. Neutral, similar to other local methods.
+			'confidentiality': 3, # As a local explanation, it does not leak global model logic. Same as DeepSHAP (3) and DeepLIFT (3). 
+			'traceability': 3, # Tracing activations through the network is direct, but interpreting the meaning of an activation can be challenging and less traceable to the final output. Less traceable than LRP (5) or DeepSHAP (4), but more than Anchors (2), and LIME (2)
+			'runtime_performance_and_implementation_constraints': 5, # Very efficient to compute as it's typically just a forward pass through the network to get internal activations. Similar to Grad-CAM (5).
 		},
 		'scope_stage': 'local-expost',
 		'question_types': {'how_computed', 'what_feature'},
