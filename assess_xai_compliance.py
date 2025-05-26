@@ -20,12 +20,10 @@ QUESTION_KINDS = {
 
 # map from the exact phrase (or a close synonym) to our canonical question key
 TEXT_TO_QUESTION_KIND = {
-	# rule-related
 	'what rule':           'what_rule',
 	'what general logic':  'what_rule',
 	'how model decides':   'how_computed',
 
-	# feature-related
 	'what features':         'what_feature',
 	'what are top features': 'what_feature',
 	'what reasons':          'why_instead_of',
@@ -33,19 +31,15 @@ TEXT_TO_QUESTION_KIND = {
 
 	'why those top features': 'how_computed', # think about it
 
-	# comparison
 	'how output differs from others': 'how_differs',
 
-	# counterfactual / sensitivity
 	'what if':                    'what_if',
 	'how sensitive to outliers': 'what_if',
 
-	# input modification
 	'how to change':                'how_modify_input',
 	'what inputs have wrong outcomes': 'what_feature',
 	'what best input format and ranges': 'what_rule', # not sure about format
 
-	# computation transparency
 	'how output is computed':      'how_computed',
 	'is input problematic':        'what_rule',
 	'what input quality':          'how_modify_input', # similar to 'what best input format and ranges'
@@ -67,7 +61,6 @@ SUBPROP_TO_CAT = {
 	'sparsity': 'Complexity',
 	'level_of_detail': 'Complexity',
 	# Responsibility
-	'fairness': 'Responsibility',
 	'confidentiality': 'Responsibility',
 	'traceability': 'Responsibility',
 	# Efficiency
@@ -92,7 +85,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':0,
 			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 0, 
 			'sparsity': 0, 'level_of_detail': 0,
-			'fairness':1, 'confidentiality':0.5, 'traceability':1,
+			'confidentiality':0.5, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':0,
 		},
 		# ---------- procedure ----------
@@ -106,7 +99,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 0, 
 			'sparsity': 0, 'level_of_detail': 0,
-			'fairness':1, 'confidentiality':0.5, 'traceability':1,
+			'confidentiality':0.5, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':0,
 		},
 		'scope_stage': 'local-expost',
@@ -118,7 +111,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':0, 'completeness':0,
 			'stability':1, 'adversarial_robustness':0.5, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 0, 'level_of_detail': 1,
-			'fairness':1, 'confidentiality':1, 'traceability':0,
+			'confidentiality':1, 'traceability':0,
 			'runtime_performance_and_implementation_constraints':0,
 		},
 		'scope_stage': 'global-exante',
@@ -130,7 +123,7 @@ regulations = {
 			'no_false_positives':0.75, 'no_false_negatives':1, 'completeness':0.75,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 0, 'level_of_detail': 0,
-			'fairness':1, 'confidentiality':0, 'traceability':1,
+			'confidentiality':0, 'traceability':1,
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
 		'scope_stage': 'both',  # accepts both local/ex‑post and global/ex‑ante
@@ -142,7 +135,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 0.5, 'level_of_detail': 0,
-			'fairness':1, 'confidentiality':1, 'traceability':1, # we assume the worst-case scenario for confidentiality
+			'confidentiality':1, 'traceability':1, # we assume the worst-case scenario for confidentiality
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
 		'scope_stage': 'both',
@@ -154,7 +147,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 0, 'level_of_detail': 0,
-			'fairness':1, 'confidentiality':0, 'traceability':1, 
+			'confidentiality':0, 'traceability':1, 
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
 		'scope_stage': 'both',
@@ -169,7 +162,7 @@ regulations = {
 			'no_false_positives':1, 'no_false_negatives':1, 'completeness':1,
 			'stability':1, 'adversarial_robustness':1, 'consistency':1, 'hyperparameters_perturbation_robustness': 1, 
 			'sparsity': 1, 'level_of_detail': 1,
-			'fairness':1, 'confidentiality':0, 'traceability':1, 
+			'confidentiality':0, 'traceability':1, 
 			'runtime_performance_and_implementation_constraints':0,
 		},
 		'scope_stage': 'global-exante',
@@ -203,7 +196,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 2,  # Tree depth/pruning changes shape drastically → lower than PDP/ICE (4).
 			'sparsity': 3,        # Typical pruned trees are readable but can still be large.
 			'level_of_detail': 5,          # Very fine‐grained (per‐leaf) → highest detail.
-			'fairness': 3,                 # Neutral (inherits model biases) → same as most global XAI.
 			'confidentiality': 2,          # Full structure leaks splits/data distribution → worse than local methods (3).
 			'traceability': 4,             # Deterministic training allows audit → better than non‐deterministic LIME (1).
 			'runtime_performance_and_implementation_constraints': 4,  # Fast inference, easy to implement → better than sampling methods like SHAP (1).
@@ -222,7 +214,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
 			'sparsity': 2,        # LASSO regularization enforces sparsity but still worse than DT (3) due to gradient boosting generating hundreds of decision trees.
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5).
-			'fairness': 3,                 # Neutral → same as DT.
 			'confidentiality': 2,          # Leaks rule logic → same as DT.
 			'traceability': 4,             # Linear+rule pipeline is transparent → close to DT (4).
 			'runtime_performance_and_implementation_constraints': 3,  # More expensive to fit than DT but lighter than SHAP.
@@ -241,7 +232,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 3,  # Regularization helps → above DT (2).
 			'sparsity': 3,        # L1 penalty enforces sparsity → similar to DT thanks to SHAP-driven LASSO regression (4) and better than RuleFit (3).
 			'level_of_detail': 4,          # Rule+coef detail → less granular than DT (5), same as RuleFit (4).
-			'fairness': 3,                 # Neutral → same as RuleFit.
 			'confidentiality': 2,          # Leaks rule logic → same as RuleFit.
 			'traceability': 3,             # Linear+rule pipeline is transparent. However SHAP approximations add some extra non-determinism → less than RuleFit (4).
 			'runtime_performance_and_implementation_constraints': 2,  # More expensive to fit than RuleFit but lighter than SHAP since approximations are used.
@@ -260,7 +250,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 4,  # Few hyperparameters → stable.
 			'sparsity': 2,        # Shows a few features at a time, presenting every feature as a curve → lower sparsity than LIME (3).
 			'level_of_detail': 4,          # Full feature effect curves + interaction effects → higher than SHAP (4).
-			'fairness': 3,                 # Neutral → same as other globals.
 			'confidentiality': 3,          # Global summary only → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 4,             # Straightforward averaging → high.
 			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost but better than DiCE (3).
@@ -279,7 +268,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 4,  # Similar to PDP.
 			'sparsity': 2,        # Only shows one feature at a time, presenting every datapoints as a curve → similar sparsity to PDP (2).
 			'level_of_detail': 4,          # Full feature effect curves with limited interaction effects → similar to PDP (4).
-			'fairness': 3,                 # Neutral → same as PDP.
 			'confidentiality': 2,          # Like DT (2) and worse than PDP (3) since it doesn't show only aggregated information.
 			'traceability': 3,             # Random sampling makes it less traceable than PDP (4).
 			'runtime_performance_and_implementation_constraints': 4,  # Moderate sampling cost similar to PDP (4).
@@ -298,7 +286,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 1,  # Kernel width / sample count drastically shift outcome → worst.
 			'sparsity': 3,        # User‐set feature count → neutral.
 			'level_of_detail': 2,          # Feature‐level weights → worse than SHAP (3).
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Random seeds obscure path → worst.
 			'runtime_performance_and_implementation_constraints': 3,  # Moderate sampling cost.
@@ -317,7 +304,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 3,  # Background choices matter → better than LIME (1) and Anchors (2).
 			'sparsity': 3,        # Same as LIME (3).
 			'level_of_detail': 3,          # Same as LIME (3)
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Well‐defined axioms, deterministic → very high.
 			'runtime_performance_and_implementation_constraints': 1,  # Very expensive for many features.
@@ -336,7 +322,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 2,  # Anchor selection can change → similar to CEM (1) but better since there's no stochastic optimization involved.
 			'sparsity': 5,        # Very compact anchors → best among all.
 			'level_of_detail': 3,          # Rules at feature‐value granularity → neutral detail.
-			'fairness': 3,                 # Neutral → same as LIME.
 			'confidentiality': 3,          # Local what-if explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Procedure is clear but non-deterministic sampling adds opacity → above LIME (1).
 			'runtime_performance_and_implementation_constraints': 3,  # Sampling is costly but not as CEM (2) → slightly worse than LIME (3).
@@ -355,7 +340,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 1,  # Solver heavily dependent on settings → similar to DiCE (1). Performance and explanation sparsity hinge on regularization parameters and distance metrics, which can be hard to tune
 			'sparsity': 4,        # Optimizes minimal changes → high; similar to DiCE (4) but worse than Anchors (5). Explanation sparsity hinge on regularization parameters and distance metrics, which can be hard to tune.
 			'level_of_detail': 3,          # Only changes shown → medium.
-			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Complex optimization path → low.
 			'runtime_performance_and_implementation_constraints': 2,  # Expensive search, more than DiCE (3).
@@ -374,7 +358,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 1,  # Solver settings sway results → lowest.
 			'sparsity': 4,        # Tend to optimize for minimal changes → high sparsity.
 			'level_of_detail': 3,          # Shows feature deltas only → medium detail.
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 2,             # Solver complexity obscures path → lower than SHAP (4).
 			'runtime_performance_and_implementation_constraints': 3,  # NP‐hard solver with heuristics.
@@ -393,7 +376,6 @@ algorithms_model_agnostic = {
 			'hyperparameters_perturbation_robustness': 3,  # Kernel parameters matter → average.
 			'sparsity': 4,        # Selects few prototypes → high sparsity.
 			'level_of_detail': 3,          # Shows representative points only → medium detail.
-			'fairness': 3,                 # Neutral → same.
 			'confidentiality': 2,          # Exposes actual data points → lower than local proxies.
 			'traceability': 4,             # Simple algorithmic steps → high.
 			'runtime_performance_and_implementation_constraints': 2,  # Quadratic kernel cost.
@@ -408,15 +390,14 @@ algorithms_model_specific = {
 	'CAVs': {
 		'subprops': {
 			'no_false_positives': 3,       # Concept vectors capture some true factors → neutral; better than LIME (2), worse than SHAP (5).
-			'no_false_negatives': 2,       # May miss latent factors → worse than no_false_positives (3), similar to LIME (2).
+			'no_false_negatives': 2,       # It depends on the choice of concepts, so it may miss latent factors → worse than no_false_positives (3), similar to LIME (2).
 			'completeness': 2,          # only concept axes, not full model → less complete than SHAP (3)
 			'stability': 1,                # Depends on network activations; based on stochastic gradient descent → worse than SHAP (4), similar to LIME (1).
 			'adversarial_robustness': 2,   # Can be fooled by adversarial examples → less than Anchors (3), more than LIME (1) because neural nets are more robust against noise than linear models.
 			'consistency': 3,              # Concept drift across runs → more than DiCE (1) since training is anchored to a training set; similar to ICE (3); less than PDP (4) because it does averaging but it's non-deterministic.
 			'hyperparameters_perturbation_robustness': 1,  # Layer choice matters + training hyper-parameters → similar to LIME (1).
-			'sparsity': 4,        # One vector per concept → more sparse than SHAP (4) but it depends on the kind and amount of concepts.
+			'sparsity': 5,        # One vector per concept → more sparse than SHAP (4) but it depends on the kind and amount of concepts.
 			'level_of_detail': 1,          # Concept-level granularity → possibly the lowest level of detail since it can work with very abstract concepts.
-			'fairness': 2,                 # It depends on the choice of concepts → in the worst-case scenario can be hampered by concept choices, so it's low.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 1,             # Training neural nets is barely traceable → worse than LIME (2).
 			'runtime_performance_and_implementation_constraints': 1,  # Training involved → worse than LIME (3) and it depends on the size of the neural network (which can be huge).
@@ -435,7 +416,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 1,  # Less than DeepSHAP (2)
 			'sparsity': 3,        # Same as DeepSHAP (3).
 			'level_of_detail': 3,          # Same as DeepSHAP (3)
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 3,             # backprop, non-deterministic → less than DeepSHAP (4) but more than Anchors (2), LIME (2)
 			'runtime_performance_and_implementation_constraints': 4,  # Faster than DeepSHAP (3)
@@ -454,7 +434,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 2,  # Background choices matter → better than LIME (1) but worse than SHAP (3), so similar to Anchors (2).
 			'sparsity': 3,        # Same as SHAP (3).
 			'level_of_detail': 3,          # Same as SHAP (3)
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 4,             # Well‐defined axioms + backprop, non-deterministic → less than SHAP (5) but more than Anchors (2), LIME (2), and DeepLift (3)
 			'runtime_performance_and_implementation_constraints': 3,  # More passes than DeepLift. Expensive for many features but approximations make it faster than SHAP (1). Similar to LIME (3).
@@ -473,7 +452,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 1,  # LRP requires tuning ε, α/β, or γ per‐layer; small changes in these hyperparameters can significantly alter explanations  → similar to DeepLift (1)
 			'sparsity': 2,        # Standard LRP assigns relevance to nearly every input feature, producing dense maps. Dedicated variants are needed to induce sparsity → Slightly less than DeepLift (3).
 			'level_of_detail': 3,          # Same as DeepLift (3)
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Follows specific rules for propagation and it's deterministic → more than DeepSHAP (4)
 			'runtime_performance_and_implementation_constraints': 4,  # LRP runs in a single backward pass (comparable to gradient‐based methods), making it highly efficient to implement → similar to DeepLift (4)
@@ -492,7 +470,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 2,  # Few hyperparameters than LRP (choice of layer, aggregation method), but changing them alters maps noticeably → slightly more than LRP (1).
 			'sparsity': 3,        # dense heatmaps → similar to LRP (2).
 			'level_of_detail': 3,          # Same as LRP (3)
-			'fairness': 3,                 # Neutral → same as other locals.
 			'confidentiality': 3,          # Local explanations don't leak global logic → better than DT (2), but neutral since it can still disclose how the AI model works.
 			'traceability': 5,             # Same as LRP (5)
 			'runtime_performance_and_implementation_constraints': 5,  # Requires only one backward pass through the last conv layer plus a weighted sum—ultra-efficient and simple to implement → more than LRP (4)
@@ -511,7 +488,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 3,  # The choice of baseline matters and can influence the explanation, but not overly sensitive. Better than LIME (1) and Anchors (2), similar to SHAP (3).
 			'sparsity': 3, # Generates attribution scores for all input features. Can be interpreted by thresholding but not inherently sparse. Similar to SHAP (3); all features evaluated.
 			'level_of_detail': 3, # Feature-level with gradient weighting. Similar to LRP (3) and Grad-CAM (3).
-			'fairness': 3, # Does not inherently address fairness, reflecting biases from the model. Neutral, similar to other local methods.
 			'confidentiality': 3, # As a local explanation, it does not leak global model logic. Same as DeepSHAP (3) and DeepLIFT (3). 
 			'traceability': 5, # The method is axiomatically defined and its calculation (integral of gradients) is precise and traceable. More transparent than LIME (2), similar to LRP (5) and SHAP (5).
 			'runtime_performance_and_implementation_constraints': 2, # Can be computationally expensive as it requires multiple forward passes to approximate the integral, especially for high-dimensional inputs. Slower than Grad-CAM (5) and LRP (4) but often faster than exact SHAP (1).
@@ -530,7 +506,6 @@ algorithms_model_specific = {
 			'hyperparameters_perturbation_robustness': 2, # The choice of layer to visualize and the input range for activation maximization can influence the results. Similar to Grad-CAM (2)
 			'sparsity': 3, # Can highlight specific regions or features, but the underlying activation maps are dense. Similar to Grad-CAM (3). 
 			'level_of_detail': 4, # Provides visual insights into what parts of the input a specific neuron responds to, which is quite detailed at a conceptual level. Can be lower if simply showing raw activation values without interpretation. So, better than Integrated Gradients (3) and LRP (3), similar to PDP (4)
-			'fairness': 3, # Does not inherently address fairness; if the model is biased, neuron activations will reflect those biases. Neutral, similar to other local methods.
 			'confidentiality': 3, # As a local explanation, it does not leak global model logic. Same as DeepSHAP (3) and DeepLIFT (3). 
 			'traceability': 3, # Tracing activations through the network is direct, but interpreting the meaning of an activation can be challenging and less traceable to the final output. Less traceable than LRP (5) or DeepSHAP (4), but more than Anchors (2), and LIME (2)
 			'runtime_performance_and_implementation_constraints': 5, # Very efficient to compute as it's typically just a forward pass through the network to get internal activations. Similar to Grad-CAM (5).
