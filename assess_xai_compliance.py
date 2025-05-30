@@ -43,8 +43,7 @@ TEXT_TO_QUESTION_KIND = {
 	'how output is computed':      'how_computed',
 	'is input problematic':        'what_rule',
 	'what input quality':          'how_modify_input', # similar to 'what best input format and ranges'
-	'how reliable is output':      'why_instead_of', # think about it, maybe not about XAI but rather confidence scoring
-	'how robust':      'how_differs', # think about it, maybe not about XAI but rather confidence scoring
+	'how robust is output':      'how_differs', # think about it, maybe not about XAI but rather confidence scoring
 }
 
 SUBPROP_TO_CAT = {
@@ -127,7 +126,7 @@ regulations = {
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
 		'scope_stage': 'both',  # accepts both local/ex‑post and global/ex‑ante
-		'question_types': ['what input quality', 'how output is computed', 'how sensitive to outliers', 'what rule', 'how reliable is output'],
+		'question_types': ['what input quality', 'how output is computed', 'how sensitive to outliers', 'what rule', 'how robust is output'],
 	},
 
 	'MDR': {
@@ -139,7 +138,7 @@ regulations = {
 			'runtime_performance_and_implementation_constraints':1, # we assume the worst-case scenario
 		},
 		'scope_stage': 'both',
-		'question_types': ['what rule', 'what general logic', 'is input problematic', 'what inputs have wrong outcomes', 'what best input format and ranges', 'how reliable is output'],
+		'question_types': ['what rule', 'what general logic', 'is input problematic', 'what inputs have wrong outcomes', 'what best input format and ranges', 'how robust is output'],
 	},
 
 	'MiFID17': {
@@ -154,7 +153,7 @@ regulations = {
 		'question_types': [
 			'how model decides', 'what feature importance', 
 			# 'how regulatory compliance implemented', # not about XAI
-			'how robust', 'what inputs have wrong outcomes'],
+			'how robust is output', 'what inputs have wrong outcomes'],
 	},
 
 	'AIA11': {
@@ -169,7 +168,7 @@ regulations = {
 		'question_types': [
 			'how model decides', 'what feature importance', 
 			# 'how regulatory compliance implemented', # not about XAI
-			'how robust', 'what inputs have wrong outcomes'],
+			'how robust is output', 'what inputs have wrong outcomes'],
 	},
 }
 
