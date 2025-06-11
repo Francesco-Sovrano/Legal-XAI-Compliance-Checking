@@ -561,8 +561,8 @@ algorithms_model_specific['Attention'           ]['models'] = [
 # -------------------------------------------------------------------
 # Helper functions
 # -------------------------------------------------------------------
-def procedure_fit(algo_mode, reg_mode):
-	return reg_mode == 'both' or algo_mode == reg_mode or (algo_mode == 'global-exante' and reg_mode == 'local-expost')
+def procedure_fit(algo_mode, reg_mode, runtime_performance_and_implementation_constraints):
+	return runtime_performance_and_implementation_constraints > 0 and (reg_mode == 'both' or algo_mode == reg_mode or (algo_mode == 'global-exante' and reg_mode == 'local-expost'))
 
 def question_fit(algo_q, reg_q):
 	return algo_q & reg_q
@@ -599,7 +599,7 @@ def assess_xai_algorithms(algorithms):
 			assert all(q in QUESTION_KINDS for q in algo['question_types']), f"There's an invalid question in {algo_name}"
 			w_pi = compute_w_pi(algo['subprops'], req)
 			avg_cov = sum(w_pi.values())/len(w_pi) if w_pi else 0.0
-			fit_proc = procedure_fit(algo['scope_stage'], reg['scope_stage'])
+			fit_proc = procedure_fit(algo['scope_stage'], reg['scope_stage'], algo['subprops']['runtime_performance_and_implementation_constraints'])
 			fit_q    = question_fit(algo['question_types'], set(map(lambda x: TEXT_TO_QUESTION_KIND[x], reg['question_types'])))
 			S = round(avg_cov * (1 if (fit_proc and fit_q) else 0), 2)
 			rows.append({
