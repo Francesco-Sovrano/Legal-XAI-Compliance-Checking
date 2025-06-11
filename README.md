@@ -115,7 +115,7 @@ If you use this tool in academic work, please cite:
 
 ```text
 @software{legal_xai_2025,
-  author = {Francesco Sovranoo, Giulia Vilone, Michael Lognoul},
+  author = {Francesco Sovrano, Giulia Vilone, Michael Lognoul},
   title  = {Legal XAI: A Systematic Review of XAI and Law, Interdisciplinary Mapping for Legal Compli-
 ance, and a Responsible Research Agenda},
   year   = 2025,
