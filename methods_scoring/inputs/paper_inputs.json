@@ -1,0 +1,873 @@
+{
+  "properties": [
+    "no_false_positives",
+    "no_false_negatives",
+    "completeness",
+    "stability",
+    "adversarial_robustness",
+    "consistency",
+    "hyperparameters_perturbation_robustness",
+    "sparsity",
+    "level_of_detail",
+    "confidentiality",
+    "traceability",
+    "runtime_performance_and_implementation_constraints"
+  ],
+  "methods": {
+    "Decision Trees": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 1,
+        "adversarial_robustness": 2,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 5,
+        "confidentiality": 2,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 4
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if",
+        "what_rule"
+      ]
+    },
+    "RuleFit": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 4,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 3,
+        "sparsity": 3,
+        "level_of_detail": 4,
+        "confidentiality": 2,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if",
+        "what_rule"
+      ]
+    },
+    "RuleSHAP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 4,
+        "completeness": 4,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 3,
+        "sparsity": 3,
+        "level_of_detail": 4,
+        "confidentiality": 2,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if",
+        "what_rule"
+      ]
+    },
+    "PDP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 4,
+        "adversarial_robustness": 3,
+        "consistency": 4,
+        "hyperparameters_perturbation_robustness": 4,
+        "sparsity": 2,
+        "level_of_detail": 4,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 4
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_if",
+        "what_rule"
+      ]
+    },
+    "ICE": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 4,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 4,
+        "hyperparameters_perturbation_robustness": 4,
+        "sparsity": 2,
+        "level_of_detail": 4,
+        "confidentiality": 2,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 4
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_differs",
+        "what_rule"
+      ]
+    },
+    "LIME": {
+      "subprops": {
+        "no_false_positives": 2,
+        "no_false_negatives": 2,
+        "completeness": 2,
+        "stability": 1,
+        "adversarial_robustness": 1,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 3,
+        "level_of_detail": 2,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "Anchors": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 1,
+        "adversarial_robustness": 3,
+        "consistency": 1,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 4,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_rule"
+      ]
+    },
+    "CEM": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 4,
+        "stability": 2,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 4,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "what_feature",
+        "why_instead_of"
+      ]
+    },
+    "DiCE": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 1,
+        "adversarial_robustness": 3,
+        "consistency": 1,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 4,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_modify_input",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "ProtoDash": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 2,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 3,
+        "sparsity": 4,
+        "level_of_detail": 3,
+        "confidentiality": 2,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "how_differs"
+      ]
+    },
+    "Exact local SHAP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 3,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 1
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "what_feature"
+      ]
+    },
+    "Approximate local SHAP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 2,
+        "adversarial_robustness": 2,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "local-expost",
+      "explanation_target": "model output",
+      "question_types": [
+        "what_feature"
+      ]
+    },
+    "Global SHAP summaries": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 2,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 2,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 1
+      },
+      "scope_stage": "global-exante",
+      "explanation_target": "model output",
+      "question_types": [
+        "what_feature"
+      ]
+    },
+    "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 2,
+        "adversarial_robustness": 3,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 4,
+        "confidentiality": 2,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "global-exante",
+      "models": [
+        "task-labeled predictor outputs; evaluated on language-model tasks"
+      ],
+      "required_access": "behavioral_records",
+      "requires_model_replacement": false,
+      "component_only": false,
+      "explanation_target": "task success/failure patterns of the unchanged predictor",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_rule"
+      ]
+    },
+    "CAVs": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 2,
+        "completeness": 2,
+        "stability": 2,
+        "adversarial_robustness": 2,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 3,
+        "level_of_detail": 2,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "deep-neural-networks (CNNs, RNNs, Transformers)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature"
+      ]
+    },
+    "DeepLift": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 2,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 4
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "deep-neural-networks (feed-forward, CNNs, RNN/LSTM, Transformers)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "DeepSHAP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "deep-neural-networks (feed-forward, CNNs, RNN/LSTM, Transformers)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "LRP": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 1,
+        "adversarial_robustness": 1,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 2,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 4
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "deep-neural-networks (especially CNNs, RNNs, Transformers)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature"
+      ]
+    },
+    "Grad-CAM": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 2,
+        "completeness": 2,
+        "stability": 2,
+        "adversarial_robustness": 2,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 5
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "convolutional neural networks (2-D/3-D, vision, video)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature"
+      ]
+    },
+    "Integrated Gradients": {
+      "subprops": {
+        "no_false_positives": 4,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 3,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "any differentiable model (deep neural networks)"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature"
+      ]
+    },
+    "Attention": {
+      "subprops": {
+        "no_false_positives": 2,
+        "no_false_negatives": 2,
+        "completeness": 1,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 2,
+        "confidentiality": 3,
+        "traceability": 3,
+        "runtime_performance_and_implementation_constraints": 5
+      },
+      "scope_stage": "local-expost",
+      "models": [
+        "transformers and any architecture with attention mechanisms"
+      ],
+      "explanation_target": "model output",
+      "question_types": [
+        "how_computed",
+        "what_feature"
+      ]
+    },
+    "Supervised CBM": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 4,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "both",
+      "models": [
+        "concept-bottleneck classifier"
+      ],
+      "required_access": "model_replacement",
+      "requires_model_replacement": true,
+      "component_only": false,
+      "explanation_target": "concept-head output of the CBM itself",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "Post-hoc CBM (concept-only)": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 4,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 4,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "both",
+      "models": [
+        "concept-bottleneck classifier"
+      ],
+      "required_access": "model_replacement",
+      "requires_model_replacement": true,
+      "component_only": false,
+      "explanation_target": "output of the fitted post-hoc concept head",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "LaBo (LLM-guided CBM)": {
+      "subprops": {
+        "no_false_positives": 3,
+        "no_false_negatives": 3,
+        "completeness": 4,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 3
+      },
+      "scope_stage": "both",
+      "models": [
+        "concept-bottleneck classifier"
+      ],
+      "required_access": "model_replacement",
+      "requires_model_replacement": true,
+      "component_only": false,
+      "explanation_target": "output of the LaBo concept classifier",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_if"
+      ]
+    },
+    "LLM neuron explanations (Bills et al.)": {
+      "subprops": {
+        "no_false_positives": 2,
+        "no_false_negatives": 2,
+        "completeness": 2,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 2,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 3,
+        "level_of_detail": 3,
+        "confidentiality": 3,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "global-exante",
+      "models": [
+        "transformer language model with required internal access"
+      ],
+      "required_access": "component_analysis",
+      "requires_model_replacement": false,
+      "component_only": true,
+      "explanation_target": "neuron activation patterns, not downstream model decisions",
+      "question_types": [
+        "what_feature"
+      ]
+    },
+    "MechaRule": {
+      "subprops": {
+        "no_false_positives": 4,
+        "no_false_negatives": 3,
+        "completeness": 3,
+        "stability": 3,
+        "adversarial_robustness": 3,
+        "consistency": 3,
+        "hyperparameters_perturbation_robustness": 2,
+        "sparsity": 4,
+        "level_of_detail": 4,
+        "confidentiality": 2,
+        "traceability": 4,
+        "runtime_performance_and_implementation_constraints": 2
+      },
+      "scope_stage": "global-exante",
+      "models": [
+        "transformer language model with required internal access"
+      ],
+      "required_access": "internal_interventions",
+      "requires_model_replacement": false,
+      "component_only": false,
+      "explanation_target": "task-conditioned behavior under internal neuron ablation",
+      "question_types": [
+        "how_computed",
+        "what_feature",
+        "what_rule"
+      ]
+    }
+  },
+  "regulations": {
+    "GDPR+AIA86+MiFID25": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 1.0,
+        "completeness": 0.0,
+        "stability": 0,
+        "adversarial_robustness": 0.5,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 1.0,
+        "level_of_detail": 0.0,
+        "confidentiality": 0.5,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 1
+      },
+      "scope_stage": "local-expost",
+      "question_types": [
+        "what rule",
+        "how output differs from others",
+        "what features",
+        "what reasons",
+        "is input problematic",
+        "how to change"
+      ]
+    },
+    "DSA17": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 1.0,
+        "completeness": 1.0,
+        "stability": 0,
+        "adversarial_robustness": 0.5,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1,
+        "sparsity": 0.0,
+        "level_of_detail": 0.0,
+        "confidentiality": 0.5,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 1
+      },
+      "scope_stage": "local-expost",
+      "question_types": [
+        "what rule",
+        "how output differs from others",
+        "what features",
+        "what reasons",
+        "is input problematic",
+        "how to change"
+      ]
+    },
+    "DSA27+P2B5": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 0.0,
+        "completeness": 0.0,
+        "stability": 1.0,
+        "adversarial_robustness": 0.5,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1.0,
+        "sparsity": 1.0,
+        "level_of_detail": 0,
+        "confidentiality": 1.0,
+        "traceability": 0.0,
+        "runtime_performance_and_implementation_constraints": 0.0
+      },
+      "scope_stage": "global-exante",
+      "question_types": [
+        "what are top features",
+        "why those top features",
+        "what general logic",
+        "what if"
+      ]
+    },
+    "AIA13-14": {
+      "required": {
+        "no_false_positives": 1,
+        "no_false_negatives": 1.0,
+        "completeness": 1,
+        "stability": 1.0,
+        "adversarial_robustness": 1.0,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1.0,
+        "sparsity": 0.0,
+        "level_of_detail": 1,
+        "confidentiality": 0.0,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 1.0
+      },
+      "scope_stage": "both",
+      "question_types": [
+        "what input quality",
+        "how output is computed",
+        "how sensitive to outliers",
+        "what rule",
+        "how robust is output"
+      ]
+    },
+    "MDR": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 1.0,
+        "completeness": 1.0,
+        "stability": 1.0,
+        "adversarial_robustness": 1.0,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1.0,
+        "sparsity": 0.5,
+        "level_of_detail": 0.5,
+        "confidentiality": 0.5,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 0
+      },
+      "scope_stage": "both",
+      "question_types": [
+        "what rule",
+        "what general logic",
+        "is input problematic",
+        "what inputs have wrong outcomes",
+        "what best input format and ranges",
+        "how robust is output"
+      ]
+    },
+    "MiFID17": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 1.0,
+        "completeness": 1.0,
+        "stability": 1.0,
+        "adversarial_robustness": 1.0,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1.0,
+        "sparsity": 0.0,
+        "level_of_detail": 1,
+        "confidentiality": 0.0,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 1.0
+      },
+      "scope_stage": "both",
+      "question_types": [
+        "how model decides",
+        "what feature importance",
+        "how robust is output",
+        "what inputs have wrong outcomes"
+      ]
+    },
+    "AIA11": {
+      "required": {
+        "no_false_positives": 1.0,
+        "no_false_negatives": 1.0,
+        "completeness": 1.0,
+        "stability": 1.0,
+        "adversarial_robustness": 1.0,
+        "consistency": 1.0,
+        "hyperparameters_perturbation_robustness": 1.0,
+        "sparsity": 0.0,
+        "level_of_detail": 1.0,
+        "confidentiality": 0.0,
+        "traceability": 1.0,
+        "runtime_performance_and_implementation_constraints": 0.0
+      },
+      "scope_stage": "global-exante",
+      "question_types": [
+        "how model decides",
+        "what feature importance",
+        "how robust is output",
+        "what inputs have wrong outcomes"
+      ]
+    }
+  },
+  "seed": 20261005,
+  "draws": 10000,
+  "study": {
+    "included_slots": [
+      "E08",
+      "E11",
+      "E13",
+      "E18"
+    ],
+    "contexts": {
+      "GDPR": {
+        "regulation": "GDPR+AIA86+MiFID25",
+        "module": "credit_authority",
+        "methods": [
+          "Approximate local SHAP",
+          "PDP",
+          "CEM",
+          "DiCE"
+        ],
+        "eligibility": [
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "MDR": {
+        "regulation": "MDR",
+        "module": "clinical_empirical",
+        "methods": [
+          "Global SHAP summaries",
+          "PDP",
+          "Decision Trees",
+          "RuleSHAP"
+        ],
+        "eligibility": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  }
+}

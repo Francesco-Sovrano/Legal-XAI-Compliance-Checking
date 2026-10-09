@@ -1,0 +1,226 @@
+[
+  {
+    "participant": "E08",
+    "module": "clinical_empirical",
+    "condition": "clinical-pdp",
+    "technical_property_language": true,
+    "text": "- wording/content: \n--a) good warning: \"These are average model responses across the reference patients, not predictions for one particular patient.\"\n--b) but not information on performance limits and other limitations (if any - if no limitations, it should also be explicitly mentioned)\n\n- need for more completeness/coverage: information provided based on the increase of four patient measurements taken together (if my understanding is correct) - what about the increase of individual measurements (if relevevant)?"
+  },
+  {
+    "participant": "E08",
+    "module": "clinical_empirical",
+    "condition": "clinical-tree",
+    "technical_property_language": true,
+    "text": "- definitely need for more completeness/coverage\n- need for warnings and information on performance limits and other limitations (if any - if no limitations, it should also be explicitly mentioned)\n- need for a bit more robustness"
+  },
+  {
+    "participant": "E08",
+    "module": "clinical_empirical",
+    "condition": "clinical-shap",
+    "technical_property_language": true,
+    "text": "- definitely too vague\n- need for more completeness/coverage and granularity + efficiency"
+  },
+  {
+    "participant": "E08",
+    "module": "clinical_empirical",
+    "condition": "clinical-ruleshap",
+    "technical_property_language": true,
+    "text": "- good warning: \"The ranking compares only the four patterns shown here and does not give an individual patient\u2019s diabetes risk score.\", but not information on performance limits and other limitations (if any - if no limitations, it should also be explicitly mentioned)\n- need for more traceability/accountability + efficiency"
+  },
+  {
+    "participant": "E08",
+    "module": "credit_authority",
+    "condition": "credit-authority-d",
+    "technical_property_language": true,
+    "text": "wording seems clear and relevant, but there is a need for more faithfulness (in particular, what about more completeness/coverage - do other parameters than those covered by the three hypotheses have a decisive influence on the outcome?), robustness and traceability/accountability"
+  },
+  {
+    "participant": "E08",
+    "module": "credit_authority",
+    "condition": "credit-authority-a",
+    "technical_property_language": true,
+    "text": "- wording does not seem clear enough: the data subject is not provided with clear information on how he/she would have obtained the credit --> need for rewording or additional information in this regard\n- need for more faithfulness, robustness and sparsity"
+  },
+  {
+    "participant": "E08",
+    "module": "credit_authority",
+    "condition": "credit-authority-c",
+    "technical_property_language": true,
+    "text": "- wording more or less clear, but the data subject should exactly know at which point he/she can obtain a credit (i.e., where the model estimate is just below 12%, e.g., 11,9999% - here, there is an \"example\" based on a value of 11,7%)\n- need for more necessity and sufficiency but good completeness (// faithfulness)\n- need for more robustness \n- need for more accountability/traceability"
+  },
+  {
+    "participant": "E08",
+    "module": "credit_authority",
+    "condition": "credit-authority-b",
+    "technical_property_language": true,
+    "text": "- wording is not clear, not \"tailored\" to the situation of the data subject (wording more focused on the general behaviour of the model, which does not provide the data subject with relevant information to reach the legal objective)\n- need for more faithfulness (in particular, more completeness/coverage - do other parameters than those covered have a decisive influence on the outcome?)\n- need for more sparsity and less granularity"
+  },
+  {
+    "participant": "E11",
+    "module": "clinical_empirical",
+    "condition": "clinical-shap",
+    "technical_property_language": false,
+    "text": "The user manual explains the measurements used by the medical device, as well as the significance and weight assigned to each of these measurements. However, other factors\u2014such as the software\u2019s behavior, performance limitations, warnings, or other technical constraints\u2014that should limit the degree of confidence a healthcare professional can place in this tool are not clearly and explicitly stated. When reading the instructions for use, the physician\u2019s attention is not drawn to how the medical device should be used, its risks, or its limitations"
+  },
+  {
+    "participant": "E11",
+    "module": "clinical_empirical",
+    "condition": "clinical-pdp",
+    "technical_property_language": true,
+    "text": "The \u201cfaithfulness\u201d criterion, which I consider important for the user notice, could be higher. However, the XAI robustness criterion\u2014which I consider important\u2014is high, and the criteria for confidentiality and traceability, which I also consider important, are well met. The granularity criterion, which is also important, is likewise high."
+  },
+  {
+    "participant": "E11",
+    "module": "clinical_empirical",
+    "condition": "clinical-ruleshap",
+    "technical_property_language": true,
+    "text": "From a technical standpoint, the criteria met are interesting: granularity and faithfullness are high. However, confidentiality is low. As for the content, the explanation is a bit more complex but answers the question of how the various criteria combine to affect the severity of diabetes."
+  },
+  {
+    "participant": "E11",
+    "module": "clinical_empirical",
+    "condition": "clinical-tree",
+    "technical_property_language": true,
+    "text": "From a technical standpoint, the explanation meets some important and interesting criteria: the granularity criterion is high, which indicates a detailed explanation\u2014something I believe is important for a medical device user manual. The \u201cfaithfulness\u201d criterion also has an interesting score, although there is room for improvement. From a content perspective, the explanation does not contain an explanation on what performance limits, warnings or other technical limitations should constrain professional reliance ."
+  },
+  {
+    "participant": "E11",
+    "module": "credit_authority",
+    "condition": "credit-authority-c",
+    "technical_property_language": true,
+    "text": "Overall, the explanation lacks clarity. The robustness criteria\u2014which are important when explaining an automated individual decision\u2014are all low (2/5), which is insufficient to guarantee the reliability of the explanation provided. The faithfulness criteria are average, without being particularly high (3/5)."
+  },
+  {
+    "participant": "E11",
+    "module": "credit_authority",
+    "condition": "credit-authority-d",
+    "technical_property_language": true,
+    "text": "The content and wording make it possible to understand the automated individual decision. However, from a technical standpoint, several criteria fall short: robustness criteria are generally too low, and reliability is moderate. On the other hand, in terms of complexity, the explanation is concise, which is a positive aspect in terms of legal requirements."
+  },
+  {
+    "participant": "E11",
+    "module": "credit_authority",
+    "condition": "credit-authority-b",
+    "technical_property_language": true,
+    "text": "The explanation helps clarify the decision but lacks conciseness. It does not include all the information, such as the percentage obtained for the two identified late payments. From a technical standpoint, it meets some interesting criteria for traceability. Other important criteria could be better rated: reliability criteria, as well as sparsity and adversarial robustness."
+  },
+  {
+    "participant": "E11",
+    "module": "credit_authority",
+    "condition": "credit-authority-a",
+    "technical_property_language": true,
+    "text": "The explanation answers the question by identifying the data used to calculate the risk, as well as the weight assigned to each piece of data. In practice, this allows the requester to verify and challenge certain factors that were taken into account. However, from a technical standpoint, the criteria I consider important are too low: robustness is low, and accuracy is average. The information could be more concise and clearer. . However, from a technical standpoint, the criteria I consider important are too low: robustness is low, and accuracy is average. The information could be more concise and clearer."
+  },
+  {
+    "participant": "E13",
+    "module": "clinical_empirical",
+    "condition": "clinical-tree",
+    "technical_property_language": true,
+    "text": "It is difficult for me to properly assess the answer because I do not have sufficient medical expertise. My impression is that the information should be more complete and granular, and I am not sure that it contains all the information a physician would need. From a legal perspective, and without having a true specific expertise in the MDR, I also have doubts as to whether all the information that should normally be included in the instructions for use is actually provided."
+  },
+  {
+    "participant": "E13",
+    "module": "clinical_empirical",
+    "condition": "clinical-ruleshap",
+    "technical_property_language": false,
+    "text": "Based on my understanding, the information is presented more clearly and is easier for a physician to understand than in the first explanation. In addition, the response is more transparent, as it includes a disclaimer explaining that the information provided is generic and must still be adapted to the specific circumstances of each patient. However, it remains necessary to verify whether all the information that must mandatorily be provided is actually included."
+  },
+  {
+    "participant": "E13",
+    "module": "clinical_empirical",
+    "condition": "clinical-pdp",
+    "technical_property_language": true,
+    "text": "This explanation is clear to me and answers the question well. A physician would be able to understand the thresholds beyond which the risk becomes particularly high and would have a useful basis for comparison with their own clinical experience. My only reservation, again, concerns the legal completeness of the answer: I am not sure whether it includes all the information that is required to be provided under the MDR."
+  },
+  {
+    "participant": "E13",
+    "module": "clinical_empirical",
+    "condition": "clinical-shap",
+    "technical_property_language": false,
+    "text": "For me, the explanation is neither sufficiently clear and understandable nor sufficiently precise. In particular, I do not see how a physician could determine exactly which thresholds are relevant and how crossing them affects the risk score."
+  },
+  {
+    "participant": "E13",
+    "module": "credit_authority",
+    "condition": "credit-authority-a",
+    "technical_property_language": false,
+    "text": "I think it would be clearer if the explanation started by describing how the system works in general, including the procedure it follows and the data it relies on, before explaining the factors that may increase the risk level. As currently drafted, we only understand towards the end that the baseline risk level was around 7% and that it was subsequently increased due to the characteristics described above."
+  },
+  {
+    "participant": "E13",
+    "module": "credit_authority",
+    "condition": "credit-authority-b",
+    "technical_property_language": false,
+    "text": "I think it is very difficult for a layperson to understand the importance and impact of each parameter based on the current explanation. Again, I would suggest starting with a clear description of how the credit-scoring system works in practice, including the procedure it follows and the underlying principles, before explaining the individual parameters and their respective impact on the score."
+  },
+  {
+    "participant": "E13",
+    "module": "credit_authority",
+    "condition": "credit-authority-d",
+    "technical_property_language": true,
+    "text": "I think this is clearer than the first two explanations. The data subject seems better able to understand which changes to the parameters could improve his chances of obtaining credit. It is still not perfect, though. For me, the main issue is completeness: it remains somewhat unclear what exactly is meant by \u201crevolving credit use under 52%\u201d. 52% of what exactly?"
+  },
+  {
+    "participant": "E13",
+    "module": "credit_authority",
+    "condition": "credit-authority-c",
+    "technical_property_language": true,
+    "text": "It is not entirely complete, as it does not indicate which parameters can remain unchanged, even though this is part of the question. In addition, the procedure used to produce the result is, once again, not really explained. On the positive side, the data subject can broadly understand which main parameters contributed to the decision. However, he still does not have a sufficiently detailed understanding of how he could influence those parameters in practice."
+  },
+  {
+    "participant": "E18",
+    "module": "clinical_empirical",
+    "condition": "clinical-ruleshap",
+    "technical_property_language": true,
+    "text": "IMO the explaination does not fully enable the legal objective since it relate only to the strongest paterns (remaining silent regarding other paterns). Hence it remains (at least partialy) silent on how some patient measurements influence the score (e.g. what about combination of age and BMI). \n\nFurther, turning to the memo, the rating on false positive is moderate (3/5) which means that this explanation may grant importance to things that do not have influence on the result. Ratings on robustness criterions is also moderate which seems to indicate that small (and maybe not relevant) modifications may influence the content of the explaination. moderate auditabily of the process may also be problematic.\n\nLastly, there are no information on warnings or other technical limitations (this may also impact the safety of the use by the physician)"
+  },
+  {
+    "participant": "E18",
+    "module": "clinical_empirical",
+    "condition": "clinical-shap",
+    "technical_property_language": true,
+    "text": "Criterions linked to faithfulness of the explaination are quite low. It is questionnable to say that this explaination (i) allows safe and proper use of the device and (ii) describe the software behavior since, it seems that the memo indicates, that it omits elements having influence on the results ans simultaneously may grant importance to elements irrelevant for the results. Further, it indicates the logic of the systems is not fully covered at all (score of 2/5). To that extent, combination of the criterions used is not tackled. \n\nHere again limits and warnings that should constraints the physician reliance are not explicitely tackled."
+  },
+  {
+    "participant": "E18",
+    "module": "clinical_empirical",
+    "condition": "clinical-tree",
+    "technical_property_language": true,
+    "text": "On the positive side, this explaination seems to meet the auditability requirements and a strong level of granularity. \n\nHowever, it seems that faithfullness is at most \"moderate\" meaning that, among others gaps exist regarding the completness of the explaination. Further, the explaination does not seems robust (sub criteria ranging from 1/5 to 2/5)."
+  },
+  {
+    "participant": "E18",
+    "module": "clinical_empirical",
+    "condition": "clinical-pdp",
+    "technical_property_language": true,
+    "text": "The robustness of the explaination is mostly strong which indicates that small and irrelevant changes should not impair it. it also encompasses a high level of detail. \n\nFaithfullness of the explaination remains however moderate which may have impact on the requirements such as helping the physician to understand the systems behaviour. Similarly it seems that risk that this explaination contains false postive and negative remains."
+  },
+  {
+    "participant": "E18",
+    "module": "credit_authority",
+    "condition": "credit-authority-b",
+    "technical_property_language": true,
+    "text": "IMO the explanation does not reach both the legal standard and the legal objective as it fails to explain how the score is calculated (and hence fails to provide a sufficient explaination of the procedure and methods applied in order to enable in what way the personal data were used). In the present case it is not explained how both % calculated are wheighted for instance (this leads to the conclusion of \"material gap\" in the explaination).\n\nThis seems to be suported in the memo where completeness/coverage is only moderate."
+  },
+  {
+    "participant": "E18",
+    "module": "credit_authority",
+    "condition": "credit-authority-c",
+    "technical_property_language": true,
+    "text": "To me, this explaination meets, from a formal point of view the legal standard set by the EU Court of justice which considers counterfactual explanations as meaningfull explanation under GDPR. This justify my rating of 5/7.\n\nThe memo however seems to open discussion on the compatibility of this explanation with legal objective due to its moderate/low robustness and the fact that it may contain false and true positives. If the explanation refers, for instance, to irrelevant information (false positive) one can discuss the ability of the explanation to assess the oportunity to challenge the refusal."
+  },
+  {
+    "participant": "E18",
+    "module": "credit_authority",
+    "condition": "credit-authority-a",
+    "technical_property_language": true,
+    "text": "Again, from a formal point of view this explanation helps to answer the legal question and objectives since it explains what personal data are used, how they mattered in the specific decision at hand (i.e. it seems to apply to the specific decision concerning the data subjet) and may be used to assess correctness of the data. details on the \"starting estimate from comparison applications\" hovewer lacks and can hepls the data subject to assess wether its own final score is correct. \n\nHowever, the memo once again indicates that the faithfullness of the explanation is moderate and its robustness is limited which raises questions wether it effectively comply with the goal pursued by the law."
+  },
+  {
+    "participant": "E18",
+    "module": "credit_authority",
+    "condition": "credit-authority-d",
+    "technical_property_language": true,
+    "text": "The explanation informs on how to obtain another decision but does not contain much information on how the data used mattered in the decision at hand.  One can also discuss the fact that imposing to the data subject to deduce from what paramaters can be modified to obtain an approval decision, what are in fact the paramaters used and important in the decision at hand do not meet the requirement of providing information \"using clear language\". \n\nFurthermore, turning to the memo, it seems that a risk that the explanation contains false positive or negative remains significant."
+  }
+]

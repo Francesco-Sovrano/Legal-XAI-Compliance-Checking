@@ -1,0 +1,137 @@
+{
+  "seed": 20261005,
+  "draws": 10000,
+  "methods": [
+    "Decision Trees",
+    "RuleFit",
+    "RuleSHAP",
+    "PDP",
+    "ICE",
+    "LIME",
+    "Anchors",
+    "CEM",
+    "DiCE",
+    "ProtoDash",
+    "Exact local SHAP",
+    "Approximate local SHAP",
+    "Global SHAP summaries",
+    "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "CAVs",
+    "DeepLift",
+    "DeepSHAP",
+    "LRP",
+    "Grad-CAM",
+    "Integrated Gradients",
+    "Attention",
+    "MechaRule"
+  ],
+  "regulations": [
+    "GDPR+AIA86+MiFID25",
+    "DSA17",
+    "DSA27+P2B5",
+    "AIA13-14",
+    "MDR",
+    "MiFID17",
+    "AIA11"
+  ],
+  "retention": [
+    {
+      "catalogue": "all",
+      "regulation": "GDPR+AIA86+MiFID25",
+      "mean": 0.8348800000000001,
+      "minimum": 0.1744,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "GDPR+AIA86+MiFID25",
+      "mean": 0.85418,
+      "minimum": 0.2709,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "all",
+      "regulation": "DSA17",
+      "mean": 0.83794,
+      "minimum": 0.1897,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "DSA17",
+      "mean": 0.85836,
+      "minimum": 0.2918,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "all",
+      "regulation": "DSA27+P2B5",
+      "mean": 0.37362499999999993,
+      "minimum": 0.2802,
+      "maximum": 0.5032
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "DSA27+P2B5",
+      "mean": 0.49160000000000004,
+      "minimum": 0.3847,
+      "maximum": 0.6076
+    },
+    {
+      "catalogue": "all",
+      "regulation": "AIA13-14",
+      "mean": 0.63226,
+      "minimum": 0.3401,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "AIA13-14",
+      "mean": 0.6814600000000001,
+      "minimum": 0.475,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "all",
+      "regulation": "MDR",
+      "mean": 0.4612,
+      "minimum": 0.2619,
+      "maximum": 0.6805
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "MDR",
+      "mean": 0.48563333333333336,
+      "minimum": 0.2998,
+      "maximum": 0.6805
+    },
+    {
+      "catalogue": "all",
+      "regulation": "MiFID17",
+      "mean": 0.44070000000000004,
+      "minimum": 0.199,
+      "maximum": 0.7834
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "MiFID17",
+      "mean": 0.5232,
+      "minimum": 0.3133,
+      "maximum": 0.7834
+    },
+    {
+      "catalogue": "all",
+      "regulation": "AIA11",
+      "mean": 0.6419,
+      "minimum": 0.3507,
+      "maximum": 1.0
+    },
+    {
+      "catalogue": "agnostic",
+      "regulation": "AIA11",
+      "mean": 0.7067333333333333,
+      "minimum": 0.4076,
+      "maximum": 1.0
+    }
+  ]
+}

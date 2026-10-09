@@ -1,0 +1,516 @@
+{
+  "metadata": [
+    {
+      "name": "key",
+      "type": "TEXT",
+      "required": false,
+      "primary_key_order": 1
+    },
+    {
+      "name": "value",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "sessions": [
+    {
+      "name": "id",
+      "type": "TEXT",
+      "required": false,
+      "primary_key_order": 1
+    },
+    {
+      "name": "panel_slot",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "module_order_json",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "sequence_index",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "stage",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "current_trial",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "csrf_token",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "experience_band",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "years_legal_experience",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "gdpr_familiarity",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "mdr_familiarity",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "consent_version",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "consent_json",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "consented_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "config_hash",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "completed_at",
+      "type": "TEXT",
+      "required": false,
+      "primary_key_order": 0
+    }
+  ],
+  "orientation_responses": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 1
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 2
+    },
+    {
+      "name": "attempt_no",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 3
+    },
+    {
+      "name": "responses_json",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "correct_count",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "passed",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "assignments": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 1
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 2
+    },
+    {
+      "name": "trial_index",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 3
+    },
+    {
+      "name": "case_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "condition_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "blind_label",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "trial_responses": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 1
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 2
+    },
+    {
+      "name": "trial_index",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 3
+    },
+    {
+      "name": "condition_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "disposition",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "answers_legal_question",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "enables_legal_objective",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "confidence",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "rationale",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "additional_information",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "visual_appearance_influenced",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "visual_format_comments",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "elapsed_ms",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "ranking_responses": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 1
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 2
+    },
+    {
+      "name": "blind_label",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 3
+    },
+    {
+      "name": "condition_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "score_decision",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "revised_answers_legal_question",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "revised_enables_legal_objective",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "revised_confidence",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "rank_group",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "rationale",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "checklist_responses": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 1
+    },
+    {
+      "name": "module_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 2
+    },
+    {
+      "name": "condition_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 3
+    },
+    {
+      "name": "blind_label",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "item_id",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 4
+    },
+    {
+      "name": "score",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "comment",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "poststudy_responses": [
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": false,
+      "primary_key_order": 1
+    },
+    {
+      "name": "checklist_new_considerations",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "technical_fact_understanding",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "method_recognition",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "comments",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "withdrawal_metrics": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "required": false,
+      "primary_key_order": 1
+    },
+    {
+      "name": "withdrawn_sessions",
+      "type": "INTEGER",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "updated_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "events": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "required": false,
+      "primary_key_order": 1
+    },
+    {
+      "name": "session_id",
+      "type": "TEXT",
+      "required": false,
+      "primary_key_order": 0
+    },
+    {
+      "name": "event_type",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "payload_json",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    },
+    {
+      "name": "created_at",
+      "type": "TEXT",
+      "required": true,
+      "primary_key_order": 0
+    }
+  ],
+  "sqlite_sequence": [
+    {
+      "name": "name",
+      "type": "",
+      "required": false,
+      "primary_key_order": 0
+    },
+    {
+      "name": "seq",
+      "type": "",
+      "required": false,
+      "primary_key_order": 0
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "defaults": {
+    "qualified_weight": 0.5,
+    "positive_weight": 1,
+    "unweighted": 0
+  },
+  "intervals": [
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "property": "runtime_performance_and_implementation_constraints",
+      "values": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "bundle": "AIA13-14",
+      "property": "runtime_performance_and_implementation_constraints",
+      "values": [
+        0.75,
+        1
+      ]
+    },
+    {
+      "bundle": "MiFID17",
+      "property": "runtime_performance_and_implementation_constraints",
+      "values": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "bundle": "MDR",
+      "property": "sparsity",
+      "values": [
+        0.25,
+        0.75
+      ]
+    },
+    {
+      "bundle": "MDR",
+      "property": "level_of_detail",
+      "values": [
+        0.25,
+        0.75
+      ]
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "property": "stability",
+      "values": [
+        0,
+        1
+      ]
+    },
+    {
+      "bundle": "DSA17",
+      "property": "stability",
+      "values": [
+        0,
+        1
+      ]
+    }
+  ],
+  "task_cases": [
+    {
+      "name": "MDR patient instructions",
+      "bundle": "MDR",
+      "weights": {
+        "sparsity": 0.75,
+        "level_of_detail": 0.25,
+        "confidentiality": 0.5,
+        "runtime_performance_and_implementation_constraints": 0
+      }
+    },
+    {
+      "name": "MDR professional instructions",
+      "bundle": "MDR",
+      "weights": {
+        "sparsity": 0.25,
+        "level_of_detail": 0.75,
+        "confidentiality": 0.5,
+        "runtime_performance_and_implementation_constraints": 0
+      }
+    },
+    {
+      "name": "MDR interactive instructions, lower runtime priority",
+      "bundle": "MDR",
+      "weights": {
+        "runtime_performance_and_implementation_constraints": 0.75,
+        "confidentiality": 0.5
+      }
+    },
+    {
+      "name": "MDR interactive instructions, full runtime priority",
+      "bundle": "MDR",
+      "weights": {
+        "runtime_performance_and_implementation_constraints": 1,
+        "confidentiality": 0.5
+      }
+    }
+  ]
+}

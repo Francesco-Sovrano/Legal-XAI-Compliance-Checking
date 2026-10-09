@@ -1,0 +1,300 @@
+{
+  "endpoint_cases": 128,
+  "task_cases": 4,
+  "summary": [
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 0.9,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "GDPR+AIA86+MiFID25",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA17",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "DSA27+P2B5",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA13-14",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 0.6666666666666666,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 0.6666666666666666,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 0.8333333333333334,
+      "retention_fraction": 0.8333333333333334
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 0.6666666666666666,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MDR",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "MiFID17",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "all",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "all",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "all",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "agnostic",
+      "view": "soft",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "agnostic",
+      "view": "threshold",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    },
+    {
+      "bundle": "AIA11",
+      "catalogue": "agnostic",
+      "view": "geometric",
+      "same_winner_fraction": 1.0,
+      "retention_fraction": 1.0
+    }
+  ]
+}

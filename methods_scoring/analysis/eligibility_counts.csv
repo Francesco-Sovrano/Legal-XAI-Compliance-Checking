@@ -1,0 +1,23 @@
+,GDPR+AIA86+MiFID25,DSA17,DSA27+P2B5,AIA13-14,MDR,MiFID17,AIA11
+Decision Trees,0,0,4,3,2,2,2
+RuleFit,0,0,4,3,2,2,2
+RuleSHAP,0,0,4,3,2,2,2
+PDP,0,0,3,3,1,1,1
+ICE,0,0,1,2,2,1,1
+LIME,1,1,0,2,1,2,0
+Anchors,2,2,0,2,2,2,0
+CEM,2,2,0,0,1,1,0
+DiCE,2,2,0,2,1,1,0
+ProtoDash,1,1,0,1,1,1,0
+Exact local SHAP,1,1,0,0,1,1,0
+Approximate local SHAP,1,1,0,0,1,1,0
+Global SHAP summaries,0,0,1,0,1,1,1
+LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0,0,3,2,2,2,2
+CAVs,1,1,0,1,1,2,0
+DeepLift,1,1,0,2,1,2,0
+DeepSHAP,1,1,0,2,1,2,0
+LRP,1,1,0,1,1,2,0
+Grad-CAM,1,1,0,1,1,2,0
+Integrated Gradients,1,1,0,1,1,2,0
+Attention,1,1,0,1,1,2,0
+MechaRule,0,0,3,2,2,2,2

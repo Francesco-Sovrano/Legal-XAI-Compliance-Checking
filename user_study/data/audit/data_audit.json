@@ -1,0 +1,29 @@
+{
+  "included_slots": [
+    "E08",
+    "E11",
+    "E13",
+    "E18"
+  ],
+  "primary_observations": 32,
+  "primary_observations_per_expert": 8,
+  "descriptive_checks": {
+    "primary_count": 32,
+    "comparison_count": 32,
+    "confidence_medians": {
+      "clinical_empirical": 3.0,
+      "credit_authority": 4.0
+    },
+    "content_only_confirmations": 32
+  },
+  "technical_property_language_count": 27,
+  "qualitative_coders": 1,
+  "database_metadata": {
+    "schema_version": "11",
+    "config_hash": "126853e1a686fb792c4090ede1a987e3f33da99379c36ab9bd211333c83fa8b0",
+    "study_id": "legal-xai-empirical-validation"
+  },
+  "packaged_ui_canonical_sha256": "afaf2a7689865b0c946c8f6bc1666d2a29abca3d64ac9a6f155e3acf84ab7006",
+  "instrument_hash_match": false,
+  "instrument_verification": "Retrieve the study instrument with the database config_hash to verify exact collection text."
+}

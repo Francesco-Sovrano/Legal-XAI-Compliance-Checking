@@ -1,0 +1,170 @@
+regulation,question,method,probability,baseline_soft_winner
+AIA11,what_feature,Decision Trees,0.048,0
+AIA11,what_feature,RuleFit,0.2896,1
+AIA11,what_feature,RuleSHAP,0.2854,1
+AIA11,what_feature,Global SHAP summaries,0.0974,0
+AIA11,what_feature,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0667,0
+AIA11,what_feature,MechaRule,0.2129,0
+AIA11,how_computed,Decision Trees,0.0287,0
+AIA11,how_computed,RuleFit,0.2139,0
+AIA11,how_computed,RuleSHAP,0.2084,0
+AIA11,how_computed,PDP,0.3507,1
+AIA11,how_computed,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0453,0
+AIA11,how_computed,MechaRule,0.153,0
+AIA11,how_differs,ICE,1.0,1
+AIA13-14,what_rule,Decision Trees,0.0273,0
+AIA13-14,what_rule,RuleFit,0.1433,0
+AIA13-14,what_rule,RuleSHAP,0.1098,0
+AIA13-14,what_rule,PDP,0.3116,1
+AIA13-14,what_rule,ICE,0.3067,1
+AIA13-14,what_rule,Anchors,0.0089,0
+AIA13-14,what_rule,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0192,0
+AIA13-14,what_rule,MechaRule,0.0732,0
+AIA13-14,how_computed,Decision Trees,0.0311,0
+AIA13-14,how_computed,RuleFit,0.155,0
+AIA13-14,how_computed,RuleSHAP,0.1174,0
+AIA13-14,how_computed,PDP,0.3401,1
+AIA13-14,how_computed,LIME,0.0004,0
+AIA13-14,how_computed,Anchors,0.009,0
+AIA13-14,how_computed,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0207,0
+AIA13-14,how_computed,CAVs,0.0034,0
+AIA13-14,how_computed,DeepLift,0.0432,0
+AIA13-14,how_computed,DeepSHAP,0.0676,0
+AIA13-14,how_computed,LRP,0.0097,0
+AIA13-14,how_computed,Grad-CAM,0.0219,0
+AIA13-14,how_computed,Integrated Gradients,0.0881,0
+AIA13-14,how_computed,Attention,0.0107,0
+AIA13-14,how_computed,MechaRule,0.0817,0
+AIA13-14,how_differs,ICE,0.779,1
+AIA13-14,how_differs,ProtoDash,0.221,0
+AIA13-14,what_if,Decision Trees,0.0462,0
+AIA13-14,what_if,RuleFit,0.2055,0
+AIA13-14,what_if,RuleSHAP,0.155,0
+AIA13-14,what_if,PDP,0.4239,1
+AIA13-14,what_if,LIME,0.0006,0
+AIA13-14,what_if,DiCE,0.011,0
+AIA13-14,what_if,DeepLift,0.062,0
+AIA13-14,what_if,DeepSHAP,0.0958,0
+AIA13-14,how_modify_input,DiCE,1.0,1
+DSA17,what_rule,Anchors,1.0,1
+DSA17,what_feature,LIME,0.0062,0
+DSA17,what_feature,Anchors,0.0506,0
+DSA17,what_feature,CEM,0.0667,0
+DSA17,what_feature,DiCE,0.0305,0
+DSA17,what_feature,Exact local SHAP,0.1027,0
+DSA17,what_feature,Approximate local SHAP,0.0523,0
+DSA17,what_feature,CAVs,0.0251,0
+DSA17,what_feature,DeepLift,0.1086,0
+DSA17,what_feature,DeepSHAP,0.1513,0
+DSA17,what_feature,LRP,0.0881,0
+DSA17,what_feature,Grad-CAM,0.0911,0
+DSA17,what_feature,Integrated Gradients,0.1897,1
+DSA17,what_feature,Attention,0.0371,0
+DSA17,how_differs,ProtoDash,1.0,1
+DSA17,how_modify_input,DiCE,1.0,1
+DSA17,why_instead_of,CEM,1.0,1
+DSA27+P2B5,what_rule,Decision Trees,0.0164,0
+DSA27+P2B5,what_rule,RuleFit,0.1374,0
+DSA27+P2B5,what_rule,RuleSHAP,0.138,0
+DSA27+P2B5,what_rule,PDP,0.3273,1
+DSA27+P2B5,what_rule,ICE,0.1695,0
+DSA27+P2B5,what_rule,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0395,0
+DSA27+P2B5,what_rule,MechaRule,0.1719,0
+DSA27+P2B5,what_feature,Decision Trees,0.0356,0
+DSA27+P2B5,what_feature,RuleFit,0.2222,0
+DSA27+P2B5,what_feature,RuleSHAP,0.227,0
+DSA27+P2B5,what_feature,Global SHAP summaries,0.1623,0
+DSA27+P2B5,what_feature,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0728,0
+DSA27+P2B5,what_feature,MechaRule,0.2802,1
+DSA27+P2B5,how_computed,Decision Trees,0.0214,0
+DSA27+P2B5,how_computed,RuleFit,0.164,0
+DSA27+P2B5,how_computed,RuleSHAP,0.1678,0
+DSA27+P2B5,how_computed,PDP,0.3838,1
+DSA27+P2B5,how_computed,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0527,0
+DSA27+P2B5,how_computed,MechaRule,0.2103,0
+DSA27+P2B5,what_if,Decision Trees,0.0377,0
+DSA27+P2B5,what_if,RuleFit,0.2283,0
+DSA27+P2B5,what_if,RuleSHAP,0.2308,0
+DSA27+P2B5,what_if,PDP,0.5032,1
+GDPR+AIA86+MiFID25,what_rule,Anchors,1.0,1
+GDPR+AIA86+MiFID25,what_feature,LIME,0.0076,0
+GDPR+AIA86+MiFID25,what_feature,Anchors,0.0583,0
+GDPR+AIA86+MiFID25,what_feature,CEM,0.0615,0
+GDPR+AIA86+MiFID25,what_feature,DiCE,0.0366,0
+GDPR+AIA86+MiFID25,what_feature,Exact local SHAP,0.098,0
+GDPR+AIA86+MiFID25,what_feature,Approximate local SHAP,0.047,0
+GDPR+AIA86+MiFID25,what_feature,CAVs,0.0349,0
+GDPR+AIA86+MiFID25,what_feature,DeepLift,0.0985,0
+GDPR+AIA86+MiFID25,what_feature,DeepSHAP,0.1346,0
+GDPR+AIA86+MiFID25,what_feature,LRP,0.05,0
+GDPR+AIA86+MiFID25,what_feature,Grad-CAM,0.1253,0
+GDPR+AIA86+MiFID25,what_feature,Integrated Gradients,0.1744,1
+GDPR+AIA86+MiFID25,what_feature,Attention,0.0733,0
+GDPR+AIA86+MiFID25,how_differs,ProtoDash,1.0,1
+GDPR+AIA86+MiFID25,how_modify_input,DiCE,1.0,1
+GDPR+AIA86+MiFID25,why_instead_of,CEM,1.0,1
+MDR,what_rule,Decision Trees,0.0196,0
+MDR,what_rule,RuleFit,0.159,0
+MDR,what_rule,RuleSHAP,0.1587,0
+MDR,what_rule,PDP,0.2619,1
+MDR,what_rule,ICE,0.2238,0
+MDR,what_rule,Anchors,0.016,0
+MDR,what_rule,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0299,0
+MDR,what_rule,MechaRule,0.1311,0
+MDR,what_feature,Decision Trees,0.015,0
+MDR,what_feature,RuleFit,0.1501,1
+MDR,what_feature,RuleSHAP,0.1451,1
+MDR,what_feature,LIME,0.0003,0
+MDR,what_feature,Anchors,0.014,0
+MDR,what_feature,CEM,0.0462,0
+MDR,what_feature,DiCE,0.0062,0
+MDR,what_feature,Exact local SHAP,0.1108,0
+MDR,what_feature,Approximate local SHAP,0.0253,0
+MDR,what_feature,Global SHAP summaries,0.05,0
+MDR,what_feature,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0237,0
+MDR,what_feature,CAVs,0.0052,0
+MDR,what_feature,DeepLift,0.0352,0
+MDR,what_feature,DeepSHAP,0.081,0
+MDR,what_feature,LRP,0.0065,0
+MDR,what_feature,Grad-CAM,0.0156,0
+MDR,what_feature,Integrated Gradients,0.146,1
+MDR,what_feature,Attention,0.0079,0
+MDR,what_feature,MechaRule,0.1159,0
+MDR,how_differs,ICE,0.6805,1
+MDR,how_differs,ProtoDash,0.3195,0
+MiFID17,what_feature,Decision Trees,0.0391,0
+MiFID17,what_feature,RuleFit,0.199,1
+MiFID17,what_feature,RuleSHAP,0.1481,0
+MiFID17,what_feature,LIME,0.0002,0
+MiFID17,what_feature,Anchors,0.0126,0
+MiFID17,what_feature,CEM,0.0282,0
+MiFID17,what_feature,DiCE,0.0082,0
+MiFID17,what_feature,Exact local SHAP,0.0586,0
+MiFID17,what_feature,Approximate local SHAP,0.0201,0
+MiFID17,what_feature,Global SHAP summaries,0.0279,0
+MiFID17,what_feature,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.0288,0
+MiFID17,what_feature,CAVs,0.0052,0
+MiFID17,what_feature,DeepLift,0.0581,0
+MiFID17,what_feature,DeepSHAP,0.0856,0
+MiFID17,what_feature,LRP,0.0156,0
+MiFID17,what_feature,Grad-CAM,0.0322,0
+MiFID17,what_feature,Integrated Gradients,0.1106,0
+MiFID17,what_feature,Attention,0.015,0
+MiFID17,what_feature,MechaRule,0.1069,0
+MiFID17,how_computed,Decision Trees,0.028,0
+MiFID17,how_computed,RuleFit,0.1605,0
+MiFID17,how_computed,RuleSHAP,0.1172,0
+MiFID17,how_computed,PDP,0.3397,1
+MiFID17,how_computed,LIME,0.0001,0
+MiFID17,how_computed,Anchors,0.0103,0
+MiFID17,how_computed,LLM-assisted behavioral RuleSHAP (MechaRule stage 1),0.02,0
+MiFID17,how_computed,CAVs,0.004,0
+MiFID17,how_computed,DeepLift,0.0426,0
+MiFID17,how_computed,DeepSHAP,0.0675,0
+MiFID17,how_computed,LRP,0.0105,0
+MiFID17,how_computed,Grad-CAM,0.0222,0
+MiFID17,how_computed,Integrated Gradients,0.085,0
+MiFID17,how_computed,Attention,0.0114,0
+MiFID17,how_computed,MechaRule,0.081,0
+MiFID17,how_differs,ICE,0.7834,1
+MiFID17,how_differs,ProtoDash,0.2166,0

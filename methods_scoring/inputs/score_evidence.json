@@ -1,0 +1,2810 @@
+[
+  {
+    "method": "Decision Trees",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Surrogate agreement requires validation; predictive overfitting does not establish explanation false positives.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "A compressed surrogate can omit black-box effects; no general recall ranking against RuleFit is established.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Surrogate paths cover the fitted tree; agreement with the explained predictor determines rationale coverage.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "stability",
+    "score": 1,
+    "justification": "Crossing a split abruptly changes the path, giving low input stability for path-based use of surrogate rules.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "adversarial_robustness",
+    "score": 2,
+    "justification": "Threshold discontinuities create sensitivity; this is a structural inference, not a universal attack benchmark.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "consistency",
+    "score": 2,
+    "justification": "Resampling outputs from a fixed predictor can change the fitted surrogate structure.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Depth, pruning and leaf-size changes can materially change explanations.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "A pruned tree can be compact, but path and tree size remain tunable.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "level_of_detail",
+    "score": 5,
+    "justification": "Explicit predicates and leaf outcomes provide the catalogue's highest rule-level detail.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Publishing splits exposes proprietary logic; this threat-model assumption is not a measured privacy loss.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored tree, training data, seed and parameters permit reconstruction.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "Decision Trees",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 4,
+    "justification": "Ordinary tree fitting and inference are comparatively inexpensive; surrogate-data collection cost still matters.",
+    "source_key": "TREE",
+    "bibkey": "scoreTreeDocs",
+    "locator": "classification, complexity and practical tips"
+  },
+  {
+    "method": "RuleFit",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Surrogate training does not guarantee agreement with the target model.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Sparse term selection can omit influences of the explained predictor.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Rules and linear terms express interactions and linear trends; broader representational coverage than a simple tree is plausible.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "stability",
+    "score": 3,
+    "justification": "Regularisation constrains fitting, while selected rules remain data-dependent.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Predictive performance does not establish attack resistance; no general advantage is established.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Different samples can select different rules; deterministic optimization alone is insufficient.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 3,
+    "justification": "Penalty strength and rule-generation choices affect the selected ensemble.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "The final L1-selected ensemble can be compact, although many terms may remain.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "Predicates and coefficients reveal detailed surrogate structure.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Disclosed rules expose model logic; use the same threat-model assumption as the surrogate tree.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "traceability",
+    "score": 4,
+    "justification": "The fitted rule list and pipeline can be archived and inspected.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleFit",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Rule generation plus sparse regression adds work relative to a single tree.",
+    "source_key": "RULEFIT",
+    "bibkey": "friedman2008predictive",
+    "locator": "rule-ensemble construction and regularised fitting"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Injected-rule recovery evaluates known-rule ranking; the validity of every returned predicate remains unresolved.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "no_false_negatives",
+    "score": 4,
+    "justification": "Known-rule recovery ranks improve over RuleFit in the injected-bias experiment, supporting a qualified comparative 4 versus 3.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Rule ensembles represent compound conditions and linear trends more extensively than a single surrogate tree.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "stability",
+    "score": 3,
+    "justification": "Matched input-stability evidence for the rule-induction pipeline is limited.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Attack-resistance evidence for SHAP-guided rule induction is limited.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Sampling and attribution steps create multiple sources of repeated-fit variation.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 3,
+    "justification": "Rule and attribution choices affect induction; comparative parameter-sweep evidence is limited.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Selected rules improve compactness, but no universal minimal-rule guarantee follows.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "Explicit learned predicates retain rule-level detail.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Rule disclosure exposes logic; confidentiality depends on access and disclosure controls.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires linking attribution, rule generation and weighting records across the pipeline.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "RuleSHAP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "SHAP computation adds cost to the rule-fitting pipeline.",
+    "source_key": "RULESHAP",
+    "bibkey": "scoreRuleSHAP2025",
+    "locator": "Secs. 4--6, Table 2 and Appendix G"
+  },
+  {
+    "method": "PDP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Model evaluations reflect marginal responses, but correlated-feature extrapolation can mislead interpretation.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Population averaging hides effects that differ among examples, supporting a neutral contributor-coverage judgment.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Low-dimensional response curves cover selected effects; their coverage matches ICE when features and reference examples match.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "stability",
+    "score": 4,
+    "justification": "Averaging smooths individual response variation relative to ICE over a fixed reference population.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Population aggregation has limited attack-resistance evidence.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "consistency",
+    "score": 4,
+    "justification": "The fixed model is evaluated directly over a declared grid/reference cohort, with no fitted stochastic surrogate.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 4,
+    "justification": "Ordinary fixed grids have few tuning choices relative to fitted local surrogates.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "sparsity",
+    "score": 2,
+    "justification": "Showing response functions for many features produces an extensive display.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "One- and two-way response surfaces expose response shape and selected interactions; the rating does not describe full decision rules.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Aggregate outputs are not inherently private; neutral is not a privacy assurance.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Logged grid, model and reference dataset permit straightforward recomputation.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "PDP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 4,
+    "justification": "Low-dimensional grids require fewer evaluations than repeated counterfactual optimisation.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Direct model queries give feature-response information; impossible feature combinations remain a limitation.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "no_false_negatives",
+    "score": 4,
+    "justification": "Individual curves reveal heterogeneous effects hidden by PDP averaging.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "completeness",
+    "score": 3,
+    "justification": "ICE retains the individual curves whose mean produces PDP, giving equal partial-effect coverage under matched inputs.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "stability",
+    "score": 3,
+    "justification": "Curve changes follow the model; stochastic noise is not inherent in fixed-grid ICE.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Direct evaluation alone supplies no general protection against malicious perturbations.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "consistency",
+    "score": 4,
+    "justification": "The fixed model is evaluated directly over a declared grid/reference cohort, with no fitted stochastic surrogate.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 4,
+    "justification": "Fixed-grid construction has few tuning choices, as in PDP.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "sparsity",
+    "score": 2,
+    "justification": "Many overlaid individual curves are dense.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "Per-record response trajectories reveal more detail than population averaging.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Individual records or response trajectories can expose sensitive information; contextual disclosure-risk inference.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "traceability",
+    "score": 4,
+    "justification": "No inherent randomness prevents tracing fixed-grid model evaluations.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "ICE",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 4,
+    "justification": "PDP and ICE share prediction evaluations for matched grids and reference examples.",
+    "source_key": "ICE",
+    "bibkey": "goldstein2015peeking",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "LIME",
+    "property": "no_false_positives",
+    "score": 2,
+    "justification": "Imperfect local fitting and correlated proxies can assign misleading feature contributions.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "no_false_negatives",
+    "score": 2,
+    "justification": "Sparse local fitting can miss nonlinear effects and omitted contributors.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "completeness",
+    "score": 2,
+    "justification": "The explanation covers a neighborhood, not the full decision function.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "stability",
+    "score": 1,
+    "justification": "Unstabilised local fitting shows severe input sensitivity in nonlinear image experiments; the low ordinal anchor follows that variant.",
+    "source_key": "ROBUST",
+    "bibkey": "scoreRobust2018",
+    "locator": "Secs. 2--3, Figures 2--6"
+  },
+  {
+    "method": "LIME",
+    "property": "adversarial_robustness",
+    "score": 1,
+    "justification": "Off-distribution sampling enables demonstrated manipulation of LIME explanations.",
+    "source_key": "ATTACK",
+    "bibkey": "DBLP:conf/aies/SlackHJSL20",
+    "locator": "scaffolded-classifier experiments"
+  },
+  {
+    "method": "LIME",
+    "property": "consistency",
+    "score": 2,
+    "justification": "Sampled fitting varies across runs; repeated-rank experiments support the same below-neutral bin as sampled SHAP.",
+    "source_key": "MAN_CHAN",
+    "bibkey": "man2020best",
+    "locator": "Secs. 2--3 and 5"
+  },
+  {
+    "method": "LIME",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Neighbourhood and feature-selection choices strongly affect the fitted surrogate.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "User-selected feature counts constrain size while allowing a range of fit-size trade-offs.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "level_of_detail",
+    "score": 2,
+    "justification": "Sparse linear coefficients give less interaction and predicate detail than explicit rules.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Local outputs can reveal sensitive behavior; neutral does not assert confidentiality.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the sampled neighbourhood, random state and fitted surrogate as well as the predictor and input.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "LIME",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Repeated queries and a small regression are moderately costly; no fixed runtime ratio to KernelSHAP is asserted.",
+    "source_key": "LIME",
+    "bibkey": "DBLP:conf/kdd/Ribeiro0G16",
+    "locator": "Sec. 3"
+  },
+  {
+    "method": "Anchors",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Conditional rule precision concerns prediction retention; necessity of each predicate remains unresolved.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "A sufficient rule need not enumerate all contributors; conditional precision is not feature-recall evidence.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "completeness",
+    "score": 3,
+    "justification": "The rule describes the region it covers, giving partial decision-rationale coverage.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "stability",
+    "score": 1,
+    "justification": "Local rule selection changes with the sampled neighbourhood.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "A probabilistic precision target is not an adversarial robustness guarantee.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "consistency",
+    "score": 1,
+    "justification": "Stochastic rule search can return different conditions across runs.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Precision target, discretization and sampling budget influence rule selection.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "Search favors concise rules; 4 replaces an unsupported universal minimality score of 5.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "A conjunction provides feature predicates, but not the model's complete branching structure.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Released local rules expose behaviour; protection depends on disclosure controls.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the sampled perturbations and rule-search history as well as the predictor and input.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "Anchors",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Precision estimation and rule search require repeated prediction queries.",
+    "source_key": "ANCHORS",
+    "bibkey": "DBLP:conf/aaai/Ribeiro0G18",
+    "locator": "anchor definition and search procedure"
+  },
+  {
+    "method": "CEM",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Prediction retention by pertinent positives concerns sufficiency; necessity of each selected factor remains unresolved.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Omissions depend on the contrast and feature representation.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Pertinent positives and negatives provide two complementary contrasts.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "stability",
+    "score": 2,
+    "justification": "the sparse optimum can switch under nearby inputs, supporting below-neutral stability.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Prediction validity is distinct from attack resistance; neutral replaces an unsupported strength.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "consistency",
+    "score": 3,
+    "justification": "The published solver starts at zero, reducing random variation; comparative repeated-fit evidence is limited.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Loss weight, sparsity penalty, manifold regularization, margin, and optimization budget can change which PP/PN set is returned.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "Regularized perturbations favor compact evidence; sparsity is optimized rather than guaranteed.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Changed or retained features give a concrete contrast rather than full model structure.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Local evidence lacks inherent privacy protection.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the optimisation trajectory and solver parameters as well as the predictor and input.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "CEM",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Two optimization tasks and possible manifold regularization impose substantial explanation cost.",
+    "source_key": "CEM",
+    "bibkey": "DBLP:conf/nips/DhurandharCLTTS18",
+    "locator": "Sec. 3.3 and Appendix A"
+  },
+  {
+    "method": "DiCE",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Counterfactual validity establishes an output-changing edit; factor necessity depends on the selected contrast.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Diverse valid counterfactuals explore alternative outcomes but do not identify every influence on the actual prediction.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Diversity improves local boundary coverage but is not a complete model rationale.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "stability",
+    "score": 1,
+    "justification": "Sampling or optimization choices can produce substantially different outputs.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "A valid counterfactual can fail under model change; adversarial robustness is not established by its validity objective.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "consistency",
+    "score": 1,
+    "justification": "Sampling or optimization choices can produce substantially different outputs.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Sampling or optimization choices can produce substantially different outputs.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "Proximity and postprocessing favor few changes; minimality is conditional, not guaranteed.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Concrete feature changes give feature-level explanatory detail.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Candidate outputs can reveal sensitive behavior; no default privacy guarantee.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the search trajectory, constraints and random state as well as the predictor and input.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "DiCE",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Finite candidate generation has moderate assumed cost; algorithm and dimensionality can change this rating.",
+    "source_key": "DICE",
+    "bibkey": "DBLP:conf/fat/MothilalST20",
+    "locator": "Secs. 3--5"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Prototype representativeness concerns feature-space similarity; asserted model influence requires behavioural evidence.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "A finite prototype set can miss rare patterns, and distributional coverage is not recall of all model influences.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "completeness",
+    "score": 2,
+    "justification": "Distributional representation is partial, not full decision rationale.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "stability",
+    "score": 3,
+    "justification": "Approximation guarantees for selection quality do not imply input stability.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No general explanation attack evaluation establishes high or low resistance.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed inputs and tie rules enable repeatability, without guaranteeing sample-to-sample consistency.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 3,
+    "justification": "Kernel, bandwidth and prototype count alter the selected representatives.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "A small weighted subset explicitly promotes compact representation.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Representative records show examples, not full decision rules.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Releasing actual prototypes can disclose source records; assumes unprotected examples are shown.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Selection steps, weights, kernel and candidates can be archived.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "ProtoDash",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Greedy selection avoids exhaustive subset search; no universal quadratic-cost verdict is justified.",
+    "source_key": "PROTO",
+    "bibkey": "DBLP:conf/icdm/GurumoorthyDCA19",
+    "locator": "weighted prototype objective and greedy algorithm"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Exact allocation concerns the coalition game; feature relevance can differ under decision-based relevance definitions.",
+    "source_key": "RELEVANCE",
+    "bibkey": "scoreRelevance2023",
+    "locator": "Secs. 6--7"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Exact allocation can assign zero to decision-relevant features, motivating neutral contributor coverage.",
+    "source_key": "RELEVANCE",
+    "bibkey": "scoreRelevance2023",
+    "locator": "Secs. 6--7"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Additive allocation covers the output difference; interactions are compressed into feature contributions.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "stability",
+    "score": 3,
+    "justification": "Exact computation does not imply continuity under changes to inputs or background.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No general adversarial guarantee follows from Shapley axioms; neutral remains evidence-limited.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Exact enumeration is repeatable for fixed inputs; matched cross-method repeatability evidence is limited.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 3,
+    "justification": "Masker and background define the allocation problem; neutral does not imply invariance to their choice.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Feature attributions can be dense or truncated for presentation.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Feature allocations provide intermediate detail, not explicit decision rules.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Local exact attribution supplies no inherent privacy protection.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "traceability",
+    "score": 4,
+    "justification": "A specified computation can be reconstructed if model, input, reference or propagation parameters and software versions are retained.",
+    "source_key": "SHAP",
+    "bibkey": "DBLP:conf/nips/LundbergL17",
+    "locator": "Secs. 2--5"
+  },
+  {
+    "method": "Exact local SHAP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 1,
+    "justification": "Generic enumeration is exponentially expensive; specialized exact tree/linear methods are excluded from this profile.",
+    "source_key": "EXACT",
+    "bibkey": "scoreExactSHAPDocs",
+    "locator": "ExactExplainer, computational complexity"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Approximation error and reference semantics affect assigned factors.",
+    "source_key": "RELEVANCE",
+    "bibkey": "scoreRelevance2023",
+    "locator": "Secs. 6--7"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Sampling can suppress contributions; exact allocation also has relevance counterexamples, leaving both variants in the neutral bin.",
+    "source_key": "RELEVANCE",
+    "bibkey": "scoreRelevance2023",
+    "locator": "Secs. 6--7"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Local reconstruction does not establish full explanatory coverage.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "stability",
+    "score": 2,
+    "justification": "Sampling introduces variation in addition to input and background sensitivity.",
+    "source_key": "ROBUST",
+    "bibkey": "scoreRobust2018",
+    "locator": "Secs. 2--3, Figures 2--6"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "adversarial_robustness",
+    "score": 2,
+    "justification": "Published perturbation-based attacks support a below-neutral rating for the sampled scenario.",
+    "source_key": "ATTACK",
+    "bibkey": "DBLP:conf/aies/SlackHJSL20",
+    "locator": "scaffolded-classifier experiments"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "consistency",
+    "score": 2,
+    "justification": "Finite-sample estimates can differ across runs; fixed-seed replay does not guarantee general consistency.",
+    "source_key": "MAN_CHAN",
+    "bibkey": "man2020best",
+    "locator": "Secs. 2--3 and 5"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Budget, regularization and background can materially affect estimates.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Approximate and exact outputs use feature vectors with tunable display size.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Approximation preserves feature-level granularity.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Approximation supplies no confidentiality mechanism.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored sample masks, random state, predictor and parameters permit reconstruction.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Approximate local SHAP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Sampling reduces generic exact enumeration cost but still requires repeated model evaluations.",
+    "source_key": "KERNEL",
+    "bibkey": "scoreKernelSHAPDocs",
+    "locator": "KernelExplainer, sampling and regression"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Aggregation does not repair local relevance errors; neutral is conditional on representative inputs.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Population averaging may hide rare influential patterns.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "completeness",
+    "score": 2,
+    "justification": "Summary statistics omit individual configurations and interactions.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "stability",
+    "score": 3,
+    "justification": "Averaging may reduce variability, but cohort shifts remain; no universal stability guarantee.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Attack-resistance evidence for population summaries is limited.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Changing the cohort can alter importance rankings even with reproducible local values.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Cohort, background, estimator and aggregation choices all affect results.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "sparsity",
+    "score": 2,
+    "justification": "Many-feature, many-observation displays are dense under this scenario.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Aggregation preserves feature-level importance while compressing individual combinations.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Aggregation alone is not a privacy guarantee.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored cohort, local attributions and summary procedure permit reconstruction.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "Global SHAP summaries",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 1,
+    "justification": "Repeated local estimation across many records has high assumed cost; exact-input or optimized summaries require separate profiles.",
+    "source_key": "GLOBAL",
+    "bibkey": "scoreGlobalSHAPDocs",
+    "locator": "global bar plots"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Hypothesis scoring supports association, not causal necessity.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Proposed predicates can miss unrepresented behavioral triggers.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Selected rules cover task behavior, not all model logic.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "stability",
+    "score": 2,
+    "justification": "Feature proposals and fitted rules may vary.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No explanation attack-resistance guarantee is established.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "consistency",
+    "score": 2,
+    "justification": "LLM proposals can change between runs.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Prompt, filtering and rule-selection parameters matter.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Greedy selection promotes compactness without minimality guarantees.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "Executable predicates expose detailed behavioral conditions.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Prompts, outputs and extracted rules may be sensitive.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Stored proposals, predicate code and evaluation data link the rule to the sampled behaviour.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "LLM-assisted behavioral RuleSHAP (MechaRule stage 1)",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "LLM calls and rule fitting add computation.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "CAVs",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "A fitted direction associates concept examples with activations; semantic confounding leaves concept relevance uncertain.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "no_false_negatives",
+    "score": 2,
+    "justification": "Only supplied concepts are tested; unspecified concepts can be missed.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "completeness",
+    "score": 2,
+    "justification": "Concept directions do not recover the whole model rationale.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "stability",
+    "score": 2,
+    "justification": "Concept examples and learned directions can change measured sensitivity.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "adversarial_robustness",
+    "score": 2,
+    "justification": "Attacks on concept examples can alter directional sensitivity.",
+    "source_key": "TCAV_ATTACK",
+    "bibkey": "brown2022corgis",
+    "locator": "attacks on concept examples"
+  },
+  {
+    "method": "CAVs",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Repeated concept-set trials and significance checks help, but do not guarantee cross-dataset consistency.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Concept-bank and layer choices strongly determine the measured direction.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Few concepts can be concise, but CAVs do not enforce a minimal concept set.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "level_of_detail",
+    "score": 2,
+    "justification": "Concept-level abstraction is coarser than feature predicates; low detail is not a claim of low usefulness.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Concept examples and scores require contextual disclosure controls.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the concept examples, classifier fit and selected layer as well as the predictor and input.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "CAVs",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Fits concept classifiers on frozen activations; it does not require training the underlying neural network.",
+    "source_key": "TCAV",
+    "bibkey": "DBLP:conf/icml/KimWGCWVS18",
+    "locator": "CAV construction and directional derivatives"
+  },
+  {
+    "method": "DeepLift",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Reference-based contributions are useful but do not establish absence of irrelevant features.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Summation-to-delta does not prove every relevant factor is recovered.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "completeness",
+    "score": 3,
+    "justification": "An additive decomposition relative to a reference is not the complete decision rationale.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "stability",
+    "score": 3,
+    "justification": "Fixed references remove sampling variation; sensitivity to input and representation remains.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "adversarial_robustness",
+    "score": 2,
+    "justification": "Reference and representation changes can alter contributions, supporting a below-neutral design-based robustness judgment.",
+    "source_key": "SALIENCY",
+    "bibkey": "DBLP:series/lncs/KindermansHAASDEK19",
+    "locator": "input-invariance counterexamples"
+  },
+  {
+    "method": "DeepLift",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed execution can repeat; cross-model consistency is not guaranteed by the attribution definition.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Reference choice materially changes contribution allocation.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Feature attribution can be dense or truncated through display selection.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Feature contributions provide intermediate detail.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Feature maps have no inherent privacy guarantee.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Model, reference and propagation records support direct reconstruction of contributions.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepLift",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 4,
+    "justification": "A contribution backpropagation pass is cheaper than multi-baseline or multi-step integration approaches.",
+    "source_key": "DEEPLIFT",
+    "bibkey": "DBLP:conf/icml/ShrikumarGK17",
+    "locator": "reference differences and propagation rules"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Approximate propagation has no blanket guarantee of identifying only influential features.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Approximation and reference choice can miss effects; no universal advantage over DeepLIFT is established.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Expected-output reconstruction is distinct from complete explanatory coverage.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "stability",
+    "score": 3,
+    "justification": "Fixed background execution need not be stochastic; background and input sensitivity remain.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Comparative attack-resistance evidence for the approximate propagation procedure is limited.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed references support repeatability; comparative repeated-computation evidence is limited.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Background set and supported propagation operations affect results.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Feature attribution can be dense or truncated through display selection.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Per-feature contributions have comparable detail to DeepLIFT.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "No inherent privacy guarantee follows from background averaging.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored background examples, predictor and propagation operators permit reconstruction.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "DeepSHAP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Work scales with background examples; typically more than single-reference DeepLIFT.",
+    "source_key": "DEEPSHAP",
+    "bibkey": "scoreDeepSHAPDocs",
+    "locator": "DeepExplainer, background samples"
+  },
+  {
+    "method": "LRP",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Conservation allocates a score; relevance of highlighted factors depends on the chosen propagation variant.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "A conserved score can coexist with omitted influential factors; variant-specific failures leave broad-family coverage uncertain.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Redistributing an output quantity does not supply a complete rationale; conservation depends on propagation rule.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "stability",
+    "score": 1,
+    "justification": "Unstabilised relevance maps change sharply under input perturbations.",
+    "source_key": "ROBUST",
+    "bibkey": "scoreRobust2018",
+    "locator": "Secs. 2--3, Figures 2--6"
+  },
+  {
+    "method": "LRP",
+    "property": "adversarial_robustness",
+    "score": 1,
+    "justification": "Saliency manipulation motivates a low robustness judgment for unstabilised relevance propagation.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed rules can repeat, but rule and model changes can alter the explanation.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 1,
+    "justification": "Redistribution rules and stabilisers materially change relevance maps.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "sparsity",
+    "score": 2,
+    "justification": "Pixel or feature relevance is usually dense.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Feature-resolution relevance is intermediate detail, not full logic.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "No inherent privacy protection is supplied by relevance conservation.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored model, input and propagation rules permit reconstruction.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "LRP",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 4,
+    "justification": "Layerwise backpropagation is comparatively efficient.",
+    "source_key": "LRP",
+    "bibkey": "bach2015pixel",
+    "locator": "Methods, relevance propagation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Coarse localization can identify useful regions, without establishing pixel-level necessity.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "no_false_negatives",
+    "score": 2,
+    "justification": "Positive-only localization omits negative evidence and finer feature contributions.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "completeness",
+    "score": 2,
+    "justification": "A coarse region map does not conserve all evidence or explain the full decision.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "stability",
+    "score": 2,
+    "justification": "Layer and gradient changes can alter localization.",
+    "source_key": "ROBUST",
+    "bibkey": "scoreRobust2018",
+    "locator": "Secs. 2--3, Figures 2--6"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "adversarial_robustness",
+    "score": 2,
+    "justification": "Model manipulation can alter Grad-CAM maps while preserving predictions.",
+    "source_key": "GRADCAM_ATTACK",
+    "bibkey": "scoreGradCAMAttack2019",
+    "locator": "model-manipulation experiments"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed inference repeats, but model and sample changes can alter maps.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Chosen layer and aggregation conventions materially affect localization.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Localized regions can be compact but do not enforce a minimal feature set.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Layer resolution provides regional rather than individual-input detail.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Heatmaps do not inherently protect information about inputs or models.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored model, input, gradients and selected layer permit reconstruction.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Grad-CAM",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 5,
+    "justification": "For a fixed network, one gradient pass and pooling give a top relative runtime rating; memory remains architecture-dependent.",
+    "source_key": "GRADCAM",
+    "bibkey": "DBLP:journals/ijcv/SelvarajuCDVPB20",
+    "locator": "gradient weighting and class localisation"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "no_false_positives",
+    "score": 4,
+    "justification": "Sensitivity(b) assigns zero contribution to functionally independent features, supporting a qualified necessity advantage.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Sec. 4.1, Sensitivity(b) and Proposition 2"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Sensitivity(a) covers a single changed feature; general contributor coverage depends on baseline and multifeature interactions.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Path completeness is a mathematical allocation identity, not complete decision rationale.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "stability",
+    "score": 3,
+    "justification": "Integration does not guarantee input or baseline stability; neutral remains appropriate.",
+    "source_key": "ROBUST",
+    "bibkey": "scoreRobust2018",
+    "locator": "Secs. 2--3, Figures 2--6"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Fixed-baseline gradient attribution has mixed robustness results under worst-case input perturbations.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed paths support repeatability; matched repeated-computation evidence is limited.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 3,
+    "justification": "Baseline and quadrature choices affect attribution, with limited common-scale comparative calibration.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Feature attribution can be dense or truncated through display selection.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Feature-level contributions have intermediate detail.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "No inherent confidentiality guarantee is supplied.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored baseline, integration path and predictor permit reconstruction.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Integrated Gradients",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Path integration requires more gradient evaluations than single-pass attribution.",
+    "source_key": "IG",
+    "bibkey": "DBLP:conf/icml/SundararajanTY17",
+    "locator": "Secs. 2--4"
+  },
+  {
+    "method": "Attention",
+    "property": "no_false_positives",
+    "score": 2,
+    "justification": "Attention weights alone can disagree with output influence; contextual explanatory value remains debated.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "no_false_negatives",
+    "score": 2,
+    "justification": "Relevant factors outside displayed attention can be missed.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "completeness",
+    "score": 1,
+    "justification": "Attention weights omit downstream computations required to cover the decision rationale.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "stability",
+    "score": 3,
+    "justification": "Comparative input-stability evidence for extracted attention weights is limited.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No universal attack-resistance ranking for all attention architectures is established.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Repeatable weights in evaluation mode do not guarantee consistency across models or time.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Layer, head and aggregation choices change the displayed explanation.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Head and layer aggregation determine whether the weight display is compact or dense.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "level_of_detail",
+    "score": 2,
+    "justification": "Head-level associations are coarser than a complete feature or rule-level rationale.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Attention displays are not privacy mechanisms.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "traceability",
+    "score": 3,
+    "justification": "Reconstruction requires the selected heads, layers and aggregation procedure as well as the predictor and input.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Attention",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 5,
+    "justification": "Extraction from an existing forward pass is inexpensive; this excludes training and additional attention-attribution algorithms.",
+    "source_key": "ATTENTION",
+    "bibkey": "jain2019attention",
+    "locator": "attention-correlation and counterfactual experiments"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Concept labels need not match encoded information; no automatic necessity guarantee.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Concept coordinates expose the prediction interface; imperfect semantics can leave encoded influences unnamed.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Concept-only routing exposes all inputs to the constructed prediction head.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "stability",
+    "score": 3,
+    "justification": "Concept predictions remain sensitive to model and data.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Concept intervention is not a general attack defense.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Fixed concepts aid comparison; learned encoders can vary.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Concept bank and training scheme influence representations.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Few concepts help, but no minimal set is enforced.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Concept values and head behavior expose intermediate computation.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Concept annotations can be sensitive; no privacy mechanism.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored encoder, concept labels and prediction head permit reconstruction.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Supervised CBM",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Concept supervision and training add substantial implementation cost.",
+    "source_key": "CBM",
+    "bibkey": "DBLP:conf/icml/KohNTMPKL20",
+    "locator": "concept-to-label architecture and interventions"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Head contributions are explicit; concept semantics may remain imperfect.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Concept coordinates expose the replacement predictor; imperfect semantics can leave encoded influences unnamed.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Concept-only routing exposes all inputs to the constructed prediction head.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "stability",
+    "score": 3,
+    "justification": "Frozen embeddings help repeatability but do not guarantee stability.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No general adversarial resistance follows from concept projection.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Stored concepts aid repeatability; refitted heads may differ.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Concept bank and sparsity penalty influence the predictor.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "Sparse linear head promotes compact concept contributions.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Coefficients and concept scores expose head-level computation.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Published concepts and weights may reveal sensitive behavior.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored backbone, projection, concepts and head weights permit reconstruction.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "Post-hoc CBM (concept-only)",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Reuse of a frozen backbone reduces training overhead.",
+    "source_key": "PCBM",
+    "bibkey": "yuksekgonul2023pcbm",
+    "locator": "Sec. 2, concept-only prediction head"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "no_false_positives",
+    "score": 3,
+    "justification": "Generated concepts and visual grounding need validation.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Generated concepts expose the prediction interface; imperfect semantics can leave encoded influences unnamed.",
+    "source_key": "CBM_LIMIT",
+    "bibkey": "scoreConceptLimits2021",
+    "locator": "concept representation and semantic alignment"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "completeness",
+    "score": 4,
+    "justification": "Concept-only routing exposes all inputs to the constructed prediction head.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "stability",
+    "score": 3,
+    "justification": "Fixed selected concepts help; input sensitivity remains.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Language-generated concepts do not establish attack resistance.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "consistency",
+    "score": 2,
+    "justification": "LLM sampling and concept selection can change representations.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Prompts, bottleneck size and selection weights affect output.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "The default vocabulary uses 50 concepts per class and dense normalised weights, giving neutral compactness.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Concept scores and head weights expose intermediate detail.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Prompts and data require contextual confidentiality controls.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored concept candidates, selected descriptions and model versions permit reconstruction.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LaBo (LLM-guided CBM)",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 3,
+    "justification": "Concept generation and alignment add cost; encoders are reused.",
+    "source_key": "LABO",
+    "bibkey": "yang2023labo",
+    "locator": "Secs. 3.2--3.3 and 4.3"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "no_false_positives",
+    "score": 2,
+    "justification": "Descriptions are imperfect correlations with activation patterns.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "no_false_negatives",
+    "score": 2,
+    "justification": "Polysemantic behavior can escape concise descriptions.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "completeness",
+    "score": 2,
+    "justification": "The declared target is neuron activation behavior.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "stability",
+    "score": 3,
+    "justification": "Input-stability evidence for generated activation descriptions is limited; generation variation is assessed through consistency.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "No general adversarial-resistance evaluation establishes a strength.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "consistency",
+    "score": 2,
+    "justification": "Generated descriptions can vary across models or runs.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Prompts, examples and simulator choices affect explanations.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "sparsity",
+    "score": 3,
+    "justification": "Short descriptions compress behavior without proving minimality.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "level_of_detail",
+    "score": 3,
+    "justification": "Neuron-level linguistic patterns offer intermediate descriptive detail.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "confidentiality",
+    "score": 3,
+    "justification": "Activation examples may contain sensitive text.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored examples, prompts, activations and descriptions permit reconstruction.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "LLM neuron explanations (Bills et al.)",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Repeated generation and simulation are compute-intensive.",
+    "source_key": "LLM_NEURON",
+    "bibkey": "scoreNeuronPaper2023",
+    "locator": "explanation and simulation pipeline"
+  },
+  {
+    "method": "MechaRule",
+    "property": "no_false_positives",
+    "score": 4,
+    "justification": "Ablation provides conditional necessity evidence, not uniquely symbolic mechanisms.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "no_false_negatives",
+    "score": 3,
+    "justification": "Candidate reduction and weak-effect search can miss neurons.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "completeness",
+    "score": 3,
+    "justification": "Coverage is restricted to task, candidates and intervention basis.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "stability",
+    "score": 3,
+    "justification": "Baseline and task regime affect localized explanations.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "adversarial_robustness",
+    "score": 3,
+    "justification": "Jailbreak suppression is not robustness of the explanation itself.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "consistency",
+    "score": 3,
+    "justification": "Cross-model and temporal consistency remain unestablished.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "hyperparameters_perturbation_robustness",
+    "score": 2,
+    "justification": "Candidate budget, thresholds and baselines affect localization.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "sparsity",
+    "score": 4,
+    "justification": "Sparse neurons and compact rules are explicit objectives.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "level_of_detail",
+    "score": 4,
+    "justification": "Rules linked to neuron coordinates add mechanistic detail.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "confidentiality",
+    "score": 2,
+    "justification": "Internal coordinates and rules can expose proprietary mechanisms.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "traceability",
+    "score": 4,
+    "justification": "Stored rules, intervention traces, candidates and baselines permit reconstruction.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  },
+  {
+    "method": "MechaRule",
+    "property": "runtime_performance_and_implementation_constraints",
+    "score": 2,
+    "justification": "Hierarchical search saves interventions but requires costly internal access.",
+    "source_key": "MECHARULE",
+    "bibkey": "sovrano2026mecharule",
+    "locator": "Secs. 4 and 8"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "method_citation_counts": [
+    29,
+    28,
+    20,
+    18,
+    14,
+    14,
+    13,
+    12,
+    13,
+    12,
+    12,
+    11,
+    12,
+    12,
+    10,
+    11
+  ],
+  "method_names": [
+    "SHAP",
+    "LIME",
+    "LRP",
+    "Grad-CAM",
+    "Counterfactuals",
+    "CAM",
+    "Decision Trees",
+    "Feature importance",
+    "PDP",
+    "Rule extraction",
+    "Anchors",
+    "Saliency maps",
+    "IG",
+    "DeepLIFT",
+    "Attention",
+    "ICE"
+  ],
+  "method_surveys_by_year": {
+    "2022": 9,
+    "2023": 9,
+    "2024": 9,
+    "2025": 2
+  },
+  "property_surveys_by_year": {
+    "2022": 7,
+    "2023": 10,
+    "2024": 11,
+    "2025": 1
+  }
+}

@@ -1,0 +1,57 @@
+catalogue,regulation,question,soft_winners,soft_score,threshold_winners,threshold_score,retention
+all,GDPR+AIA86+MiFID25,how_differs,ProtoDash,0.6375,ProtoDash,0.9375,1.0
+agnostic,GDPR+AIA86+MiFID25,how_differs,ProtoDash,0.6375,ProtoDash,0.9375,1.0
+all,GDPR+AIA86+MiFID25,how_modify_input,DiCE,0.525,DiCE,0.75,1.0
+agnostic,GDPR+AIA86+MiFID25,how_modify_input,DiCE,0.525,DiCE,0.75,1.0
+all,GDPR+AIA86+MiFID25,what_feature,Integrated Gradients,0.625,Exact local SHAP; DeepSHAP; Integrated Gradients,0.875,0.1744
+agnostic,GDPR+AIA86+MiFID25,what_feature,Exact local SHAP,0.575,Exact local SHAP,0.875,0.2709
+all,GDPR+AIA86+MiFID25,what_rule,Anchors,0.55,Anchors,0.75,1.0
+agnostic,GDPR+AIA86+MiFID25,what_rule,Anchors,0.55,Anchors,0.75,1.0
+all,GDPR+AIA86+MiFID25,why_instead_of,CEM,0.55,CEM,0.75,1.0
+agnostic,GDPR+AIA86+MiFID25,why_instead_of,CEM,0.55,CEM,0.75,1.0
+all,DSA17,how_differs,ProtoDash,0.5875,ProtoDash,0.8125,1.0
+agnostic,DSA17,how_differs,ProtoDash,0.5875,ProtoDash,0.8125,1.0
+all,DSA17,how_modify_input,DiCE,0.5,DiCE,0.75,1.0
+agnostic,DSA17,how_modify_input,DiCE,0.5,DiCE,0.75,1.0
+all,DSA17,what_feature,Integrated Gradients,0.625,Exact local SHAP; DeepSHAP; Integrated Gradients,0.875,0.1897
+agnostic,DSA17,what_feature,Exact local SHAP,0.575,Exact local SHAP,0.875,0.2918
+all,DSA17,what_rule,Anchors,0.525,Anchors,0.75,1.0
+agnostic,DSA17,what_rule,Anchors,0.525,Anchors,0.75,1.0
+all,DSA17,why_instead_of,CEM,0.55,CEM,0.75,1.0
+agnostic,DSA17,why_instead_of,CEM,0.55,CEM,0.75,1.0
+all,DSA27+P2B5,how_computed,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.3838
+agnostic,DSA27+P2B5,how_computed,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.4709
+all,DSA27+P2B5,what_feature,MechaRule,0.6,RuleFit; RuleSHAP,0.846153846154,0.2802
+agnostic,DSA27+P2B5,what_feature,RuleFit; RuleSHAP,0.569230769231,RuleFit; RuleSHAP,0.846153846154,0.6076
+all,DSA27+P2B5,what_if,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.5032
+agnostic,DSA27+P2B5,what_if,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.5032
+all,DSA27+P2B5,what_rule,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.3273
+agnostic,DSA27+P2B5,what_rule,PDP,0.661538461538,RuleFit; RuleSHAP; PDP,0.846153846154,0.3847
+all,AIA13-14,how_computed,PDP,0.72,RuleFit; PDP,1.0,0.3401
+agnostic,AIA13-14,how_computed,PDP,0.72,RuleFit; PDP,1.0,0.475
+all,AIA13-14,how_differs,ICE,0.72,ICE,1.0,0.779
+agnostic,AIA13-14,how_differs,ICE,0.72,ICE,1.0,0.779
+all,AIA13-14,how_modify_input,DiCE,0.48,DiCE,0.7,1.0
+agnostic,AIA13-14,how_modify_input,DiCE,0.48,DiCE,0.7,1.0
+all,AIA13-14,what_if,PDP,0.72,RuleFit; PDP,1.0,0.4239
+agnostic,AIA13-14,what_if,PDP,0.72,RuleFit; PDP,1.0,0.4922
+all,AIA13-14,what_rule,PDP; ICE,0.72,RuleFit; PDP; ICE,1.0,0.6183
+agnostic,AIA13-14,what_rule,PDP; ICE,0.72,RuleFit; PDP; ICE,1.0,0.6611
+all,MDR,how_differs,ICE,0.673684210526,ICE,0.894736842105,0.6805
+agnostic,MDR,how_differs,ICE,0.673684210526,ICE,0.894736842105,0.6805
+all,MDR,what_feature,RuleFit; RuleSHAP; Integrated Gradients,0.642105263158,Exact local SHAP; Integrated Gradients,1.0,0.4412
+agnostic,MDR,what_feature,RuleFit; RuleSHAP,0.642105263158,Exact local SHAP,1.0,0.4766
+all,MDR,what_rule,PDP,0.684210526316,RuleFit; RuleSHAP; PDP,0.947368421053,0.2619
+agnostic,MDR,what_rule,PDP,0.684210526316,RuleFit; RuleSHAP; PDP,0.947368421053,0.2998
+all,MiFID17,how_computed,PDP,0.72,RuleFit; PDP,1.0,0.3397
+agnostic,MiFID17,how_computed,PDP,0.72,RuleFit; PDP,1.0,0.4729
+all,MiFID17,how_differs,ICE,0.72,ICE,1.0,0.7834
+agnostic,MiFID17,how_differs,ICE,0.72,ICE,1.0,0.7834
+all,MiFID17,what_feature,RuleFit,0.66,RuleFit,1.0,0.199
+agnostic,MiFID17,what_feature,RuleFit,0.66,RuleFit,1.0,0.3133
+all,AIA11,how_computed,PDP,0.711111111111,RuleFit; RuleSHAP; PDP,1.0,0.3507
+agnostic,AIA11,how_computed,PDP,0.711111111111,RuleFit; RuleSHAP; PDP,1.0,0.4076
+all,AIA11,how_differs,ICE,0.711111111111,ICE,1.0,1.0
+agnostic,AIA11,how_differs,ICE,0.711111111111,ICE,1.0,1.0
+all,AIA11,what_feature,RuleFit; RuleSHAP,0.666666666667,RuleFit; RuleSHAP,1.0,0.575
+agnostic,AIA11,what_feature,RuleFit; RuleSHAP,0.666666666667,RuleFit; RuleSHAP,1.0,0.7126

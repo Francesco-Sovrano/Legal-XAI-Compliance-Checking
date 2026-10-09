@@ -1,0 +1,119 @@
+{
+  "metrics": [
+    {
+      "context": "GDPR",
+      "median_tau_Soft": 0.18257418583505539,
+      "median_tau_Geometric": 0.18257418583505539,
+      "median_tau_T=2": 0.18257418583505539,
+      "median_tau_T=3": 0.19999999999999998,
+      "median_tau_T=4": 0.3872983346207417,
+      "sensitivity_median_tau": 0.3651483716701107,
+      "T4_exact_one_sided_p": 0.1953125,
+      "T4_BH_FDR_q": 0.3255208333333333
+    },
+    {
+      "context": "MDR",
+      "median_tau_Soft": 0.4405279454192498,
+      "median_tau_Geometric": 0.4405279454192498,
+      "median_tau_T=2": 0.11785113019775795,
+      "median_tau_T=3": 0.4738612787525831,
+      "median_tau_T=4": 0.7415816237971965,
+      "sensitivity_median_tau": 0.2579537595841943,
+      "T4_exact_one_sided_p": 0.010416666666666666,
+      "T4_BH_FDR_q": 0.078125
+    },
+    {
+      "context": "Across both",
+      "median_tau_Soft": 0.26590751916838873,
+      "median_tau_Geometric": 0.26590751916838873,
+      "median_tau_T=2": 0.0971621836365279,
+      "median_tau_T=3": 0.357831194502711,
+      "median_tau_T=4": 0.5052002329375235,
+      "sensitivity_median_tau": 0.25513253946995057,
+      "T4_exact_one_sided_p": 0.008072841314621914,
+      "T4_BH_FDR_q": 0.078125
+    }
+  ],
+  "comparison": [
+    {
+      "context": "GDPR",
+      "participant": "E08",
+      "Soft": 0.3333333333333334,
+      "Geometric": 0.0,
+      "T=2": 0.0,
+      "T=3": 0.912870929175277,
+      "T=4": 0.7071067811865477,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "GDPR",
+      "participant": "E11",
+      "Soft": -0.3333333333333334,
+      "Geometric": 0.0,
+      "T=2": 0.0,
+      "T=3": 0.18257418583505539,
+      "T=4": 0.2357022603955159,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "GDPR",
+      "participant": "E13",
+      "Soft": 0.3333333333333334,
+      "Geometric": 0.0,
+      "T=2": 0.0,
+      "T=3": 0.912870929175277,
+      "T=4": 0.7071067811865477,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "GDPR",
+      "participant": "E18",
+      "Soft": 0.3333333333333334,
+      "Geometric": 0.6666666666666669,
+      "T=2": 0.6666666666666669,
+      "T=3": -0.18257418583505539,
+      "T=4": 0.2357022603955159,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "MDR",
+      "participant": "E08",
+      "Soft": 0.3333333333333334,
+      "Geometric": 0.3333333333333334,
+      "T=2": 0.2357022603955159,
+      "T=3": 0.5477225575051662,
+      "T=4": 0.6666666666666669,
+      "changed_legal_goal_ratings": 1
+    },
+    {
+      "context": "MDR",
+      "participant": "E11",
+      "Soft": 0.3333333333333334,
+      "Geometric": 0.3333333333333334,
+      "T=2": -0.2357022603955159,
+      "T=3": 0.18257418583505539,
+      "T=4": 0.6666666666666669,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "MDR",
+      "participant": "E13",
+      "Soft": 0.6666666666666669,
+      "Geometric": 0.6666666666666669,
+      "T=2": 0.2357022603955159,
+      "T=3": 0.5477225575051662,
+      "T=4": 1.0,
+      "changed_legal_goal_ratings": 0
+    },
+    {
+      "context": "MDR",
+      "participant": "E18",
+      "Soft": 0.0,
+      "Geometric": 0.0,
+      "T=2": -0.2357022603955159,
+      "T=3": -0.18257418583505539,
+      "T=4": 0.3333333333333334,
+      "changed_legal_goal_ratings": 0
+    }
+  ]
+}
